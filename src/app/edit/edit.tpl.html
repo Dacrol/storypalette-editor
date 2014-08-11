@@ -1,0 +1,118 @@
+<header class="sp_fixedheader" ng-include="'header.tpl.html'"></header>
+<div class="sp_fixbody">
+  <div ng-include="'notifications.tpl.html'" class="container" ng-show="notifications.getCurrent().length"></div>
+  <div class="sp_fixedcontainer">
+      <div class="sp_title"><!-- <h1 id="paletteTitle">Kitten named whoof</h1>--></div>
+      <!-- Resources -->
+      <div class="sp_resources" ng-controller="ResourceListCtrl">
+        <div class="sp_toolbar">
+          <div class="field_wrapper">
+            <h4>Resurser</h4>
+            <button class="btn btn-primary pull-right" ng-click="newResource()">
+              <i class="icon-plus icon-white"></i>&nbsp;Ny resurs&hellip;
+            </button>
+          </div>
+          <div class="input-append pull-right search_box">
+            <input class="span4 search" id="inputIcon" type="text" ng-model="query" placeholder="Sök"/>
+            <span class="add-on"><i class="icon-search"></i></span>
+          </div>
+          <tabset>
+            <tab heading="Alla" select="filterResources()"></tab>
+            <tab heading="Ljud" select="filterResources('sound')"></tab>
+            <tab heading="Bilder" select="filterResources('image')"></tab>
+            <tab heading="Ljus" select="filterResources('light')"></tab>
+          </tabset>
+        </div>
+        <div class="sp_scrollport">
+          <table class="table sp_table sp_resource-list">
+            <tr ng-controller="ResourceCtrl" class="resource {{resource.type}}" ng-repeat="resource in resources | orderBy: 'name' | filter:{type: typeFilter} | filter:query" ng-switch on="resource.type">
+              <td class="sp_thumb">
+                <img class="media-object" src="/image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
+                <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
+                <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
+              </td>
+              <td class="sp_title"><h5>{{resource.name}}</h5>
+                  <!--<div class="longdescription"><p>{{resource.description}}</p></div>-->
+              </td>
+              <td class="sp_actions">
+                <div class="btn-group pull-right">
+                  <button class="btn" ng-click="toggleSound(resource)" ng-switch-when="sound"><i class="icon-{{playMsg}}"></i></button>
+                  <button class="btn" ng-click="editResource(resource)"><i class="icon-cog"></i></button>
+                  <button class="btn" ng-click="addToPalette(resource)"><i class="icon-arrow-right"></i></button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div><!-- // sp_scrollport -->
+      </div><!-- // sp_resources -->
+      <div class="sp_palette" ng-controller="PaletteCtrl">
+          <div class="sp_toolbar">
+              <input id="paletteTitle" ng-model="palette.name" class="sp_titlebox" type="text" placeholder="Skriv in palettens namn här" />
+              <button class="btn btn-success pull-right" ng-click="savePalette()">Spara palett</button>
+          </div>
+          <div class="sp_scrollport">
+              <div ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item"
+                   ng-switch on="asset.type">
+                  <a class="pull-left" href="#">
+                      <img class="media-object" src="/image/64x64/{{asset.source.id}}.{{asset.source.extension}}"
+                           ng-switch-when="image">
+                      <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
+                      <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
+                  </a>
+                  <button class="close" ng-click="remove()">&times;</button>
+                  <div class="media-body" ng-switch-when="image">
+                      <input type="text" placeholder="Kort namn" ng-model="asset.label">
+                      <span class="help-block opacity_down"><i class="icon-picture"></i> {{asset.name}}</span>
+
+                      <div class="divider"></div>
+                      <div class="btn-group pull-right">
+                          <button class="btn" ng-click="moveUp()"><i class="icon-arrow-up"></i></button>
+                          <button class="btn" ng-click="moveDown()"><i class="icon-arrow-down"></i></button>
+                      </div>
+                  </div>
+                  <div class="media-body" ng-switch-when="light">
+                      <input type="text" placeholder="Kort namn" ng-model="asset.label">
+                      <span class="help-block opacity_down"><i class="icon-certificate"></i> {{asset.name}}</span>
+
+                      <div class="divider"></div>
+                      <label class="checkbox">
+                          <input type="checkbox">Lampnamn
+                      </label>
+                      <label class="checkbox">
+                          <input type="checkbox">Lampnamn
+                      </label>
+
+                      <div class="btn-group pull-right">
+                          <button class="btn" ng-click="moveUp()"><i class="icon-arrow-up"></i></button>
+                          <button class="btn" ng-click="moveDown()"><i class="icon-arrow-down"></i></button>
+                      </div>
+                  </div>
+                  <div class="media-body" ng-switch-when="sound">
+                      <input type="text" placeholder="Kort namn" ng-model="asset.label">
+                      <span class="help-block opacity_down"><i class="icon-music"></i> {{asset.name}}</span>
+
+                      <div class="divider"></div>
+                      <label class="checkbox pull-right">
+                          <input type="checkbox" ng-model="asset.loop">Loop
+                      </label>
+                      <span class="help-block"><i class="icon-volume-up"></i> Max-volume: {{asset.maxVolume}}</span>
+                      <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
+
+                      <div class="btn-group pull-right">
+                          <button class="btn" ng-click="moveUp()"><i class="icon-arrow-up"></i></button>
+                          <button class="btn" ng-click="moveDown()"><i class="icon-arrow-down"></i></button>
+                      </div>
+                  </div>
+              </div>
+              <!-- // media -->
+
+          </div>
+          <!-- // sp_scrollport -->
+      </div>
+      <!-- // sp_palette -->
+
+  </div>
+  <!-- // sp_fixedcontainer -->
+</div> <!-- // sp_fixbody -->
+
+

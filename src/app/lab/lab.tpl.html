@@ -1,0 +1,10 @@
+<div>
+  <form ng-submit="submit()"> 
+    <input ng-model="user.username" type="text" name="user" placeholder="Username">    
+    <input ng-model="user.password" type="password" name="pass" placeholder="Password">    
+    <input type="submit" value="Login" />
+  </form>
+  <p>Message: {{message}}</p>
+  <button ng-click="testAccess()">Try GET /v1/palettes</button>
+</div>
+

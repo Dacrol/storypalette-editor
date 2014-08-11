@@ -1,0 +1,290 @@
+
+/** Hide cursor in Player */
+body.play {
+  cursor: none !important;
+}
+
+/********Sveta things*********/
+.opacity_down {
+    opacity: 0.7;
+}
+.sp_fixedheader {
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+}
+div.search_box {
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+ul.type_filter li a{
+    padding-bottom: 14px;
+}
+.sp_fixedheader {
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+    background: white;
+    z-index: 999;
+}
+
+div.search_box {
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+input.search {
+  width: 120px;
+}
+
+ul.type_filter li a{
+    padding-bottom: 14px;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 30px;
+  border-radius: 4px;
+  padding: 1px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.8);
+  border: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+}
+
+div.divider {
+  height: 1px;
+  margin: 9px 1px;
+  overflow: hidden;
+  background-color: #e5e5e5;
+  border-bottom: 1px solid #ffffff;
+}
+
+div.media-body {
+    padding: 4px;
+}
+
+.palette_item {
+  margin-right: 10px;
+}
+
+.palette_item button.close{
+  font-size: 24.5px;
+}
+
+.palette_item div.media-body label.checkbox{
+  margin-bottom: 10px;
+}
+
+.inline {
+  display: inline;
+}
+
+.field_wrapper {
+  height: 40px;
+  margin-bottom: 15px;
+}
+
+.field_wrapper h4 {
+  margin: 10px 0;
+  display: inline-block;
+  font-size: 18.5px;
+}
+
+.field_wrapper button {
+  margin: 5px 0;
+}
+
+.field_wrapper h4{
+  margin: 10px 0;
+  display: inline-block;
+  font-size: 18.5px;
+}
+
+.field_wrapper button{
+  margin: 5px 0;
+}
+
+table.sp_table {
+  border-collapse:collapse;
+  width: 450px;
+  max-width: 450px;
+}
+
+table.sp_table a {
+  -webkit-transition: color 0.2s ease;
+  -moz-transition: color 0.2s ease;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+table.sp_table td.sp_thumb {
+  width:40px;
+}
+
+table.sp_table td.sp_thumb img {
+  max-width:40px;
+}
+
+table.sp_table td.sp_title {
+  width: 260px;
+  max-width:260px;
+}
+
+table.sp_table td {
+  vertical-align: middle;
+}
+
+table.sp_table tr:first-child td{
+  border-top-color: transparent;
+}
+
+input[type=file] {
+  color:silver;
+  font-size:12px;
+  line-height:12px;
+  margin-top:5px;
+  font-family: SourceSansPro, Arial, Helvetica, sans-serif;
+}
+
+.sp_nav {
+  float:left;
+  line-height:44px;
+}
+
+.sp_navbar a{
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sp_navbar a:not(.sp_storypalette_home) {
+  /*border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  padding: 6px 10px;
+  background-color: rgba(0,0,0,0.7);*/
+  color: rgba(0,0,0,0.7);
+  text-shadow: 0 0px 1px rgba(0, 0, 0, 0.25);
+  line-height:44px;
+}
+
+a.sp_storypalette_home {
+  font-family:Pacifico, Georgia, "Times New Roman", Times, serif;
+  font-size:20px;
+  color:black;
+  margin-right:20px;
+  float:left;
+  line-height:38px;
+  /*vertical-align: middle;*/
+}
+
+.sp_navbar a:hover {
+  color: #003366;
+}
+
+a.logout, a.login {
+  margin-left:20px;
+}
+
+.sp_output {
+  padding-top:5px;
+  text-transform:capitalize;
+}
+
+.sp_login {
+  float:right;
+  line-height:44px;
+}
+
+.sp_login .sp_user {
+  opacity: 0.6;
+  text-shadow: 0 0px 1px rgba(0, 0, 0, 0.1);
+}
+
+/*p.sp_login a, p.sp_nav a{
+  text-decoration: none;
+  color: #003366;
+  text-shadow: 0 0px 1px rgba(0, 0, 0, 0.25);
+  -webkit-transition: color 0.2s ease;
+  -moz-transition: color 0.2s ease;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+p.sp_login a:hover, p.sp_nav a:hover{
+  color: #0064c9;
+}*/
+
+div.sp_frontbody {
+  color:white;
+  background:#003366 url(../img/frontpage_illustration.png) 50% 60px no-repeat;
+}
+
+input.sp_titlebox {
+  line-height: 20px;
+  font-size: 24.5px;
+  height:40px;
+  font-weight:bold;
+  width:76%;
+  box-sizing:border-box;
+}
+
+.fullscreenImage {
+  z-index: 100;
+  position: fixed;
+  top:0px;
+  left:0px;
+  bottom:0px;
+  right:0px;
+  width: 100%;
+}
+
+.sp_fullwidth {
+  box-sizing:border-box;
+  width:100%;
+}
+
+body.play {
+  color:black;
+  background:black;
+}
+
+.sp_btn_lefty {
+  text-align:left;
+}
+
+.loading {
+  padding: 50px;
+  color: white;
+}
+
+.progress_wrapper {
+  margin: 50px 0;
+}
+
+div.sp_toolbar button.save_palette {
+  height:40px;
+}
+
+div.sp_toolbar button.save_palette {
+  height:40px;
+}
+
+div.container { /*notifications*/
+  position: relative;
+  top: 20px;
+}
+
+div.container div.alert button.close{ /*notifications*/
+  margin-top: 4px;
+}
+
+div.modal-header button.close {
+  line-height: 30px;
+  font-size: 24.5px;
+}

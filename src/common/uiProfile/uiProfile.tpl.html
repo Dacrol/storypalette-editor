@@ -1,0 +1,7 @@
+<div class="sp_login">
+  <span class="sp_user" ng-show="isAuthenticated()"><i class="icon-user"></i> {{user.username}}&nbsp;&nbsp;&nbsp;<i class="icon-home"></i> {{user.organisation.name}}</span>
+  USER: <pre>{{auth.getCurrentUser()}}</pre>
+  <a ng-show="isAuthenticated()" ng-click="logout()" class="logout">Logga ut</a>
+  <a ng-hide="isAuthenticated()" ng-click="login()" class="login">Logga in</a>
+</div>
+

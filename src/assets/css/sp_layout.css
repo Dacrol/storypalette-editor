@@ -1,0 +1,98 @@
+/* CSS Document */
+body, html {height:100%;}
+
+div.sp_fixbody {
+    position:absolute;
+    top:44px;
+    left:0;
+    right:0;
+    bottom:0;
+    overflow:scroll;
+}
+
+div.sp_fixedcontainer {
+    margin:0 auto;
+    width:940px;
+    height:100%;
+    position:relative;
+    /*margin-bottom: 10px;*/
+    /*background:url(../img/dev/10-60-10_grid.png) -10px 0 repeat;*/
+}
+div.sp_fixedcontainer_performer {
+    margin:0 auto;
+    width:960px;
+    height:100%;
+    position:relative;
+    /*margin-bottom: 10px;*/
+    /*background:url(../img/dev/10-60-10_grid.png) -10px 0 repeat;*/
+}
+
+div.sp_title {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:40px;
+}
+
+div.sp_title h1 {
+    line-height:40px;
+    font-size:30px;
+    margin:0;
+}
+div.sp_palette {
+    position:absolute;
+    top:20px;
+    left:480px;
+    width:460px;
+    bottom:10px;
+}
+div.sp_resources {
+    position:absolute;
+    top:20px;
+    left:0px;
+    width:460px;
+    bottom:10px;
+}
+
+div.sp_palettes {
+    position:absolute;
+    top:20px;
+    left:0px;
+    width:460px;
+    bottom:10px;
+}
+div.sp_toolbar {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:110px;
+}
+div.sp_scrollport {
+    position:absolute;
+    top:150px;
+    top:100px;
+    left:0;
+    right:0;
+    bottom:0;
+    padding-bottom:0;
+    margin-bottom:0;
+    overflow-x:hidden;
+    overflow-y:scroll;
+}
+
+header.sp_fixedheader {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:44px;
+    box-sizing:border-box;
+    z-index: 999;
+}
+
+div.sp_navbar {
+    margin:0 auto;
+    width:940px;
+}

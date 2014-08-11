@@ -1,0 +1,45 @@
+<header class="sp_fixedheader" ng-include="'header.tpl.html'"></header>
+<div class="sp_fixbody">
+  <div class="sp_fixedcontainer">
+    <div class="sp_palettes">
+      <div class="sp_toolbar">
+        <div class="field_wrapper">
+          <h4>Paletter: {{userFilter}}</h4>
+          <button class="btn btn-primary pull-right" ng-click="newPalette()"><i class="icon-plus icon-white"></i> Skapa ny palett&hellip;</button>
+        </div>
+          <div class="input-append pull-right search_box">
+            <input ng-model="query" class="span4 search" id="inputIcon" type="text" placeholder="Sök"/>
+            <span class="add-on"><i class="icon-search"></i></span>
+          </div>
+          <tabset>
+            <tab heading="Alla" select="filterPalettes()"></tab>
+            <tab heading="Mina" select="filterPalettes('user')"></tab>
+            <!--<tab heading="Alla organisationens" select="filterResources()"></tab>-->
+          </tabset>
+      </div>
+
+      <div class="sp_scrollport">
+        <table class="table table-hover sp_table sp_resource-list">
+          <tr ng-repeat="palette in palettes | orderBy: 'name' | filter:{creatorId: userFilter} | filter:query">
+            <td class="sp_thumb"><a ng-href="palettes/{{palette._id}}"><img class="media-object" src="/assets/img/icon_ipad.png"></a></td>
+            <td class="sp_title"><a ng-href="palettes/{{palette._id}}">
+              <h4>{{palette.name}}</h4></a>
+              <div class="longdescription">
+                  <p>{{palette.description}}</p>
+              </div>
+            </td>
+            <td class="sp_actions">
+              <div class="pull-right dropdown">
+                  <button class="btn dropdown-toggle"><i class="icon-cog"></i></button>
+                  <ul class="dropdown-menu">
+                      <li><a ng-click="duplicatePalette(palette)">Duplicera</a></li>
+                      <li><a ng-click="deletePalette(palette)">Ta bort</a></li>
+                  </ul>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div> <!-- // sp_scrollport -->
+    </div><!-- // sp_resources -->
+  </div> <!-- // sp_fixedcontainer -->
+</div> <!-- // sp_fixbody -->

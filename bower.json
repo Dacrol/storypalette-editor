@@ -1,0 +1,16 @@
+{
+  "name": "storypalette",
+  "devDependencies": {
+    "angular-mocks": "v1.3.0-beta.3"
+  },
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "angular": "v1.3.0-beta.3",
+    "angular-animate": "v1.3.0-beta.3",
+    "bootstrap": "~3.1.0",
+    "angular-ui-bootstrap": "~0.10.0",
+    "howler": "~1.1.17",
+    "angular-bootstrap": "~0.10.0",
+    "angular-ui-router": "~0.2.10"
+  }
+}
