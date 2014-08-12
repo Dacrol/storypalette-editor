@@ -1,18 +1,20 @@
 angular.module('sp.editor.palettes', [
   'uiSocket',
-  'uiAuth'
+  'uiAuth',
+  'uiUtils',
 ])
 
 .config(function($stateProvider, $locationProvider, authProvider, socketProvider, config) {
   // Select palette or create new
-  $stateProvider.state('palettes', {
+  $stateProvider.state('user.palettes', {
     url: '/palettes', 
     templateUrl: 'palettes/palettes.tpl.html',
     controller: 'PaletteListCtrl',
     resolve: {
-      user: authProvider.requireUser,
-      socketInfo: function(user, socket) {
-        return socketProvider.requireAuthenticatedConnection(socket, user);
+      socketInfo: function(user, socket, utils) {
+        var ns = utils.getSocketNamespace(user);
+        var room = utils.getSocketRoom(user);
+        return socketProvider.requireAuthenticatedConnection(socket, ns, room);
       },
       allPalettes: function(palettes) {
         return palettes.all();

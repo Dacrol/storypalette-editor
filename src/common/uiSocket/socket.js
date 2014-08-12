@@ -1,13 +1,9 @@
-angular.module('uiSocket', [
-])
+angular.module('uiSocket', [])
+
 
 // Socket.io integration
 // http://stackoverflow.com/questions/8588689/node-js-socket-io-client-connect-failed-event
 .provider('socket', function() {
-
-  var getNamespace = function(user) {
-    return '/' + user.organisation._id;
-  };
 
   return {
     // Provider methods intented for route/state resolves.
@@ -15,11 +11,9 @@ angular.module('uiSocket', [
       return socket.connect();
     },
 
-    requireAuthenticatedConnection: function(socket, user) {
-      console.log('socket.requireAuthenticatedConnection', user);
-      var namespace = getNamespace(user);
-      var roomName = user._id;
-      return socket.connect(namespace, roomName, user);
+  //  requireAuthenticatedConnection: function(socket, user) {
+    requireAuthenticatedConnection: function(socket, namespace, room) {
+      return socket.connect(namespace, room);
     },
 
     /* TODO: Ugly. Hrrm... used to connect to Player computer
@@ -45,8 +39,8 @@ angular.module('uiSocket', [
         var api = {
             // Tries to connect to server.
             // Returns a promise that is resolved when connection is established
-            connect: function(namespace, roomName, user) {
-              console.log('socket connecting...', namespace, roomName, user);
+            connect: function(namespace, room) {
+              console.log('socket.connectng to namespace=' + namespace + 'room=' +room);
               var start = new Date().getTime();
               var deferred = $q.defer();
 
@@ -54,26 +48,20 @@ angular.module('uiSocket', [
                 //return $q.when({info: 'Already connected'});
               //}
 
-              // HACKY: Build connection url
-              //var host = $location.host();  // 'localhost', 'storypalette.net', 'palette.uidev.se'
-
               // connect to socket server
-              console.log('socket about to connect to: ' + namespace);
               socketManager = io.connect(namespace);
-              //socketManager = io.connect('http://localhost');
-              console.log('socket connecting to: ' + namespace);
 
               // Wait for connect event.
               socketManager.on('connect', function() {
                 console.log('socket connected! in ms:', new Date().getTime() - start);
 
                 // Join a room!
-                socketManager.emit('join', roomName);
+                socketManager.emit('join', room);
                 socketManager.on('onJoin', function(data) {
-                    console.log('User joined room ' + roomName);
-                    $rootScope.$apply(function () {
-                        deferred.resolve(user);
-                    });
+                  console.log('User joined room ' + room);
+                  $rootScope.$apply(function () {
+                    deferred.resolve({info: 'Connected to ' + room});
+                  });
                 });
               });
 

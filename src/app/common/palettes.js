@@ -1,10 +1,10 @@
 angular.module('sp.editor.common.palettes', [
   'sp.editor.common.config', 
-  'services.util',
+  'uiUtils',
   'uiAuth'
 ])
 
-.factory('palettes', function($http, util, auth, config) {
+.factory('palettes', function($http, utils, auth, config) {
   // Palette being currently edited or played
   var currentPalette;
   var apiBase = config.apiBase + 'palettes/'; // http://api.storypalette.net/palettes
@@ -109,10 +109,10 @@ angular.module('sp.editor.common.palettes', [
 //                }
 //            },
     moveAssetUp: function(index) {
-      currentPalette.assets = util.moveInArray(currentPalette.assets, index, index - 1);
+      currentPalette.assets = utils.moveInArray(currentPalette.assets, index, index - 1);
     },
     moveAssetDown: function(index) {
-      currentPalette.assets = util.moveInArray(currentPalette.assets, index, index + 1);
+      currentPalette.assets = utils.moveInArray(currentPalette.assets, index, index + 1);
     },
     removeAsset: function(index) {
       currentPalette.assets.splice(index, 1);
@@ -121,7 +121,7 @@ angular.module('sp.editor.common.palettes', [
       var asset = angular.copy(resource);
       delete asset._id;
 
-      asset.id = util.generateGUID();
+      asset.id = utils.generateGUID();
       asset.resourceId = resource._id;
       asset.value = {raw: 0};
 

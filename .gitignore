@@ -1,6 +1,5 @@
 .DS_Store
 /resources
-/cache
 .swp
 /build/
 /dist/

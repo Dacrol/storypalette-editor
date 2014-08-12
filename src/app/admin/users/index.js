@@ -6,8 +6,8 @@ angular.module('sp.editor.admin.users', [
 
 .config(function($stateProvider, $provide) {
 
-  $stateProvider.state('adminusers', {
-    url: '/adminusers', 
+  $stateProvider.state('admin.users', {
+    url: '/admin/users', 
     templateUrl: 'admin/users/users.tpl.html',
     controller: 'UsersCtrl',
     resolve: {

@@ -6,13 +6,10 @@ angular.module('sp.editor.admin', [
 ])
 
 .config(function($stateProvider, authProvider) {
-  $stateProvider.state('admin', {
+  $stateProvider.state('admin.admin', {
     url: '/admin', 
     templateUrl: 'admin/admin.tpl.html',
-    controller: 'AdminCtrl',
-    resolve: {
-      user: authProvider.requireUser
-    }
+    controller: 'AdminCtrl'
   });
 })
 

@@ -11,7 +11,6 @@ angular.module('sp.editor', [
   'sp.editor.lab',
   'sp.editor.admin',
   'services.httpRequestTracker',
-  'services.util',
   'uiDialog',
   'uiNotifications',
   'uiAuth',
@@ -19,7 +18,7 @@ angular.module('sp.editor', [
   'ui.bootstrap'
 ])
 
-.config(function($urlRouterProvider, $locationProvider, socketProvider, authConfigProvider, uiNotificationsProvider, config) {
+.config(function($urlRouterProvider, $locationProvider, $stateProvider, socketProvider, authConfigProvider, uiNotificationsProvider, authProvider, config) {
   // Various app-wide settings
   uiNotificationsProvider.setDefaultToastDuration(config.notifications.toastLengthMedium);
 
@@ -28,6 +27,26 @@ angular.module('sp.editor', [
 
   // Route configuration
   $locationProvider.html5Mode(true);  // no hash-urls
+
+
+  // Abstract state for different access levels
+  $stateProvider
+    .state('user', {
+      abstract: true,
+      template: '<ui-view/>',
+      resolve: {
+        user: authProvider.requireUser,
+      }
+    })
+    .state('admin', {
+      abstract: true,
+      template: '<ui-view/>',
+      resolve: {
+        // TODO: Make admin work
+        //user: authProvider.requireAdmin,
+        user: authProvider.requireUser,
+      }
+    });
 
   // Redirect to palette list.
   $urlRouterProvider.when('/', '/palettes');

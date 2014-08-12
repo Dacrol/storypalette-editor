@@ -3,18 +3,18 @@ angular.module('sp.editor.edit', [
   'uiAuth',
   'uiAudioPlayer',
   'uiDialog',
+  'uiUtils',
   'uiNotifications'
 ])
 
 .config(function($stateProvider, $locationProvider, authProvider, socketProvider, config) {
 
   // Edit a palette
-  $stateProvider.state('editor', {
+  $stateProvider.state('user.editor', {
     url: '/palettes/:paletteId',
     templateUrl: 'edit/edit.tpl.html',
     controller: 'EditCtrl',
     resolve: {
-      user: authProvider.requireUser,
       palette: function(palettes, $stateParams) {
         var paletteId = $stateParams['paletteId'];
         return palettes.one(paletteId).then(function(palette) {
@@ -190,7 +190,7 @@ angular.module('sp.editor.edit', [
 // Used by modal dialog.
 // If resource object is passed we'll go into edit mode
 // http://plnkr.co/edit/ktfq0Y?p=preview
-.controller('AddEditResourceCtrl', function ($scope, resources, Users, dialog, $state, resource, util, audioPlayer, uiNotifications) {
+.controller('AddEditResourceCtrl', function ($scope, resources, Users, dialog, $state, resource, utils, audioPlayer, uiNotifications) {
   console.log('AddEditResourceCtrl', resource);
 
   $scope.isEditing = typeof(resource) === 'object';
@@ -273,7 +273,7 @@ angular.module('sp.editor.edit', [
     };
     var source = {
       name:name.substring(0,name.lastIndexOf('.')),
-      id:util.generateGUID(),
+      id:utils.generateGUID(),
       extension:name.substring(name.lastIndexOf('.')+1).toLowerCase()
     };
     var type = ext2type[source.extension];
