@@ -13,7 +13,7 @@ angular.module('uiAuth.auth', [])
   };
 
   // auth service. 
-  this.$get = function ($q, $http, queue, login, store, authUtils, authConfig) {
+  this.$get = function ($q, $http, $rootScope, queue, login, store, authUtils, authConfig) {
     var user = null;
 
     // Register a handler for when an item is added to the retry queue
@@ -59,9 +59,10 @@ angular.module('uiAuth.auth', [])
           // TODO: Dynamic api url!
           .post('http://api.storypalette.dev:8888/v1/authenticate', {username: username, password: password}) 
           .then(function(res) {
-            console.log('result', res);
             store.set(authConfig.tokenKey, res.data.token);
-            return api.getCurrentUser();
+            var user = api.getCurrentUser();
+            $rootScope.$broadcast('auth:userLoggedIn', user);
+            return user;
           });
       },
       logout: function() {

@@ -127,6 +127,5 @@ angular.module('sp.editor', [
 })
 ;
 
-
 // TODO: Temp fix for karma.
 window.env = window.env || {};

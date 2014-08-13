@@ -15,6 +15,7 @@ angular.module('uiImagePlayer', [])
   // Public API
   var service =  {
     preloadPaletteImages: function(palette) {
+      console.log('preloadPaletteImages', palette);
       angular.forEach(palette.assets, function (asset, idx) {
         if (asset.type === 'image') {
           progress.count++;
@@ -30,10 +31,10 @@ angular.module('uiImagePlayer', [])
             progress.loaded++;
             progress.done = progress.loaded === progress.count;
             if (progress.done && events.done) {
-                events.done(progress);
+              events.done(progress);
             }
             if (events.progress) {
-                events.progress(progress);
+              events.progress(progress);
             }
           };
         }
@@ -41,7 +42,11 @@ angular.module('uiImagePlayer', [])
     },
 
     getImageUrl: function(asset) {
-        return '/image/' + asset.source.id + '.' + asset.source.extension;
+        var apiBase = 'http://api.storypalette.dev:8888/v1/';
+        var url = apiBase + 'image/' + asset.source.id + '.' + asset.source.extension;
+        console.log('imgurl:', url);
+        return url;
+        //return '/image/' + asset.source.id + '.' + asset.source.extension;
     },
 
     // Delete all images and clear array

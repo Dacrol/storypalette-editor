@@ -17,7 +17,7 @@ angular.module('uiAuth.interceptor', [])
       return config;
     },
     response: function(response) {
-      console.log('responseInterceptor', response.status);
+      //console.log('responseInterceptor', response.status);
       if (response.status === 401) {
         console.log('user not authenticated');
       } 

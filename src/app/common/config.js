@@ -10,7 +10,7 @@ angular.module('sp.editor.common.config', [])
     toastLengthMedium: 2500,
     toastLengthLong: 5000
   },
-  environment: window.env.environment || 'unknown environemnt',
+  environment: window.env.environment || 'local',
   apiBase: window.env.apiBase
 })
 ;

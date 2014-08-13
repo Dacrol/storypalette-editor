@@ -2,7 +2,7 @@ angular.module('uiUtils', [])
 
 // Collection of utility functions
 .factory('utils', function($http) {
-  return {
+  var api = {
 
     // Socket utils. 
     getSocketNamespace: function(user) {
@@ -60,5 +60,7 @@ angular.module('uiUtils', [])
       return S4()+S4()+S4()+S4()+S4()+S4()+S4()+S4();
     }
   };
+
+  return api;
 
 });
