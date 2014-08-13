@@ -1,10 +1,13 @@
 # storypalette-editor
 
-> Web-app for creating and editing palettes for the Storypalette system.
+> Web-app for creating and editing Storypalette palettes.
 
-## Running
+## Install
 
 
-## Development
+## Run / develop
+
+- Run storypalette-server
+- grunt watch
 
 

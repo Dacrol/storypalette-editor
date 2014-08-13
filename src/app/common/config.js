@@ -10,8 +10,8 @@ angular.module('sp.editor.common.config', [])
     toastLengthMedium: 2500,
     toastLengthLong: 5000
   },
-  // TODO: Make apiBase depend on environment!
-  apiBase: 'http://api.storypalette.dev:8888/v1/',
-  basePath: '/editor' 
+  environment: window.env.environment || 'unknown environemnt',
+  apiBase: window.env.apiBase
 })
 ;
+

@@ -1,7 +1,6 @@
 angular.module('uiAuth.auth', [])
 
 .provider('auth', function authProvider() {
-
   
   // Resolve methods to guard states.
   this.requireAdmin = function(auth) {
@@ -25,6 +24,9 @@ angular.module('uiAuth.auth', [])
     });
 
     var api = {
+      getToken: function() {
+        return store.get(authConfig.tokenKey);
+      },
       getCurrentUser: function() {
         if (!user) {
           var token = store.get(authConfig.tokenKey);

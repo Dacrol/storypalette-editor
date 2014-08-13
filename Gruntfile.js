@@ -191,6 +191,7 @@ module.exports = function (grunt) {
         debug: true,
         globals: {
           angular: true,
+          window: true,
           console: true
         }
       }

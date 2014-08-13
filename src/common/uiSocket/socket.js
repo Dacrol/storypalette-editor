@@ -11,24 +11,11 @@ angular.module('uiSocket', [])
       return socket.connect();
     },
 
-  //  requireAuthenticatedConnection: function(socket, user) {
-    requireAuthenticatedConnection: function(socket, namespace, room) {
-      return socket.connect(namespace, room);
+  // requireAuthenticatedConnection: function(socket, user) {
+    requireAuthenticatedConnection: function(socket, namespace, room, token) {
+      return socket.connect(namespace, room, token);
     },
 
-    /* TODO: Ugly. Hrrm... used to connect to Player computer
-    requireAuthenticatedUserAndSocketConnectionToPlayer: function(securityAuthorization, socket, $http, $q) {
-      return securityAuthorization.requireAuthenticatedUser()
-      .then(function (user) {
-        var namespace = getNamespace(user);
-        return $http.get('/api/users/' + user._id + '/players').then(function (response) {
-          var player = response.data[0];
-          var roomName = player._id;
-          return socket.connect(namespace, roomName, user);
-        });
-      });
-    },
-    */
 
     // The service singleton
     $get: function($rootScope, $q, $location) {
@@ -39,8 +26,8 @@ angular.module('uiSocket', [])
         var api = {
             // Tries to connect to server.
             // Returns a promise that is resolved when connection is established
-            connect: function(namespace, room) {
-              console.log('socket.connectng to namespace=' + namespace + 'room=' +room);
+            connect: function(namespace, room, token) {
+              console.log('socket.connectng to namespace=' + namespace + ' room=' + room + 'token=' + token);
               var start = new Date().getTime();
               var deferred = $q.defer();
 
@@ -49,7 +36,9 @@ angular.module('uiSocket', [])
               //}
 
               // connect to socket server
-              socketManager = io.connect(namespace);
+              socketManager = io.connect(namespace, {
+                'query': 'token=' + token
+              });
 
               // Wait for connect event.
               socketManager.on('connect', function() {

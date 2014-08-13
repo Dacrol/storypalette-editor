@@ -29,7 +29,7 @@ angular.module('sp.editor.edit', [
 
 // Main Editor controller
 // Palette variable is injected from route resolve, but we won't use it since Palettes stores it
-.controller('EditCtrl', function ($scope, palettes, socket, $location,uiNotifications) {
+.controller('EditCtrl', function($scope, palettes, socket, $location,uiNotifications) {
   // Palette is loaded when page is loaded
   $scope.palette = palettes.getPalette();
   $scope.valueUpdate = false;
@@ -111,7 +111,6 @@ angular.module('sp.editor.edit', [
   $scope.isCollapsed = true;
 
   resources.all().then(function(data) {
-    console.log('resources', data);
     $scope.resources = data;
   });
 
@@ -247,7 +246,7 @@ angular.module('sp.editor.edit', [
     dialog.close();
   };
 
-  $scope.toggleSound = function (resource) {
+  $scope.toggleSound = function(resource) {
     var url = resource.source.id + '.' + resource.source.extension;
     $scope.playMsg = ($scope.playMsg === 'play')?'stop':'play';
     audioPlayer.newSound('/sound/'+url);
@@ -258,7 +257,7 @@ angular.module('sp.editor.edit', [
     }
   };
 
-  $scope.fileUploadChange = function (element) {
+  $scope.fileUploadChange = function(element) {
     var file = element.files[0];
     if (!file) {return;}
 

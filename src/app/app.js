@@ -11,6 +11,7 @@ angular.module('sp.editor', [
   'sp.editor.lab',
   'sp.editor.admin',
   'services.httpRequestTracker',
+  //'uiEnv',
   'uiDialog',
   'uiNotifications',
   'uiAuth',
@@ -69,11 +70,12 @@ angular.module('sp.editor', [
   //});
 })
 
-.controller('AppCtrl', function($scope, uiNotifications, socket, $http) {
-  //console.log('Testing CORS call');
-  //$http.get('http://api.storypalette.dev:8888/v1/palettes').then(function(data) {
-    //console.log('got data', data.data); 
-  //});
+.controller('AppCtrl', function($scope, config, uiNotifications, socket, $http) {
+
+  // Used to point /image and /sound to the correct api url.
+  $scope.apiBase = config.apiBase;
+
+  console.log('config', config);
 
   // Notification handling used throughout the app
   $scope.notifications = uiNotifications;
@@ -120,7 +122,11 @@ angular.module('sp.editor', [
   };
 
   $scope.hasPendingRequests = function() {
-      return httpRequestTracker.hasPendingRequests();
+    return httpRequestTracker.hasPendingRequests();
   };
 })
 ;
+
+
+// TODO: Temp fix for karma.
+window.env = window.env || {};
