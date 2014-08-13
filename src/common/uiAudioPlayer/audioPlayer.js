@@ -15,9 +15,8 @@ angular.module('uiAudioPlayer', [])
 
   // Public API
   var service =  {
-
     newSound: function (id, url, options) {
-// console.log('AudioPlayer.newSound: ', id, url);
+     console.log('AudioPlayer.newSound: ', id, url);
       url = url || id;
 
       if (sounds[id]) {
