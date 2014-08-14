@@ -2,6 +2,7 @@ angular.module('sp.editor.palettes', [
   'uiSocket',
   'uiAuth',
   'uiUtils',
+  'uiDialog',
   'ui.bootstrap'
 ])
 
@@ -19,7 +20,7 @@ angular.module('sp.editor.palettes', [
   });
 })
 
-.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user, dialog) {
+.controller('PaletteListCtrl', function($scope, allPalettes, palettes, $location, user, dialog) {
   console.log('PaletteListCtrl user:', user);
   $scope.palettes = allPalettes;
   $scope.userFilter = '';

@@ -2,30 +2,33 @@ angular.module('uiAuth.login', [])
 
 // For the moment, this handles a modal login dialog.
 .factory('login', function(queue, $modal, $location) {
-  var dialog;
+  var loginDialog;
 
   function redirect(url) {
     url = url || '/';
+    console.log('redirect to ', url);
     $location.path(url);
   }
 
   function openDialog() {
-    if (dialog) {throw 'Dialog already open';}
+    if (loginDialog) {throw 'Dialog already open';}
 
-    dialog = $modal.open({
+    loginDialog = $modal.open({
       templateUrl: 'uiAuth/loginForm.tpl.html',
       controller: 'LoginFormCtrl'
     });
 
-    dialog.result.then(function(result) {
+    loginDialog.result.then(function(result) {
+      console.log('dialog result', result);
       queue.retryAll();
+      redirect();
     });
   }
 
   function closeDialog(success) {
-    if (dialog) {
-      dialog.close(success);
-      dialog = null;
+    if (loginDialog) {
+      loginDialog.close(success);
+      loginDialog = null;
     }
   }
 
