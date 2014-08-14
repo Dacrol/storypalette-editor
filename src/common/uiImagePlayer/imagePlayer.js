@@ -14,16 +14,23 @@ angular.module('uiImagePlayer', [])
 
   // Public API
   var service =  {
-    preloadPaletteImages: function(palette) {
+
+    // TODO: This belongs outside the player.
+    getImageUrl: function(asset, apiBase) {
+      return apiBase + 'image/' + asset.source.id + '.' + asset.source.extension;
+    },
+
+    preloadPaletteImages: function(palette, apiBase) {
       console.log('preloadPaletteImages', palette);
-      angular.forEach(palette.assets, function (asset, idx) {
+      angular.forEach(palette.assets, function(asset, idx) {
         if (asset.type === 'image') {
           progress.count++;
           progress.done = false;
           if (events.add) {
-              events.add(progress);
+            events.add(progress);
           }
-          var imageUrl = service.getImageUrl(asset);
+
+          var imageUrl = service.getImageUrl(asset, apiBase);
           images[asset.source.id] = new Image();
           images[asset.source.id].src = imageUrl;
           images[asset.source.id].visible = false;   // our own property
@@ -41,14 +48,6 @@ angular.module('uiImagePlayer', [])
       });
     },
 
-    getImageUrl: function(asset) {
-        var apiBase = 'http://api.storypalette.dev:8888/v1/';
-        var url = apiBase + 'image/' + asset.source.id + '.' + asset.source.extension;
-        console.log('imgurl:', url);
-        return url;
-        //return '/image/' + asset.source.id + '.' + asset.source.extension;
-    },
-
     // Delete all images and clear array
     reset: function() {
       images = [];
@@ -58,6 +57,7 @@ angular.module('uiImagePlayer', [])
         done:true
       };
     },
+
     on: function(event, callback) {
       if (!(event instanceof Array)){
         event = [event];

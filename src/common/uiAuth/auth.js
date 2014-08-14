@@ -57,7 +57,7 @@ angular.module('uiAuth.auth', [])
       login: function(username, password) {
         return $http
           // TODO: Dynamic api url!
-          .post('http://api.storypalette.dev:8888/v1/authenticate', {username: username, password: password}) 
+          .post(authConfig.apiBase + 'authenticate', {username: username, password: password}) 
           .then(function(res) {
             store.set(authConfig.tokenKey, res.data.token);
             var user = api.getCurrentUser();

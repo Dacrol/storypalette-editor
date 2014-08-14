@@ -1,4 +1,10 @@
 angular.module('sp.editor.edit', [
+  'sp.editor.edit.editCtrl',
+  'sp.editor.edit.paletteCtrl',
+  'sp.editor.edit.assetCtrl',
+  'sp.editor.edit.resourceCtrl',
+  'sp.editor.edit.resourceListCtrl',
+
   'uiSocket',
   'uiAuth',
   'uiAudioPlayer',
@@ -24,165 +30,6 @@ angular.module('sp.editor.edit', [
       }
     }
   });
-
-})
-
-// Main Editor controller
-// Palette variable is injected from route resolve, but we won't use it since Palettes stores it
-.controller('EditCtrl', function($scope, palettes, socket, $location,uiNotifications) {
-  // Palette is loaded when page is loaded
-  $scope.palette = palettes.getPalette();
-  $scope.valueUpdate = false;
-
-  // Let any previewing performer know that we're editing a palette
-  socket.emit('activePalette', $scope.palette);
-
-  $scope.$watch('palette', function (newPalette, oldPalette) {
-    //console.log('WATCH ' + ($scope.i++))
-    if (!$scope.valueUpdate) {
-      socket.emit('paletteUpdate', $scope.palette);
-    } else {
-      $scope.valueUpdate = false;
-    }
-  }, true);
-
-  // Notify Performer if we navigate away (no palette active)
-  $scope.$on('$locationChangeStart', function (event, next, current) {
-      socket.emit('paletteDeactivate');
-  });
-
-  // Incoming: Palette value has been updated by Palette Interface
-  socket.on('onValueUpdate', function (data) {
-    //console.log('EditCtrl.onValueUpdate: ', data.paletteId, data.assetId, data.value);
-    $scope.valueUpdate = true;
-    $scope.palette.assets[data.assetId].value.raw = data.value.raw;
-    //palettes.setValue(data.assetId, data.value);
-  });
-
-  // Performer in Preview mode wants to, ehm, preview the palette we're editing
-  socket.on('onRequestPalette', function () {
-    socket.emit('activePalette', $scope.palette);
-  });
-})
-
-// Palette controller
-.controller('PaletteCtrl', function ($scope, $location, palettes, uiNotifications) {
-  $scope.run = function () {
-    $location.path('/play/' + $scope.palette._id);
-  };
-
-  $scope.savePalette = function () {
-    palettes.saveCurrent().then(function () {
-      uiNotifications.pushToast({message: 'Palett "' + $scope.palette.name + '" sparad.', type: 'success'});
-    });
-  };
-})
-
-// Controller for individual assets in palette
-// implied scope: $scope.$index; $scope.asset
-.controller('AssetCtrl', function ($scope, palettes) {
-
-  // Watch for changes made to the control value from the outside (from the palette interface)
-  /* $scope.$watch(function() {
-   return palettes.getControlValue($scope.$index)
-   },
-   function(newVal) {
-   console.log('AssetCtrl.watch: ' + $scope.$index + ': controlValue: ', newVal);
-   //palettes.setControlValue($scope.index, newVal);
-   }); */
-  $scope.isCollapsed = true;
-
-  $scope.moveUp = function () {
-    palettes.moveAssetUp($scope.$index);
-  };
-
-  $scope.moveDown = function () {
-    palettes.moveAssetDown($scope.$index);
-  };
-
-  $scope.remove = function () {
-    palettes.removeAsset($scope.$index);
-  };
-})
-
-
-// List of Resources
-.controller('ResourceListCtrl', function($scope, audioPlayer, palettes, resources, dialog) {
-  $scope.isCollapsed = true;
-
-  resources.all().then(function(data) {
-    $scope.resources = data;
-  });
-
-  $scope.iconClasses = {};
-  $scope.iconClasses['sound'] = 'icon-music';
-  $scope.iconClasses['image'] = 'icon-picture';
-  $scope.iconClasses['light'] = 'icon-fire';
-
-  // TODO: Move to app.config
-  $scope.dialogOptions = {
-    backdrop: true,
-    backdropFade: true,
-    dialogFade: true,
-    keyboard: true,     // ESC to close
-    templateUrl: 'edit/add-resource.tpl.html',
-    controller: 'AddEditResourceCtrl',
-    resolve: {resource: function() {return undefined;} }
-  };
-
-  $scope.typeFilter = '';
-
-  $scope.filterResources = function(type) {
-    $scope.typeFilter = type;
-  };
-
-  $scope.newResource = function () {
-    openDialog();
-  };
-
-  $scope.editResource = function(resource) {
-    // Autosave palette since we'll reload the route when saving resource
-    palettes.saveCurrent();
-
-    $scope.dialogOptions.resolve = {resource: function() {return resource;}};
-    openDialog();
-  };
-
-  var openDialog = function () {
-    var dialog = dialog.dialog($scope.dialogOptions);
-    dialog.open().then(function(result) {
-      if (result) {
-        console.log('Dialog closed with result: ' + result);
-      }
-    });
-  };
-})
-
-.controller('ResourceCtrl', function($scope, audioPlayer, palettes) {
-  $scope.playMsg = 'play';
-  $scope.isCollapsed = true;
-
-  $scope.addToPalette = function(resource) {
-    console.log('Adding ' + resource.name + ' to palette...');
-    var a = palettes.addAsset(resource);
-    console.log('Asset created: ', a);
-  };
-
-  $scope.toggleSound = function(resource) {
-    var url = resource.source.id + '.' + resource.source.extension;
-    $scope.playMsg = ($scope.playMsg === 'play')?'stop':'play';
-    audioPlayer.newSound('/sound/'+url);
-    if ($scope.playMsg === 'stop'){
-      audioPlayer.play('/sound/'+url);
-    } else {
-      audioPlayer.stop('/sound/'+url);            
-    }
-  };
-  
-  $scope.getClass = function() {
-    return $scope.isPlaying ? 'icon-stop' : 'icon-play';
-  };
-
 })
 
 // Controller for adding and editing resources

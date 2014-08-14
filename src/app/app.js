@@ -2,20 +2,23 @@ angular.module('sp.editor', [
   'ui.router',
   'templates-app',
   'templates-common',
+
   'sp.editor.common.config',
   'sp.editor.common.palettes',
   'sp.editor.common.resources',
   'sp.editor.common.users',
+
+  'sp.editor.header',
   'sp.editor.palettes',
   'sp.editor.edit',
-  'sp.editor.lab',
   'sp.editor.admin',
+
   'services.httpRequestTracker',
-  //'uiEnv',
   'uiDialog',
   'uiNotifications',
   'uiAuth',
   'uiProfile',
+
   'ui.bootstrap'
 ])
 
@@ -28,7 +31,6 @@ angular.module('sp.editor', [
 
   // Route configuration
   $locationProvider.html5Mode(true);  // no hash-urls
-
 
   // Abstract state for different access levels
   $stateProvider
@@ -70,12 +72,9 @@ angular.module('sp.editor', [
   //});
 })
 
-.controller('AppCtrl', function($scope, config, uiNotifications, socket, $http) {
-
+.controller('AppCtrl', function($scope, config, uiNotifications, $http) {
   // Used to point /image and /sound to the correct api url.
   $scope.apiBase = config.apiBase;
-
-  console.log('config', config);
 
   // Notification handling used throughout the app
   $scope.notifications = uiNotifications;
@@ -84,47 +83,7 @@ angular.module('sp.editor', [
     uiNotifications.remove(notification);
   };
 
-  $scope.$on('security:userLoggedIn', function(e, user) {
-    console.log('EditAppCtrl: on  security:userLoggedIn', user.username);
-    //socket.connect();
-  });
-
-  $scope.$on('security:userLoggedOut', function(e, user) {
-    console.log('Bye bye ' + user.username + '.');
-    socket.disconnect();
-  });
-
-  $scope.$on('$destroy', function (event) {
-    console.log('AppCtrl destroyed: remove socket listeners?');
-    ///socket.removeAllListeners();
-    // or something like
-    // socket.removeListener(this);
-  });
-
-  // Outut socket errors
-  socket.on('error', function (reason){
-    console.error('Unable to connect Socket.IO', reason);
-  });
 })    
-
-.controller('HeaderCtrl', function ($scope, $location, $route, security, httpRequestTracker) {
-  $scope.isAuthenticated = security.isAuthenticated;
-  $scope.isAdmin = security.isAdmin;
-
-  $scope.home = function() {
-    if (security.isAuthenticated()) {
-      console.log('HeaderCtrl: Authenticated');
-      $location.path('/edit');
-    } else {
-      console.log('HeaderCtrl: Not authenticated');
-      $location.path('/');
-    }
-  };
-
-  $scope.hasPendingRequests = function() {
-    return httpRequestTracker.hasPendingRequests();
-  };
-})
 ;
 
 // TODO: Temp fix for karma.

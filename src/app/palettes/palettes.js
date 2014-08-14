@@ -11,11 +11,6 @@ angular.module('sp.editor.palettes', [
     templateUrl: 'palettes/palettes.tpl.html',
     controller: 'PaletteListCtrl',
     resolve: {
-      socketInfo: function(user, socket, utils) {
-        var ns = utils.getSocketNamespace(user);
-        var room = utils.getSocketRoom(user);
-        return socketProvider.requireAuthenticatedConnection(socket, ns, room);
-      },
       allPalettes: function(palettes) {
         return palettes.all();
       }
