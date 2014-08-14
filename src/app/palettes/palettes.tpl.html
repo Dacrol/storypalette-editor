@@ -29,12 +29,14 @@
               </div>
             </td>
             <td class="sp_actions">
-              <div class="pull-right dropdown">
-                  <button class="btn dropdown-toggle"><i class="icon-cog"></i></button>
-                  <ul class="dropdown-menu">
-                      <li><a ng-click="duplicatePalette(palette)">Duplicera</a></li>
-                      <li><a ng-click="deletePalette(palette)">Ta bort</a></li>
-                  </ul>
+              <div class="btn-group pull-right dropdown" dropdown>
+                <button type="button" class="btn btn-primary dropdown-toggle">
+                  Cog here Sveta! <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a ng-click="duplicatePalette(palette)">Duplicera</a></li>
+                  <li><a ng-click="deletePalette(palette)">Ta bort</a></li>
+                </ul>
               </div>
             </td>
           </tr>

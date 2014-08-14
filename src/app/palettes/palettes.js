@@ -2,6 +2,7 @@ angular.module('sp.editor.palettes', [
   'uiSocket',
   'uiAuth',
   'uiUtils',
+  'ui.bootstrap'
 ])
 
 .config(function($stateProvider, $locationProvider, authProvider, socketProvider, config) {
@@ -39,7 +40,7 @@ angular.module('sp.editor.palettes', [
     });
   };
 
-  $scope.deletePalette = function (palette) {
+  $scope.deletePalette = function(palette) {
     var title = 'Ta bort palett';
     var msg = 'Radera <strong>' + palette.name + '</strong> permanent?';
     var btns = [{result:'cancel', label: 'Nej, jag ångrar mig'}, {result:'ok', label: 'Ok, ta bort', cssClass: 'btn-danger'}];
