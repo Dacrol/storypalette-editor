@@ -60,19 +60,20 @@
                       <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
                   </a>
                   <button class="close" ng-click="remove()">&times;</button>
+                  
                   <div class="media-body" ng-switch-when="image">
-                      <input type="text" placeholder="Kort namn" ng-model="asset.label">
-                      <span class="help-block opacity_down"><span class="glyphicon glyphicon-picture"></span> {{asset.name}}</span>
-                      <div class="divider"></div>
-                      <div class="btn-group pull-right">
+                      <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
+                      <div class="btn-group btn-group-sm">
                           <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
                           <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
                       </div>
+                      <span class="help-block opacity_down">
+                        <span class="glyphicon glyphicon-picture"></span> {{asset.name}}</span>
                   </div>
 
                   <div class="media-body" ng-switch-when="light">
-                      <input type="text" class="form-control" placeholder="Kort namn" ng-model="asset.label">
-                      <div class="btn-group btn-group-sm pull-right">
+                      <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
+                      <div class="btn-group btn-group-sm">
                           <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
                           <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
                       </div>
@@ -80,18 +81,17 @@
                   </div>
 
                   <div class="media-body" ng-switch-when="sound">
-                      <input type="text" placeholder="Kort namn" ng-model="asset.label">
-                      <span class="help-block opacity_down"><span class="glyphicon glyphicon-music"></span> {{asset.name}}</span>
-                      <div class="divider"></div>
-                      <label class="checkbox pull-right">
-                          <input type="checkbox" ng-model="asset.loop">Loop
-                      </label>
-                      <span class="help-block"><span class="glyphicon glyphicon-volume-up"></span> Max-volume: {{asset.maxVolume}}</span>
-                      <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
-                      <div class="btn-group pull-right">
+                      <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
+                      <div class="btn-group btn-group-sm">
                           <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
                           <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
                       </div>
+                      <span class="help-block opacity_down"><span class="glyphicon glyphicon-music"></span> {{asset.name}}</span>
+                      <div class="checkbox pull-right loop">
+                        <label><input type="checkbox" ng-model="asset.loop"> Loop </label>  
+                      </div>
+                      <span class="help-block"><span class="glyphicon glyphicon-volume-up"></span> Max-volume: {{asset.maxVolume}}</span>
+                      <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
                   </div>
               </div>
               <!-- // media -->
