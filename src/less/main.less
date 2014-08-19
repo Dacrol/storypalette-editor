@@ -1,6 +1,6 @@
 // Application stylesheet. Import styles here.
 
-// TODO: Import only the styles we use.
+// TODO: Import only the styles we use!
 @import '../../vendor/bootstrap/less/bootstrap.less';
 
 // Our Bootstrap customizations.
@@ -26,6 +26,7 @@
 div.search_box {
     margin-top: 4px;
     margin-bottom: 0;
+    width: 180px;
 }
 
 ul.type_filter li a{
@@ -42,8 +43,9 @@ div.search_box {
   margin-bottom: 0;
 }
 
-input.search {
-  width: 120px;
+input.short-input {
+  width: 220px;
+  display: inline-block;
 }
 
 ul.type_filter li a{
@@ -70,13 +72,13 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 4px;
 }
 
-div.divider {
+/*div.divider {
   height: 1px;
   margin: 9px 1px;
   overflow: hidden;
   background-color: #e5e5e5;
   border-bottom: 1px solid #ffffff;
-}
+}*/
 
 div.media-body {
     padding: 4px;
@@ -92,6 +94,10 @@ div.media-body {
 
 .palette_item div.media-body label.checkbox{
   margin-bottom: 10px;
+}
+
+div.loop {
+  margin: 0;
 }
 
 .inline {
@@ -244,6 +250,7 @@ input.sp_titlebox {
   font-weight:bold;
   width:76%;
   box-sizing:border-box;
+  display: inline-block;
 }
 
 .fullscreenImage {

@@ -5,11 +5,11 @@
       <div class="sp_toolbar">
         <div class="field_wrapper">
           <h4>Paletter: {{userFilter}}</h4>
-          <button class="btn btn-primary pull-right" ng-click="newPalette()"><i class="icon-plus icon-white"></i> Skapa ny palett&hellip;</button>
+          <button class="btn btn-primary pull-right" ng-click="newPalette()"><span class="glyphicon glyphicon-plus icon-white"></span> Skapa ny palett&hellip;</button>
         </div>
-          <div class="input-append pull-right search_box">
-            <input ng-model="query" class="span4 search" id="inputIcon" type="text" placeholder="Sök"/>
-            <span class="add-on"><i class="icon-search"></i></span>
+          <div class="input-group pull-right search_box">
+            <input ng-model="query" class="form-control" id="inputIcon" type="text" placeholder="Sök"/>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
           </div>
           <tabset>
             <tab heading="Alla" select="filterPalettes()"></tab>
@@ -30,8 +30,8 @@
             </td>
             <td class="sp_actions">
               <div class="btn-group pull-right dropdown" dropdown>
-                <button type="button" class="btn btn-primary dropdown-toggle">
-                  Cog here Sveta! <span class="caret"></span>
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-cog"></span></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                   <li><a ng-click="duplicatePalette(palette)">Duplicera</a></li>
