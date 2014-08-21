@@ -1,6 +1,6 @@
 angular.module('sp.editor.common.palettes', [
   'sp.editor.common.config', 
-  'uiUtils',
+  'spUtils',
   'uiAuth'
 ])
 
@@ -10,14 +10,14 @@ angular.module('sp.editor.common.palettes', [
   var apiBase = config.apiBase + 'palettes/'; // http://api.storypalette.net/palettes
 
   // Move "private" methods our here
-  var create = function (palette) {
+  var create = function(palette) {
     console.log('Creating palette: ' + palette.name);
     return $http.post(apiBase, palette).then(function (response) {
       return response.data;
     });
   };
 
-  var update = function (palette) {
+  var update = function(palette) {
     console.log('Updating palette: ' + palette.name);
     return $http.put(apiBase + palette._id, palette).then(function (response) {
       return response.data;   // {result: 1}
@@ -63,8 +63,8 @@ angular.module('sp.editor.common.palettes', [
 
     all: function() {
       //console.log('Get all palettes...');
-      return $http.get(apiBase).then(function (response) {
-        return response.data;
+      return $http.get(apiBase).then(function(res) {
+        return res.data;
       });
     },
 
@@ -73,7 +73,7 @@ angular.module('sp.editor.common.palettes', [
       console.log('Get palette with id: ' + id);
       // TODO: what is returned here?
       return $http.get(apiBase + id)
-        .then(function (response) {
+        .then(function(response) {
           return response.data;
         })
         .then(function(rawPalette) {
@@ -94,20 +94,10 @@ angular.module('sp.editor.common.palettes', [
     },
 
     deletePalette: function(id) {
-      return $http.delete(apiBase + id).then(function(response) {
-        return response;
+      return $http.delete(apiBase + id).then(function(res) {
+        return res;
       });
     },
-//            setControlValue: function (assetId, value) {
-//                if (palette) {
-//                    palette.assets[assetId].params.controlValue = value;
-//                }
-//            },
-//            getControlValue: function (assetId) {
-//                if (palette) {
-//                    return palette.assets[assetId].params.controlValue;
-//                }
-//            },
     moveAssetUp: function(index) {
       currentPalette.assets = utils.moveInArray(currentPalette.assets, index, index - 1);
     },
@@ -124,11 +114,6 @@ angular.module('sp.editor.common.palettes', [
       asset.id = utils.generateGUID();
       asset.resourceId = resource._id;
       asset.value = {raw: 0};
-
-      // HACK!
-      //var roomId = security.currentUser.organisation.rooms[0].id;
-      //asset.local = {};
-      //asset.local[roomId] = {groups: ['A', 'B', 'C']};//user.organisation.rooms[0].dmx.groups;
 
       currentPalette.assets.unshift(asset);
       return asset;

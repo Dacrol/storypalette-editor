@@ -15,7 +15,6 @@ angular.module('uiAuth.auth', [])
   // auth service. 
   this.$get = function ($q, $http, $rootScope, queue, login, store, authUtils, authConfig) {
     var user = null;
-    var gotUser = false;
 
     // Register a handler for when an item is added to the retry queue
     queue.onItemAddedCallbacks.push(function(retryItem) {
@@ -29,30 +28,9 @@ angular.module('uiAuth.auth', [])
         return store.get(authConfig.tokenKey);
       },
       getCurrentUser: function() {
-        if (gotUser) {
+        if (!user) {
           var token = store.get(authConfig.tokenKey);
           user = token ? authUtils.userFromToken(token) : null;
-        }
-        if (!user) {
-          // TODO separate this stuff
-          var ipc;
-
-          try {
-            ipc = require('ipc');            
-          } catch (e) {
-            console.log("ERROR \"" + e + "\"");
-          }
-
-          if (ipc) {
-            ipc.on('credentials', function(data) {
-              api.login(data.username, data.password).then(function(theUser) {
-                user = theUser;
-              }, function(err) {
-                console.log("login failed");
-              });
-            });
-            ipc.send('getDefaultCredentials');
-          }  
         }
         return user;
       },
@@ -82,7 +60,6 @@ angular.module('uiAuth.auth', [])
           .post(authConfig.apiBase + 'authenticate', {username: username, password: password}) 
           .then(function(res) {
             store.set(authConfig.tokenKey, res.data.token);
-            gotUser = true;
             var user = api.getCurrentUser();
             $rootScope.$broadcast('auth:userLoggedIn', user);
             return user;

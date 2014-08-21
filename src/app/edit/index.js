@@ -9,7 +9,7 @@ angular.module('sp.editor.edit', [
   'uiAuth',
   'uiAudioPlayer',
   'uiDialog',
-  'uiUtils',
+  'spUtils',
   'uiNotifications'
 ])
 

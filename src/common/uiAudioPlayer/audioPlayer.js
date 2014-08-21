@@ -16,7 +16,7 @@ angular.module('uiAudioPlayer', [])
   // Public API
   var service =  {
     newSound: function (id, url, options) {
-     console.log('AudioPlayer.newSound: ', id, url);
+     //console.log('AudioPlayer.newSound: ', id, url);
       url = url || id;
 
       if (sounds[id]) {
@@ -42,11 +42,9 @@ angular.module('uiAudioPlayer', [])
       return true;
     },
     printSounds: function() {
-      console.log('\nSounds in AudioPlayer:');
       angular.forEach(sounds, function(sound) {
-         console.log('* ', sound._src);
+        console.log('* ', sound._src);
       });
-      console.log('\n');
     },
 
     // Delete all sounds and clear array
@@ -71,7 +69,7 @@ angular.module('uiAudioPlayer', [])
     },
     // Volume 0.0-1.0
     setVolume: function (id, volume) {
-      console.log('AudioPlayer.setVolume', id, volume);
+      //console.log('AudioPlayer.setVolume', id, volume);
       sounds[id].volume(volume);
     },
     on: function(event, callback){

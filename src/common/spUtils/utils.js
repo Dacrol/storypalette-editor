@@ -8,27 +8,11 @@ angular.module('spUtils', [])
     getSocketNamespace: function(user) {
       return '/' + user.organisation._id;
     },
-    getUserRooms: function(user, apiBase) {
-      return $http.get(apiBase + 'users/' +  user._id + '/players').then(function(res) {
-        return res.data;
-      });
-    },
-    getSocketRoom: function(user, apiBase) {
 
-      if (user.role === 'player') {
-        return user._id;  
-      } else {
-        // TODO: Temp hardcoded: ui-hq
-        //return '51ac6ecbf54d7d411c000002';
-        // Connect to player room. 
-        
-        return $http.get(apiBase + user._id + '/players').then(function(res) {
-          var player = res.data[0];
-          console.log('Got player', player, 'for user', user);
-          var roomName = player._id;
-          return roomName;
-        });
-      }
+    // Returns an array of available rooms for a (non-player user)
+    getUserRooms: function(user, apiBase) {
+      // Get all rooms for my organisation
+      return user.organisation.rooms;
     },
 
     // Move element within array

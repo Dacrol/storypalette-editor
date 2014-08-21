@@ -4,8 +4,6 @@ angular.module('uiDialog', [
 
 
 .factory('dialog', function($rootScope, $templateCache, $modal) {
-  var mooModal = $modal; // To be renamed.
-
   function modalOptions(template, controller, scope) {
     return {template: template, controller: controller, scope: scope}; 
   }
@@ -13,7 +11,7 @@ angular.module('uiDialog', [
   var api = {
     // Creates and opens dialog.
     dialog: function(modalOptions, resultFn) {
-      var dialog = mooModal.open(modalOptions);
+      var dialog = $modal.open(modalOptions);
       if (resultFn) {
         dialog.result.then(resultFn);
       }
@@ -32,11 +30,30 @@ angular.module('uiDialog', [
     // Opens simple generic dialog presenting title, message (any html) and provided buttons.
     messageBox: function(title, message, buttons, resultFn) {
       var scope = angular.extend($rootScope.$new(false), {title: title, message: message, buttons: buttons });
-      return api.dialog(modalOptions("template/messageBox/message.html", 'MessageBoxController', scope), function (result) {
+      return api.dialog(modalOptions('template/messageBox/message.html', 'MessageBoxController', scope), function (result) {
         var value = resultFn ? resultFn(result) : undefined;
         scope.$destroy();
         return value;
       });
+    },
+
+    // opts: 'title', 'message'
+    confirm: function(opts) {
+      var modalInstance = $modal.open({
+        size: 'sm', 
+        templateUrl: 'uiDialog/confirm.tpl.html',
+        scope: angular.extend($rootScope.$new(false), {data: opts})
+      });
+
+      return modalInstance.result;
+
+      /*
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+      */
     }
   };
 

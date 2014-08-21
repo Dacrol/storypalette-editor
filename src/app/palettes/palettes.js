@@ -1,7 +1,7 @@
 angular.module('sp.editor.palettes', [
   'uiSocket',
   'uiAuth',
-  'uiUtils',
+  'spUtils',
   'uiDialog',
   'ui.bootstrap'
 ])
@@ -20,7 +20,7 @@ angular.module('sp.editor.palettes', [
   });
 })
 
-.controller('PaletteListCtrl', function($scope, allPalettes, palettes, $location, user, dialog) {
+.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user, dialog) {
   console.log('PaletteListCtrl user:', user);
   $scope.palettes = allPalettes;
   $scope.userFilter = '';
@@ -42,21 +42,15 @@ angular.module('sp.editor.palettes', [
   };
 
   $scope.deletePalette = function(palette) {
-    var title = 'Ta bort palett';
-    var msg = 'Radera <strong>' + palette.name + '</strong> permanent?';
-    var btns = [{result:'cancel', label: 'Nej, jag ångrar mig'}, {result:'ok', label: 'Ok, ta bort', cssClass: 'btn-danger'}];
-    
-    dialog.messageBox(title, msg, btns) 
-      .open()
-      .then(function(result) {
-        if (result === 'ok') {
-          palettes.deletePalette(palette._id).then(function () {
-            console.log('Palette deleted');
-            // Remove palette from client array as well
-            $scope.palettes.splice($scope.palettes.indexOf(palette), 1);
-          });
-        }
+    dialog.confirm({
+      title: 'Ta bort palett',
+      message: 'Vill du ta bort "' + palette.name + '"?'
+    }).then(function ok() {
+      palettes.deletePalette(palette._id).then(function() {
+        // Remove palette from client array as well
+        $scope.palettes.splice($scope.palettes.indexOf(palette), 1);
       });
+    });
   };
 })
 ;
