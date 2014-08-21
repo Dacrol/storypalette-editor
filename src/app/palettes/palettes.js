@@ -20,10 +20,8 @@ angular.module('sp.editor.palettes', [
   });
 })
 
-.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user,dialog, utils, auth, info) {
+.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user,dialog, utils, auth) {
   console.log('PaletteListCtrl user:', user);
-
-  console.log('socket info', info);
 
   $scope.palettes = allPalettes;
   $scope.userFilter = '';

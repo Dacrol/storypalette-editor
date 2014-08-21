@@ -1,14 +1,9 @@
-angular.module('sp.editor.edit.paletteCtrl', [])
+angular.module('sp.editor.edit.editCtrl', [])
 
-.controller('PaletteCtrl', function ($scope, $location, palettes, uiNotifications) {
-  $scope.run = function () {
-    $location.path('/play/' + $scope.palette._id);
-  };
-
-  $scope.savePalette = function () {
-    palettes.saveCurrent().then(function () {
-      uiNotifications.pushToast({message: 'Palett "' + $scope.palette.name + '" sparad.', type: 'success'});
-    });
-  };
+// Main Editor controller
+// Palette variable is injected from route resolve, but we won't use it since Palettes stores it
+.controller('EditCtrl', function($scope, palettes, $location,uiNotifications) {
+  // Palette is loaded when page is loaded
+  $scope.palette = palettes.getPalette();
 })
 ;
