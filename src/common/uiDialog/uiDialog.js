@@ -41,8 +41,8 @@ angular.module('uiDialog', [
     confirm: function(opts) {
       var modalInstance = $modal.open({
         size: 'sm', 
-        templateUrl: 'uiDialog/confirm.tpl.html',
-        scope: angular.extend($rootScope.$new(false), {data: opts})
+        templateUrl: 'uiDialog/confirm.tpl.html'
+        //scope: angular.extend($rootScope.$new(false), {data: opts})
       });
 
       return modalInstance.result;

@@ -21,7 +21,7 @@ angular.module('uiImagePlayer', [])
     },
 
     preloadPaletteImages: function(palette, apiBase) {
-      console.log('preloadPaletteImages', palette);
+      //console.log('preloadPaletteImages', palette);
       angular.forEach(palette.assets, function(asset, idx) {
         if (asset.type === 'image') {
           progress.count++;

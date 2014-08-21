@@ -5,7 +5,6 @@ angular.module('sp.editor.edit', [
   'sp.editor.edit.resourceCtrl',
   'sp.editor.edit.resourceListCtrl',
 
-  'uiSocket',
   'uiAuth',
   'uiAudioPlayer',
   'uiDialog',
@@ -13,7 +12,7 @@ angular.module('sp.editor.edit', [
   'uiNotifications'
 ])
 
-.config(function($stateProvider, $locationProvider, authProvider, socketProvider, config) {
+.config(function($stateProvider, $locationProvider, authProvider, config) {
 
   // Edit a palette
   $stateProvider.state('user.editor', {

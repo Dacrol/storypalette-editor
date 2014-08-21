@@ -22,7 +22,7 @@ angular.module('sp.editor', [
   'ui.bootstrap'
 ])
 
-.config(function($urlRouterProvider, $locationProvider, $stateProvider, socketProvider, authConfigProvider, uiNotificationsProvider, authProvider, config) {
+.config(function($urlRouterProvider, $locationProvider, $stateProvider, authConfigProvider, uiNotificationsProvider, authProvider, config) {
   // Various app-wide settings
   uiNotificationsProvider.setDefaultToastDuration(config.notifications.toastLengthMedium);
 
@@ -58,8 +58,13 @@ angular.module('sp.editor', [
   //$routeProvider.otherwise({template: 'Bad route. Go <a href="/">home.</a>'});
 })
 
-.run(function(socket, config, auth) {
+.run(function($rootScope, config) {
   console.log('*** Storypalette version ' + config.version.number + ' - ' + config.version.name + ' ***\n');
+
+  $rootScope.$on('$stateChangeError', 
+function(event, toState, toParams, fromState, fromParams, error){ 
+    console.warn('$stateChangeError', error); 
+  });
 
   // Get the current user when the application starts
   // (in case they are still logged in from a previous session)

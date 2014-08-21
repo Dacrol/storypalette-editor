@@ -1,12 +1,12 @@
 angular.module('sp.editor.palettes', [
-  'uiSocket',
   'uiAuth',
   'spUtils',
+
   'uiDialog',
   'ui.bootstrap'
 ])
 
-.config(function($stateProvider, $locationProvider, authProvider, socketProvider, config) {
+.config(function($stateProvider, $locationProvider, authProvider, config) {
   // Select palette or create new
   $stateProvider.state('user.palettes', {
     url: '/palettes', 
@@ -20,8 +20,11 @@ angular.module('sp.editor.palettes', [
   });
 })
 
-.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user, dialog) {
+.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user,dialog, utils, auth, info) {
   console.log('PaletteListCtrl user:', user);
+
+  console.log('socket info', info);
+
   $scope.palettes = allPalettes;
   $scope.userFilter = '';
 

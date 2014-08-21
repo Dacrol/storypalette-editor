@@ -35,7 +35,6 @@ module.exports = {
       'vendor/angular-route/angular-route.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
       'vendor/howler/howler.js'
-      //'vendor/angular-bootstrap/ui-bootstrap.js'
     ],
     css: [],
     assets: [
