@@ -1,8 +1,7 @@
 angular.module('sp.editor.palettes', [
   'uiAuth',
-  'spUtils',
-
   'uiDialog',
+  'uiNotifications',
   'ui.bootstrap'
 ])
 
@@ -20,12 +19,9 @@ angular.module('sp.editor.palettes', [
   });
 })
 
-.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user, dialog, utils, auth) {
-  console.log('PaletteListCtrl user:', user);
-
+.controller('PaletteListCtrl', function($scope, allPalettes, palettes, $location, user, dialog,  auth, notifications) {
   $scope.palettes = allPalettes;
   $scope.user = user;
-
   $scope.userFilter = '';
 
   $scope.filterPalettes = function(filter) {
@@ -50,6 +46,8 @@ angular.module('sp.editor.palettes', [
       message: 'Vill du ta bort "' + palette.name + '"?'
     }).then(function ok() {
       palettes.deletePalette(palette._id).then(function() {
+        notifications.pushToast({message: 'Palett "' + palette.name + '" borttagen.', type: 'success'});
+
         // Remove palette from client array as well
         $scope.palettes.splice($scope.palettes.indexOf(palette), 1);
       });

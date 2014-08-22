@@ -1,5 +1,6 @@
 <header class="sp_fixedheader" ng-include="'header/header.tpl.html'"></header>
 <div class="sp_fixbody">
+  <div ng-include="'notifications.tpl.html'" class="container" ng-show="notifications.getCurrent().length"></div>
   <div class="sp_fixedcontainer">
     <div class="sp_palettes">
       <div class="sp_toolbar">

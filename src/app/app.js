@@ -22,9 +22,9 @@ angular.module('sp.editor', [
   'ui.bootstrap'
 ])
 
-.config(function($urlRouterProvider, $locationProvider, $stateProvider, authConfigProvider, uiNotificationsProvider, authProvider, config) {
+.config(function($urlRouterProvider, $locationProvider, $stateProvider, authConfigProvider, notificationsProvider, authProvider, config) {
   // Various app-wide settings
-  uiNotificationsProvider.setDefaultToastDuration(config.notifications.toastLengthMedium);
+  notificationsProvider.setDefaultToastDuration(config.notifications.toastLengthMedium);
 
   authConfigProvider.setTokenKey('spToken'); 
   authConfigProvider.setApiBase(config.apiBase); 
@@ -77,17 +77,18 @@ function(event, toState, toParams, fromState, fromParams, error){
   //});
 })
 
-.controller('AppCtrl', function($scope, config, uiNotifications, $http) {
+.controller('AppCtrl', function($scope, config, notifications, $http) {
   // Used to point /image and /sound to the correct api url.
   $scope.apiBase = config.apiBase;
 
   // Notification handling used throughout the app
-  $scope.notifications = uiNotifications;
+  $scope.notifications = notifications;
+
+  notifications.pushToast({message: 'Test', type: 'success'});
 
   $scope.removeNotification = function(notification) {
-    uiNotifications.remove(notification);
+    notifications.remove(notification);
   };
-
 })    
 ;
 

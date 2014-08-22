@@ -1,6 +1,6 @@
 angular.module('uiNotifications', [])
 
-.provider('uiNotifications', function() {
+.provider('notifications', function() {
   var config = {
     toastDuration: 2000
   };

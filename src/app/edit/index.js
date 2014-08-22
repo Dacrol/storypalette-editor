@@ -35,7 +35,7 @@ angular.module('sp.editor.edit', [
 // Used by modal dialog.
 // If resource object is passed we'll go into edit mode
 // http://plnkr.co/edit/ktfq0Y?p=preview
-.controller('AddEditResourceCtrl', function ($scope, resources, Users, dialog, $state, resource, utils, audioPlayer, uiNotifications) {
+.controller('AddEditResourceCtrl', function ($scope, resources, Users, dialog, $state, resource, utils, audioPlayer, notifications) {
   console.log('AddEditResourceCtrl', resource);
 
   $scope.isEditing = typeof(resource) === 'object';
@@ -80,7 +80,7 @@ angular.module('sp.editor.edit', [
     $scope.resource.edited = new Date().getTime();
 
     resources.save($scope.resource).then(function (resource) {
-      uiNotifications.pushToast({message: 'Resursen sparad', type: 'success'});
+      notifications.pushToast({message: 'Resursen sparad', type: 'success'});
 
       // Update view and reload resources
       // TODO: Do we really need to do a full GET?
