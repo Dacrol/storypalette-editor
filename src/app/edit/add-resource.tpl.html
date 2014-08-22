@@ -15,7 +15,7 @@
                         <div ng-switch on="resource.type">
                             <div ng-switch-when="image"><img src="/image/220x220/{{resource.source.id}}.{{resource.source.extension}}"/></div>
                             <div ng-switch-when="sound">
-                                <button class="btn btn-mini" ng-click="toggleSound(resource)"><i class="icon-{{playMsg}}"></i></button>
+                                <button class="btn btn-default btn-sm" ng-click="toggleSound(resource)"><span class="glyphicon glyphicon-{{playMsg}}"></span></button>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
         </form>
     </div> <!-- // modal-body -->
     <div class="modal-footer">
-        <button ng-show="isEditing" class="btn btn-link pull-left" ng-click="deleteResource()"><i class="icon-trash"></i> Ta bort</button>
-        <button class="btn btn-success" ng-click="createResource()">Spara</button>
+        <button ng-show="isEditing" class="btn btn-link pull-left" ng-click="deleteResource()"><span class="glyphicon glyphicon-trash"></span> Ta bort</button>
+        <button class="btn btn-default btn-success" ng-click="createResource()">Spara</button>
     </div>
 </div>

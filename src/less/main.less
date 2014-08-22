@@ -33,7 +33,7 @@ body {
 input,
 button,
 select,
-textarea,
+textarea,sp_actions
 a {
   font-family: SourceSansPro, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -57,16 +57,6 @@ div.search_box {
 
 ul.type_filter li a{
     padding-bottom: 14px;
-}
-.sp_fixedheader {
-    box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
-    background: white;
-    z-index: 999;
-}
-
-div.search_box {
-  margin-top: 4px;
-  margin-bottom: 0;
 }
 
 input.short-input {
@@ -181,7 +171,7 @@ table.sp_table td.sp_title {
   max-width:260px;
 }
 
-table.sp_table td {
+table.sp_table tr td {
   vertical-align: middle;
 }
 
@@ -299,9 +289,9 @@ body.play {
   background:black;
 }
 
-.sp_btn_lefty {
+/*.sp_btn_lefty {
   text-align:left;
-}
+}*/
 
 .loading {
   padding: 50px;
@@ -332,4 +322,8 @@ div.container div.alert button.close{ /*notifications*/
 div.modal-header button.close {
   line-height: 30px;
   font-size: 24.5px;
+}
+
+.btn span {
+  top: 2px;
 }
