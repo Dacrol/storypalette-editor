@@ -20,10 +20,12 @@ angular.module('sp.editor.palettes', [
   });
 })
 
-.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user,dialog, utils, auth) {
+.controller('PaletteListCtrl', function ($scope, allPalettes, palettes, $location, user, dialog, utils, auth) {
   console.log('PaletteListCtrl user:', user);
 
   $scope.palettes = allPalettes;
+  $scope.user = user;
+
   $scope.userFilter = '';
 
   $scope.filterPalettes = function(filter) {
@@ -38,7 +40,7 @@ angular.module('sp.editor.palettes', [
 
   $scope.duplicatePalette = function (srcPalette, $index) {
     palettes.newPalette(srcPalette).then(function (palette) {
-        $location.path('/palettes/' + palette._id);
+      $location.path('/palettes/' + palette._id);
     });
   };
 

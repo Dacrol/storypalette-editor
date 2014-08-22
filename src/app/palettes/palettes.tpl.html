@@ -4,7 +4,9 @@
     <div class="sp_palettes">
       <div class="sp_toolbar">
         <div class="field_wrapper">
-          <h4>Paletter: {{userFilter}}</h4>
+          <h4 ng-if="!userFilter">Alla paletter</h4>
+          <h4 ng-if="userFilter">{{user.firstname}}s paletter</h4>
+          
           <button class="btn btn-primary pull-right" ng-click="newPalette()"><span class="glyphicon glyphicon-plus icon-white"></span> Skapa ny palett&hellip;</button>
         </div>
           <div class="input-group pull-right search_box">
