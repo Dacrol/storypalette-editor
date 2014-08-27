@@ -84,8 +84,6 @@ function(event, toState, toParams, fromState, fromParams, error){
   // Notification handling used throughout the app
   $scope.notifications = notifications;
 
-  notifications.pushToast({message: 'Test', type: 'success'});
-
   $scope.removeNotification = function(notification) {
     notifications.remove(notification);
   };

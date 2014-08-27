@@ -15,12 +15,13 @@ angular.module('uiAudioPlayer', [])
 
   // Public API
   var service =  {
-    newSound: function (id, url, options) {
-     //console.log('AudioPlayer.newSound: ', id, url);
-      url = url || id;
+    newSound: function(url, options) {
+      console.log('AudioPlayer.newSound:', url, options);
+
+      var id = url;
 
       if (sounds[id]) {
-          return false;
+        return false;
       }
       options = options || {};
       options.urls = [url];
