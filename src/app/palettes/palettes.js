@@ -29,7 +29,8 @@ angular.module('sp.editor.palettes', [
   };
 
   $scope.newPalette = function () {
-    palettes.newPalette().then(function (palette) {
+    console.log('newPalette');
+    palettes.newPalette().then(function(palette) {
       $location.path('/palettes/' + palette._id);
     });
   };

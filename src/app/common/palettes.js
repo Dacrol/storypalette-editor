@@ -12,7 +12,8 @@ angular.module('sp.editor.common.palettes', [
   // Move "private" methods our here
   var create = function(palette) {
     console.log('Creating palette: ' + palette.name);
-    return $http.post(apiBase, palette).then(function (response) {
+    return $http.post(apiBase, palette).then(function(response) {
+      console.log('got response from create', response);
       return response.data;
     });
   };
