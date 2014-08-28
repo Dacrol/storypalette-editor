@@ -11,7 +11,7 @@ angular.module('uiAuth.login', [])
   }
 
   function openDialog() {
-    if (loginDialog) {throw 'Dialog already open';}
+    //if (loginDialog) {throw 'Dialog already open';}
 
     loginDialog = $modal.open({
       templateUrl: 'uiAuth/loginForm.tpl.html',
@@ -22,6 +22,7 @@ angular.module('uiAuth.login', [])
       console.log('dialog result', result);
       queue.retryAll();
       redirect();
+      //closeDialog();
     });
   }
 

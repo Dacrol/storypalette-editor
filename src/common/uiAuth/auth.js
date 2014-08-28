@@ -68,6 +68,7 @@ angular.module('uiAuth.auth', [])
       logout: function() {
         user = null;
         store.unset(authConfig.tokenKey); 
+        $rootScope.$broadcast('auth:userLoggedOut', user);
       },
       showLogin: function() {
         login.show(); 
