@@ -32,7 +32,7 @@
                 <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
               </td>
               <td class="sp_title"><h5>{{resource.name}}</h5>
-                  <!--<div class="longdescription"><p>{{resource.description}}</p></div>-->
+                  <div class="longdescription"><p>{{resource.description}}</p></div>
               </td>
               <td class="sp_actions">
                 <div class="btn-group btn-group-sm pull-right">
@@ -48,8 +48,11 @@
       <div class="sp_palette" ng-controller="PaletteCtrl">
           <div class="sp_toolbar">
               <input id="paletteTitle" ng-model="palette.name" class="sp_titlebox form-control" type="text" placeholder="Skriv in palettens namn här" />
-              <button class="btn btn-default btn-success pull-right" ng-click="savePalette()">Spara palett</button>
-          </div>
+ 		<button class="btn btn-default btn-success pull-right" ng-click="savePalette()">Spara palett</button>
+		<div class="sp_descriptionbox">
+	           <textarea id="paletteDescription" ng-model="palette.description" class="long-input form-control" type="text" placeholder="Skriv in palettens beskrivning här">		    </textarea> 
+                </div>
+	  </div>
           <div class="sp_scrollport">
               <div ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item"
                    ng-switch on="asset.type">

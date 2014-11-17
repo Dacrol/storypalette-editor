@@ -30,6 +30,9 @@ angular.module('sp.editor.common.palettes', [
     setName: function(name) {
       currentPalette.name = name;
     },
+    setDescription: function(description) {
+      currentPalette.description = description;
+    },
     getPalette: function() {
       return currentPalette;
     },
