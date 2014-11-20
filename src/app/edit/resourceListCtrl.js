@@ -1,26 +1,16 @@
 angular.module('sp.editor.edit.resourceListCtrl', [])
 
-.controller('ResourceListCtrl', function($scope, audioPlayer, palettes, resources, dialog) {
+.controller('ResourceListCtrl', function($scope, audioPlayer, palettes, resources, dialog, $modal) {
   $scope.isCollapsed = true;
 
   resources.all().then(function(data) {
     $scope.resources = data;
   });
 
-  $scope.iconClasses = {};
-  $scope.iconClasses['sound'] = 'icon-music';
-  $scope.iconClasses['image'] = 'icon-picture';
-  $scope.iconClasses['light'] = 'icon-fire';
-
-  // TODO: Move to app.config
-  $scope.dialogOptions = {
-    backdrop: true,
-    backdropFade: true,
-    dialogFade: true,
-    keyboard: true,     // ESC to close
-    templateUrl: 'edit/add-resource.tpl.html',
-    controller: 'AddEditResourceCtrl',
-    resolve: {resource: function() {return undefined;} }
+  $scope.iconClasses = {
+    sound: 'icon-music',
+    image: 'icon-picture',
+    light: 'icon-fire'
   };
 
   $scope.typeFilter = '';
@@ -29,15 +19,23 @@ angular.module('sp.editor.edit.resourceListCtrl', [])
     $scope.typeFilter = type;
   };
 
-  $scope.newResource = function () {
-    openDialog();
+  var dialogOptions = {
+    templateUrl: 'edit/addEditResource.tpl.html',
+    controller: 'AddEditResourceCtrl',
+    resolve: {resource: function() {return undefined;} }
+  };
+
+  var loginDialog;
+
+  $scope.newResource = function() {
+    loginDialog = $modal.open(dialogOptions);
   };
 
   $scope.editResource = function(resource) {
     // Autosave palette since we'll reload the route when saving resource
     palettes.saveCurrent();
 
-    $scope.dialogOptions.resolve = {resource: function() {return resource;}};
+    dialogOptions.resolve = {resource: function() {return resource;}};
     openDialog();
   };
 

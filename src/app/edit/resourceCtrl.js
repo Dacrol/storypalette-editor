@@ -11,8 +11,7 @@ angular.module('sp.editor.edit.resourceCtrl', [])
   };
 
   $scope.toggleSound = function(resource) {
-    console.log(resource);
-    var url = config.apiBase + 'sound/' + resource.source.id + '/ogg';// + resource.source.extension;
+    var url = config.apiBase + 'sound/' + resource.source.id + '/' + resource.source.extension;
     $scope.playMsg = ($scope.playMsg === 'play') ? 'stop':'play';
     audioPlayer.newSound(url, {format: resource.source.extension});
     if ($scope.playMsg === 'stop'){
