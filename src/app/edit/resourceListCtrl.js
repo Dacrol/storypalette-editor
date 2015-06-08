@@ -40,12 +40,13 @@ angular.module('sp.editor.edit.resourceListCtrl', [])
   };
 
   var openDialog = function () {
-    var dialog = dialog.dialog($scope.dialogOptions);
-    dialog.open().then(function(result) {
+    console.log(dialog);
+    var d = dialog.dialog(dialogOptions);
+    d.open().then(function(result) {
       if (result) {
         console.log('Dialog closed with result: ' + result);
       }
     });
   };
 })
-;
+; 
