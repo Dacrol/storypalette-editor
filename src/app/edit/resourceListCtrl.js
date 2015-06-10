@@ -27,7 +27,8 @@ angular.module('sp.editor.edit.resourceListCtrl', [])
 
   var loginDialog;
 
-  $scope.newResource = function() {
+  $scope.newResource = function(resource) {
+    dialogOptions.resolve =  {resource: function() {return undefined;}};
     loginDialog = $modal.open(dialogOptions);
   };
 
