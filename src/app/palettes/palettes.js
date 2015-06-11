@@ -26,6 +26,7 @@ angular.module('sp.editor.palettes', [
 
   $scope.filterPalettes = function(filter) {
     $scope.userFilter = (filter === 'user') ? user._id : '';
+    $scope.organisationFilter = (filter === 'organisation') ? user.organisationId : '';
   };
 
   $scope.newPalette = function () {
