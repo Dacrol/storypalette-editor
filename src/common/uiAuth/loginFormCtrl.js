@@ -11,16 +11,23 @@ angular.module('uiAuth.loginFormCtrl', [
   $scope.login = function() {
     // Clear any previous security errors
     $scope.authError = null;
-
+    var wrongUserPass = 'Fel namn eller lösenord';
     // Try to login
     auth.login($scope.user.username, $scope.user.password).then(function(user) {
       if (!user) {
-        $scope.authError = 'Fel namn eller lösenord';
+        $scope.authError = wrongUserPass;
       } else {
         $modalInstance.close(user);
       }
     }, function(err) {
-      $scope.authError = 'Serverfel'; 
+      if (err.status == 401)
+      {
+        $scope.authError = wrongUserPass; 
+      }
+      else
+      {
+        $scope.authError = "Serverfel";
+      }
     });
   };
 
