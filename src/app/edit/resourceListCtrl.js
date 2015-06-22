@@ -1,6 +1,6 @@
 angular.module('sp.editor.edit.resourceListCtrl', [])
 
-.controller('ResourceListCtrl', function($scope, audioPlayer, palettes, resources, dialog, $modal) {
+.controller('ResourceListCtrl', function($scope, $state, audioPlayer, palettes, resources, dialog, $modal) {
   $scope.isCollapsed = true;
 
   resources.all().then(function(data) {
@@ -42,11 +42,9 @@ angular.module('sp.editor.edit.resourceListCtrl', [])
 
   var openDialog = function () {
     console.log(dialog);
-    var d = dialog.dialog(dialogOptions);
-    d.open().then(function(result) {
-      if (result) {
-        console.log('Dialog closed with result: ' + result);
-      }
+    dialog.dialog(dialogOptions, function() {
+    console.log('reloading page');
+    $state.go($state.current, {}, {reload: true});
     });
   };
 })
