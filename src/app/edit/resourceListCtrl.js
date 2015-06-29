@@ -6,6 +6,8 @@ angular.module('sp.editor.edit.resourceListCtrl', [])
   resources.all().then(function(data) {
     $scope.resources = data;
   });
+  
+  console.log(angular.version);
 
   $scope.iconClasses = {
     sound: 'icon-music',

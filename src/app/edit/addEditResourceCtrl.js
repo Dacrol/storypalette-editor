@@ -25,7 +25,8 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   $scope.resource.creatorId = auth.getCurrentUser()._id;
 
   $scope.deleteResource = function() {
-    resources.remove($scope.resource);
+    var test = resources.remove($scope.resource);
+    console.log(test);    
     $modalInstance.close();
   };
 
