@@ -13,7 +13,11 @@
           <div>{{progress}}</div>
           <div ng-switch on="resource.type">
             <div ng-switch-when="image">
-              <img ng-src="{{apiBase}}image/220x220/{{resource.source.id}}.{{resource.source.extension}}"/>
+              <div ng-switch on="imagefound">
+                <div ng-switch-when="true">
+                  <img ng-src="{{apiBase}}image/220x220/{{resource.source.id}}.{{resource.source.extension}}"/>
+                </div>
+              </div>
             </div>
             <div ng-switch-when="sound">
               <button class="btn btn-default btn-sm" ng-click="toggleSound(resource)">

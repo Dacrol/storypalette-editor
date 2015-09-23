@@ -13,6 +13,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   $scope.action = $scope.isEditing ? 'Redigera' : 'Lägg till';
   $scope.progress = '';
   $scope.source = false;
+  $scope.imagefound = $scope.isEditing;
   $scope.playMsg = 'play';
   $scope.types = ['sound', 'image', 'light'];
   $scope.apiBase = config.apiBase;
@@ -25,8 +26,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   $scope.resource.creatorId = auth.getCurrentUser()._id;
 
   $scope.deleteResource = function() {
-    var test = resources.remove($scope.resource);
-    console.log(test);    
+    resources.remove($scope.resource);   
     $modalInstance.close();
   };
 
@@ -108,10 +108,42 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
       }
     }, false);
     upload.addEventListener("load", function (ev) {
-      $scope.progress = 'Uppladdning klar';
-      $scope.resource.source = source;
-      $scope.resource.type = type;
-      $scope.$apply();
+       
+      if (type != 'image') {
+        $scope.progress = 'Uppladdning klar';
+        $scope.resource.source = source;
+        $scope.resource.type = type;
+        $scope.$apply();
+      }
+      else {
+        // wait till image is loaded
+        var pollImage = new Image();
+        
+        $scope.progress = 'Uppladdning klar. Det kan ibland dröja något innan bilden är visningsklar.';
+        $scope.resource.found = true;
+        $scope.$apply();
+
+        pollImage.onload = function () {
+          window.clearInterval(timer);
+          $scope.progress = 'Uppladdning klar';
+          $scope.resource.source = source;  
+          $scope.resource.type = type;
+          $scope.imagefound = true;
+          console.log($scope);
+          $scope.$apply();
+        };
+ 
+        var cloudinaryBaseAddress = "http://res.cloudinary.com/storypalette/image/upload/";
+        var date = new Date();
+        
+        var timer = window.setInterval(function () {
+          console.log('sending the request again');
+          pollImage.src = cloudinaryBaseAddress + source.id + "." + source.extension + "?" + date.getTime();
+
+        }, 5000);
+
+      }
+          
     }, false);
     upload.addEventListener("error", function (ev) {console.log(ev);}, false);
     xhr.open("POST", url);
