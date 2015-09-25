@@ -1,11 +1,13 @@
 angular.module('sp.editor.edit.resourceListCtrl', [])
 
-.controller('ResourceListCtrl', function($scope, audioPlayer, palettes, resources, dialog, $modal) {
+.controller('ResourceListCtrl', function($scope, $state, audioPlayer, palettes, resources, dialog, $modal) {
   $scope.isCollapsed = true;
 
   resources.all().then(function(data) {
     $scope.resources = data;
   });
+  
+  console.log(angular.version);
 
   $scope.iconClasses = {
     sound: 'icon-music',
@@ -27,7 +29,8 @@ angular.module('sp.editor.edit.resourceListCtrl', [])
 
   var loginDialog;
 
-  $scope.newResource = function() {
+  $scope.newResource = function(resource) {
+    dialogOptions.resolve =  {resource: function() {return undefined;}};
     loginDialog = $modal.open(dialogOptions);
   };
 
@@ -40,12 +43,11 @@ angular.module('sp.editor.edit.resourceListCtrl', [])
   };
 
   var openDialog = function () {
-    var dialog = dialog.dialog($scope.dialogOptions);
-    dialog.open().then(function(result) {
-      if (result) {
-        console.log('Dialog closed with result: ' + result);
-      }
+    console.log(dialog);
+    dialog.dialog(dialogOptions, function() {
+    console.log('reloading page');
+    $state.go($state.current, {}, {reload: true});
     });
   };
 })
-;
+; 

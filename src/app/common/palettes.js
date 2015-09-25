@@ -49,16 +49,19 @@ angular.module('sp.editor.common.palettes', [
     // If srcPalette is provided, copy properties of srcPalette to new palette
     // Returns a promise that will resolve with the new palette
     newPalette: function(srcPalette) {
+      var user = auth.getCurrentUser();
+
       if (srcPalette) {
         currentPalette = angular.copy(srcPalette);
         currentPalette.name = 'Kopia av ' + currentPalette.name;
         delete currentPalette._id;
       } else {
         currentPalette = {
-          name: 'Ny palett',
+          name: 'Ny Palett',
           created: new Date().getTime(),
           edited: new Date().getTime(),
-          creatorId: auth.getCurrentUser()._id,
+          creatorId: user._id,
+          organisationId: user.organisationId,
           assets: []
         };
       }

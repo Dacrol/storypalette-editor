@@ -14,16 +14,17 @@
             <input ng-model="query" class="form-control" id="inputIcon" type="text" placeholder="Sök"/>
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
           </div>
+          
           <tabset>
             <tab heading="Alla" select="filterPalettes()"></tab>
             <tab heading="Mina" select="filterPalettes('user')"></tab>
-            <!--<tab heading="Alla organisationens" select="filterResources()"></tab>-->
+            <tab heading="Alla organisationens" select="filterPalettes('organisation')"></tab>
           </tabset>
       </div>
 
       <div class="sp_scrollport">
         <table class="table table-hover sp_table sp_resource-list">
-          <tr ng-repeat="palette in palettes | orderBy: 'name' | filter:{creatorId: userFilter} | filter:query">
+          <tr ng-repeat="palette in palettes | orderBy: 'name' | filter:{creatorId: userFilter,organisationId: organisationFilter} | filter:query">
             <td class="sp_thumb"><a ng-href="palettes/{{palette._id}}"><img class="media-object" src="/assets/img/icon_ipad.png"></a></td>
             <td class="sp_title"><a ng-href="palettes/{{palette._id}}">
               <h4>{{palette.name}}</h4></a>
