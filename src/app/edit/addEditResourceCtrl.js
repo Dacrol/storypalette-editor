@@ -124,7 +124,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
         $scope.$apply();
 
         pollImage.onload = function () {
-          //window.clearInterval(timer);
+          window.clearInterval(timer);
           $scope.progress = 'Uppladdning klar';
           $scope.resource.source = source;  
           $scope.resource.type = type;
@@ -133,10 +133,6 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
           $scope.$apply();
         };
               
-        var cloudinaryBaseAddress = "http://res.cloudinary.com/storypalette/image/upload/";
-        
-        var date = new Date();
- 
         var timer = window.setInterval(function () {
           console.log('sending the request again');
           pollImage.src = $scope.apiBase + "image/" + source.id + "." + source.extension;
