@@ -1,12 +1,29 @@
 angular.module('sp.editor.edit.resourceListCtrl', [])
 
-.controller('ResourceListCtrl', function($scope, $state, audioPlayer, palettes, resources, dialog, $modal) {
+.controller('ResourceListCtrl', function($scope, $state, auth, audioPlayer, palettes, resources, dialog, $modal) {
   $scope.isCollapsed = true;
 
+  // TODO is current user available somewhere?
+  var currentUser = auth.getCurrentUser();
+
   resources.all().then(function(data) {
-    $scope.resources = data;
+    // TODO Move filtering serverside
+    $scope.resources = data.filter(function(resource) {
+      if (!resource.restrict) {
+        return true;
+      }
+
+      switch (resource.restrict.type) {
+        case 'organisation':
+          return resource.restrict.id === currentUser.organisationId;
+        case 'user':
+          return resource.restrict.id === currentUser._id;
+        default:
+          return true;
+      }
+    });
   });
-  
+
   console.log(angular.version);
 
   $scope.iconClasses = {
@@ -45,9 +62,9 @@ angular.module('sp.editor.edit.resourceListCtrl', [])
   var openDialog = function () {
     console.log(dialog);
     dialog.dialog(dialogOptions, function() {
-    console.log('reloading page');
-    $state.go($state.current, {}, {reload: true});
+      console.log('reloading page');
+      $state.go($state.current, {}, {reload: true});
     });
   };
 })
-; 
+;

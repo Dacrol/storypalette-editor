@@ -8,6 +8,9 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   console.log('AddEditResourceCtrl', resource);
   console.log('AddEditResourceCtrl config', config);
 
+  // TODO is current user available somewhere?
+  var currentUser = auth.getCurrentUser();
+
   $scope.isEditing = typeof(resource) === 'object';
   $scope.resource = $scope.isEditing ? resource : {};
   $scope.action = $scope.isEditing ? 'Redigera' : 'Lägg till';
@@ -18,15 +21,29 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   $scope.types = ['sound', 'image', 'light'];
   $scope.apiBase = config.apiBase;
 
+  $scope.restrictOptions = [
+    {
+      label: 'Alla',
+      value: null
+    },
+    {
+      label: currentUser.organisation.name,
+      value: {
+        type: 'organisation',
+        id:   currentUser.organisationId
+      }
+    }
+  ];
+
+  // Creator
+  $scope.resource.creatorId = currentUser._id;
+
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
   };
 
-  // Creator
-  $scope.resource.creatorId = auth.getCurrentUser()._id;
-
   $scope.deleteResource = function() {
-    resources.remove($scope.resource);   
+    resources.remove($scope.resource);
     $modalInstance.close();
   };
 
@@ -43,6 +60,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     $scope.resource.created = new Date().getTime();
     $scope.resource.edited = new Date().getTime();
 
+    // FIXME går inte att uppdatera resurser?
     resources.save($scope.resource).then(function (resource) {
       notifications.pushToast({message: 'Resursen sparad', type: 'success'});
 
@@ -108,7 +126,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
       }
     }, false);
     upload.addEventListener("load", function (ev) {
-       
+
       if (type != 'image') {
         $scope.progress = 'Uppladdning klar';
         $scope.resource.source = source;
@@ -118,7 +136,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
       else {
         // wait till image is loaded
         var pollImage = new Image();
-        
+
         $scope.progress = 'Uppladdning klar. Det kan ibland dröja något innan bilden är visningsklar.';
         $scope.resource.found = true;
         $scope.$apply();
@@ -126,20 +144,20 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
         pollImage.onload = function () {
           window.clearInterval(timer);
           $scope.progress = 'Uppladdning klar';
-          $scope.resource.source = source;  
+          $scope.resource.source = source;
           $scope.resource.type = type;
           $scope.imagefound = true;
           console.log($scope);
           $scope.$apply();
         };
-              
+
         var timer = window.setInterval(function () {
           console.log('sending the request again');
           pollImage.src = $scope.apiBase + "image/" + source.id + "." + source.extension;
         }, 2000);
 
       }
-          
+
     }, false);
     upload.addEventListener("error", function (ev) {console.log(ev);}, false);
     xhr.open("POST", url);
