@@ -60,9 +60,19 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     $scope.resource.created = new Date().getTime();
     $scope.resource.edited = new Date().getTime();
 
-    // FIXME går inte att uppdatera resurser?
-    resources.save($scope.resource).then(function (resource) {
-      notifications.pushToast({message: 'Resursen sparad', type: 'success'});
+    var promise;
+    var msg;
+
+    if ($scope.isEditing) {
+      promise = resources.update($scope.resource);
+      msg     = "Resursen uppdaterad";
+    } else {
+      promise = resources.save($scope.resource);
+      msg     = "Resursen sparad";
+    }
+
+    promise.then(function(response) {
+      notifications.pushToast({message: msg, type: 'success'});
 
       // Update view and reload resources
       // TODO: Do we really need to do a full GET?
