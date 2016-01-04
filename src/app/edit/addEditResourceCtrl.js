@@ -22,18 +22,24 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   $scope.apiBase = config.apiBase;
 
   $scope.restrictOptions = [
-    {
-      label: 'Alla',
-      value: null
-    },
-    {
-      label: currentUser.organisation.name,
-      value: {
-        type: 'organisation',
-        id:   currentUser.organisationId
-      }
-    }
+    'Alla',
+    currentUser.organisation.name
   ];
+
+  $scope.formChoice = {
+    restrict: $scope.restrictOptions[0]
+  };
+
+  if ($scope.resource.restrict) {
+    switch ($scope.resource.restrict.type) {
+      case 'organisation':
+        $scope.formChoice.restrict = $scope.restrictOptions[1];
+
+        break;
+      case 'user':
+        // not used now
+    }
+  }
 
   // Creator
   $scope.resource.creatorId = currentUser._id;
@@ -59,6 +65,24 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     $scope.resource.tags = tags;
     $scope.resource.created = new Date().getTime();
     $scope.resource.edited = new Date().getTime();
+
+    $scope.resource.restrict = null;
+
+    switch ($scope.formChoice.restrict) {
+      case currentUser.organisation.name:
+        $scope.resource.restrict = {
+          type: 'organisation',
+          id:   currentUser.organisation._id
+        };
+
+        break;
+      case currentUser.username:
+        // not used now
+        // $scope.resource.restrict = {
+        //   type: 'user',
+        //   id:   currentUser._id
+        // };
+    }
 
     var promise;
     var msg;
