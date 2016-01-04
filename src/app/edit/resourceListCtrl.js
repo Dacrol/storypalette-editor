@@ -1,27 +1,13 @@
-angular.module('sp.editor.edit.resourceListCtrl', [])
+angular.module('sp.editor.edit.resourceListCtrl', [
+  'sp.editor.common.restriction'
+])
 
-.controller('ResourceListCtrl', function($scope, $state, auth, audioPlayer, palettes, resources, dialog, $modal) {
+.controller('ResourceListCtrl', function($scope, $state, restriction, audioPlayer, palettes, resources, dialog, $modal) {
   $scope.isCollapsed = true;
-
-  // TODO is current user available somewhere?
-  var currentUser = auth.getCurrentUser();
 
   resources.all().then(function(data) {
     // TODO Move filtering serverside
-    $scope.resources = data.filter(function(resource) {
-      if (!resource.restrict) {
-        return true;
-      }
-
-      switch (resource.restrict.type) {
-        case 'organisation':
-          return resource.restrict.id === currentUser.organisationId;
-        case 'user':
-          return resource.restrict.id === currentUser._id;
-        default:
-          return true;
-      }
-    });
+    $scope.resources = restriction.filterRestrictedData(data);
   });
 
   console.log(angular.version);

@@ -6,6 +6,7 @@ angular.module('sp.editor', [
   'sp.editor.common.config',
   'sp.editor.common.palettes',
   'sp.editor.common.resources',
+  'sp.editor.common.restriction',
   'sp.editor.common.users',
 
   'sp.editor.header',
@@ -26,8 +27,8 @@ angular.module('sp.editor', [
   // Various app-wide settings
   notificationsProvider.setDefaultToastDuration(config.notifications.toastLengthMedium);
 
-  authConfigProvider.setTokenKey('spToken'); 
-  authConfigProvider.setApiBase(config.apiBase); 
+  authConfigProvider.setTokenKey('spToken');
+  authConfigProvider.setApiBase(config.apiBase);
 
   // Route configuration
   $locationProvider.html5Mode(true);  // no hash-urls
@@ -61,9 +62,9 @@ angular.module('sp.editor', [
 .run(function($rootScope, config) {
   console.log('*** Storypalette version ' + config.version.number + ' - ' + config.version.name + ' ***\n');
 
-  $rootScope.$on('$stateChangeError', 
-function(event, toState, toParams, fromState, fromParams, error){ 
-    console.warn('$stateChangeError', error); 
+  $rootScope.$on('$stateChangeError',
+function(event, toState, toParams, fromState, fromParams, error){
+    console.warn('$stateChangeError', error);
   });
 
   // Get the current user when the application starts
@@ -87,7 +88,7 @@ function(event, toState, toParams, fromState, fromParams, error){
   $scope.removeNotification = function(notification) {
     notifications.remove(notification);
   };
-})    
+})
 ;
 
 // TODO: Temp fix for karma.
