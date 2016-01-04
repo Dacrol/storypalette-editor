@@ -1,8 +1,8 @@
-angular.module('sp.editor.common.restriction', [
+angular.module('sp.editor.common.access', [
   'uiAuth'
 ])
 
-.factory('restriction', function(auth) {
+.factory('access', function(auth) {
   return {
     filterRestrictedData: function(data) {
       var currentUser = auth.getCurrentUser();

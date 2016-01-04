@@ -6,7 +6,7 @@ angular.module('sp.editor', [
   'sp.editor.common.config',
   'sp.editor.common.palettes',
   'sp.editor.common.resources',
-  'sp.editor.common.restriction',
+  'sp.editor.common.access',
   'sp.editor.common.users',
 
   'sp.editor.header',

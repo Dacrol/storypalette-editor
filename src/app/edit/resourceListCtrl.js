@@ -1,13 +1,13 @@
 angular.module('sp.editor.edit.resourceListCtrl', [
-  'sp.editor.common.restriction'
+  'sp.editor.common.access'
 ])
 
-.controller('ResourceListCtrl', function($scope, $state, restriction, audioPlayer, palettes, resources, dialog, $modal) {
+.controller('ResourceListCtrl', function($scope, $state, access, audioPlayer, palettes, resources, dialog, $modal) {
   $scope.isCollapsed = true;
 
   resources.all().then(function(data) {
     // TODO Move filtering serverside
-    $scope.resources = restriction.filterRestrictedData(data);
+    $scope.resources = access.filterRestrictedData(data);
   });
 
   console.log(angular.version);

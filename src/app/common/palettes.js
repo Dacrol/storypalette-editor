@@ -93,7 +93,7 @@ angular.module('sp.editor.common.palettes', [
     },
 
     saveCurrent: function() {
-      // Update palette restriction
+      // Update palette access
       currentPalette.restrict = null;
       for (var i = 0; i < currentPalette.assets.length; i++) {
         var asset = currentPalette.assets[i];

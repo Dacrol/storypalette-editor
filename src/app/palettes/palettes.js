@@ -1,5 +1,5 @@
 angular.module('sp.editor.palettes', [
-  'sp.editor.common.restriction',
+  'sp.editor.common.access',
 
   'uiAuth',
   'uiDialog',
@@ -21,8 +21,8 @@ angular.module('sp.editor.palettes', [
   });
 })
 
-.controller('PaletteListCtrl', function($scope, allPalettes, palettes, restriction, $location, user, dialog, notifications) {
-  $scope.palettes = restriction.filterRestrictedData(allPalettes);
+.controller('PaletteListCtrl', function($scope, allPalettes, palettes, access, $location, user, dialog, notifications) {
+  $scope.palettes = access.filterRestrictedData(allPalettes);
   $scope.user = user;
   $scope.userFilter = '';
 
