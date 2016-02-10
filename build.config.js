@@ -34,7 +34,9 @@ module.exports = {
       'vendor/angular-animate/angular-animate.js',
       'vendor/angular-route/angular-route.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
-      'vendor/howler/howler.js'
+      'vendor/howler/howler.js',
+      'vendor/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js'
+
     ],
     css: [],
     assets: [

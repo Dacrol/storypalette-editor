@@ -21,9 +21,18 @@ angular.module('sp.editor.edit.resourceCtrl', [])
     }
   };
   
+  $scope.dropCallback = function(event, index, item, external, type, allowedType) {
+    console.log('test');
+    return false;
+  };
+    
   $scope.getClass = function() {
     return $scope.isPlaying ? 'icon-stop' : 'icon-play';
   };
-
+  
+    $scope.dropCallback = function(event, index, item, external, type, allowedType) {
+    console.log('test');
+    return false;
+  };
 })
 ;

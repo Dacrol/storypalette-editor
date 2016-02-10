@@ -1,5 +1,5 @@
 angular.module('sp.editor.edit.resourceListCtrl', [
-  'sp.editor.common.access'
+  'sp.editor.common.access', 'dndLists'
 ])
 
 .controller('ResourceListCtrl', function($scope, $state, access, audioPlayer, palettes, resources, dialog, $modal) {
@@ -17,7 +17,7 @@ angular.module('sp.editor.edit.resourceListCtrl', [
     image: 'icon-picture',
     light: 'icon-fire'
   };
-
+  
   $scope.typeFilter = '';
 
   $scope.filterResources = function(type) {
@@ -36,7 +36,7 @@ angular.module('sp.editor.edit.resourceListCtrl', [
     dialogOptions.resolve =  {resource: function() {return undefined;}};
     loginDialog = $modal.open(dialogOptions);
   };
-
+  
   $scope.editResource = function(resource) {
     // Autosave palette since we'll reload the route when saving resource
     palettes.saveCurrent();
@@ -44,7 +44,22 @@ angular.module('sp.editor.edit.resourceListCtrl', [
     dialogOptions.resolve = {resource: function() {return resource;}};
     openDialog();
   };
+         $scope.models = {
+        selected: null,
+        lists: {"A": [], "B": []}
+    };
 
+    // Generate initial model
+    for (var i = 1; i <= 3; ++i) {
+        $scope.models.lists.A.push({name: "Item A" + i});
+        $scope.models.lists.B.push({name: "Item B" + i});
+    }
+
+    // Model to JSON for demo purpose
+    $scope.$watch('models', function(model) {
+        $scope.modelAsJson = angular.toJson(model, true);
+    }, true);
+  
   var openDialog = function () {
     console.log(dialog);
     dialog.dialog(dialogOptions, function() {

@@ -23,26 +23,45 @@
             <tab heading="Ljus" select="filterResources('light')"></tab>
           </tabset>
         </div>
-        <div class="sp_scrollport">
-          <table class="table sp_table sp_resource-list">
-            <tr ng-controller="ResourceCtrl" class="resource {{resource.type}}" ng-repeat="resource in resources | orderBy: 'name' | filter:{type: typeFilter} | filter:query" ng-switch on="resource.type">
-              <td class="sp_thumb">
+        <div class="dndLists sp_scrollport">
+          
+
+
+<!-- The dnd-list directive allows to drop elements into it.
+     The dropped data will be added to the referenced list -->
+    <ul dnd-list="resources" dnd-drop="resources.splice($index, 1);">
+    <!-- The dnd-draggable directive makes an element draggable and will
+         transfer the object that was assigned to it. If an element was
+         dragged away, you have to remove it from the original list
+         yourself using the dnd-moved attribute -->
+    <li ng-controller="ResourceCtrl" ng-repeat="resource in resources | orderBy: 'name' | filter:{type: typeFilter} | filter:query" ng-switch on="resource.type"
+        dnd-draggable="resource"
+        dnd-selected="models.selected = resource"
+        ng-class="{'selected': models.selected === resource}">
+           <div class="resource">
+              <div class="handle">::::</div>
+              <dnd-nodrag>
+              <div class="thumb">
                 <img class="media-object" ng-src="{{apiBase}}image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
                 <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
                 <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
-              </td>
-              <td class="sp_title"><h5>{{resource.name}}</h5>
-                  <div class="longdescription"><p>{{resource.description}}</p></div>
-              </td>
-              <td class="sp_actions">
+              </div>
+              <div class="name">
+                <div>{{resource.name}}</div>
+                <div class="longdescription"><p>{{resource.description}}</p></div>
+              </div>
+              <div class="sp_actions">
                 <div class="btn-group btn-group-sm pull-right">
                   <button class="btn btn-default" ng-click="toggleSound(resource)" ng-switch-when="sound"><span class="glyphicon glyphicon-{{playMsg}}"></span></button>
                   <button class="btn btn-default" ng-click="editResource(resource)"><span class="glyphicon glyphicon-cog"></span></button>
                   <button class="btn btn-default" ng-click="addToPalette(resource)"><span class="glyphicon glyphicon-arrow-right"></span></button>
                 </div>
-              </td>
-            </tr>
-          </table>
+              </div>
+              </dnd-nodrag>
+           </div>
+    </li>
+</ul>
+
         </div><!-- // sp_scrollport -->
       </div><!-- // sp_resources -->
       <div class="sp_palette" ng-controller="PaletteCtrl">
@@ -53,9 +72,15 @@
 	           <textarea id="paletteDescription" ng-model="palette.description" class="long-input form-control" type="text" placeholder="Skriv in palettens beskrivning här">		    </textarea> 
                 </div>
 	  </div>
-          <div class="sp_scrollport">
-              <div ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item"
-                   ng-switch on="asset.type">
+      <div class="dndLists sp_scrollport">
+            <ul dnd-list="palette.assets">
+              <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item"
+                   ng-switch on="asset.type"
+                   dnd-draggable="asset"
+        dnd-moved="palette.assets.splice($index, 1)"
+        dnd-effect-allowed="move"
+        dnd-selected="models.selected = asset">
+              <div class="media well {{asset.type}} palette_item">
                   <a class="pull-left" href="#">
                     <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}"
                            ng-switch-when="image">              
@@ -98,7 +123,11 @@
                   </div>
               </div>
               <!-- // media -->
+              </li>
+             </ul>
           </div>
+              <!-- // media -->
+          </div-->
           <!-- // sp_scrollport -->
       </div>
       <!-- // sp_palette -->
