@@ -62,15 +62,15 @@
 
             </div>
             <div class="sp_paging">
-  <pagination 
-      total-items="resources.length" 
-      page="currentPage" 
-      max-size="maxSize" 
-      class="pagination-sm" 
+  <pagination
+      total-items="resources.length"
+      page="currentPage"
+      max-size="maxSize"
+      class="pagination-sm"
       boundary-links="true"
       items-per-page="itemsPerPage"
       on-select-page="pageChanged()"
-      previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">     
+      previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
   </pagination>
             <!-- // sp_scrollport -->
         </div>
@@ -91,7 +91,7 @@
                     <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item" ng-switch
                     on="asset.type" dnd-draggable="asset" dnd-moved="palette.assets.splice($index, 1)" dnd-effect-allowed="move"
                     dnd-selected="models.selected = asset">
-                        <div class="media well {{asset.type}} palette_item">
+                        <div class="media {{asset.type}} palette_item">
                             <a class="pull-left" href="#">
                                 <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}" ng-switch-when="image">
                                 <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
