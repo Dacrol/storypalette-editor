@@ -30,12 +30,9 @@ body {
   margin: 0;
   font-family: SourceSansPro, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-input,
-button,
-select,
-textarea,sp_actions
+
 a {
-  font-family: SourceSansPro, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none !important;
 }
 
 // Header
@@ -46,13 +43,13 @@ a {
 }
 
 .opacity_down {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 div.search_box {
-    margin-top: 4px;
-    margin-bottom: 0;
-    width: 180px;
+  margin-top: 4px;
+  margin-bottom: 0;
+  width: 180px;
 }
 
 ul.type_filter li a{
@@ -62,10 +59,6 @@ ul.type_filter li a{
 input.short-input {
   width: 220px;
   display: inline-block;
-}
-
-ul.type_filter li a{
-    padding-bottom: 14px;
 }
 
 input[type=range] {
@@ -88,16 +81,8 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 4px;
 }
 
-/*div.divider {
-  height: 1px;
-  margin: 9px 1px;
-  overflow: hidden;
-  background-color: #e5e5e5;
-  border-bottom: 1px solid #ffffff;
-}*/
-
 div.media-body {
-    padding: 4px;
+  padding: 4px;
 }
 
 .palette_item {
@@ -146,29 +131,12 @@ div.loop {
 }
 
 table.sp_table {
-  border-collapse:collapse;
-  width: 450px;
-  max-width: 450px;
-}
-
-table.sp_table a {
-  -webkit-transition: color 0.2s ease;
-  -moz-transition: color 0.2s ease;
-  transition: color 0.2s ease;
-  text-decoration: none;
-}
-
-table.sp_table td.sp_thumb {
-  width:40px;
-}
-
-table.sp_table td.sp_thumb img {
-  max-width:40px;
+  /*border-collapse:collapse;
+  width: 460px;*/
 }
 
 table.sp_table td.sp_title {
   width: 260px;
-  max-width:260px;
 }
 
 table.sp_table tr td {
@@ -198,11 +166,6 @@ input[type=file] {
 }
 
 .sp_navbar a:not(.sp_storypalette_home) {
-  /*border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  padding: 6px 10px;
-  background-color: rgba(0,0,0,0.7);*/
   color: rgba(0,0,0,0.7);
   text-shadow: 0 0px 1px rgba(0, 0, 0, 0.25);
   line-height: 44px;
@@ -240,19 +203,6 @@ a.logout, a.login {
   opacity: 0.6;
   text-shadow: 0 0px 1px rgba(0, 0, 0, 0.1);
 }
-
-/*p.sp_login a, p.sp_nav a{
-  text-decoration: none;
-  color: #003366;
-  text-shadow: 0 0px 1px rgba(0, 0, 0, 0.25);
-  -webkit-transition: color 0.2s ease;
-  -moz-transition: color 0.2s ease;
-  transition: color 0.2s ease;
-  cursor: pointer;
-}
-p.sp_login a:hover, p.sp_nav a:hover{
-  color: #0064c9;
-}*/
 
 div.sp_frontbody {
   color:white;
