@@ -1,150 +1,145 @@
 <header class="sp_fixedheader" ng-include="'header/header.tpl.html'"></header>
+
 <div class="sp_fixbody">
-    <div ng-include="'notifications.tpl.html'" class="container" ng-show="notifications.getCurrent().length"></div>
-    <div class="sp_fixedcontainer">
-        <div class="sp_title">
-            <!-- <h1 id="paletteTitle">Kitten named whoof</h1>--></div>
-        <!-- Resources -->
-        <div class="sp_resources" ng-controller="ResourceListCtrl">
-            <div class="sp_toolbar">
-                <div class="field_wrapper">
-                    <h4>Resurser</h4>
-                    <button class="btn btn-primary pull-right" ng-click="newResource()">
-                        <span class="glyphicon glyphicon-plus glyphicon-white"></span>&nbsp;Ny resurs&hellip;
-                    </button>
-                </div>
-                <div class="input-group pull-right search_box">
-                    <input class="form-control" id="inputIcon" type="text" ng-model="query" placeholder="Sök" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                </div>
-                <tabset>
-                    <tab heading="Alla" select="filterResources()"></tab>
-                    <tab heading="Ljud" select="filterResources('sound')"></tab>
-                    <tab heading="Bilder" select="filterResources('image')"></tab>
-                    <tab heading="Ljus" select="filterResources('light')"></tab>
-                </tabset>
-            </div>
-            <div class="dndLists sp_scrollport">
-                <!-- The dnd-list directive allows to drop elements into it.
-     The dropped data will be added to the referenced list -->
-                <ul dnd-list="filteredResources" dnd-drop="filteredResources.splice($index, 1);">
-                    <!-- The dnd-draggable directive makes an element draggable and will
-         transfer the object that was assigned to it. If an element was
-         dragged away, you have to remove it from the original list
-         yourself using the dnd-moved attribute -->
-                    <li ng-controller="ResourceCtrl" ng-repeat="resource in filteredResources"
-                    ng-switch on="resource.type" dnd-draggable="resource" dnd-selected="models.selected = resource" ng-class="{'selected': models.selected === resource}">
-                        <div class="resource">
-                            <div class="handle">::::</div>
-                            <dnd-nodrag>
-                                <div class="thumb">
-                                    <img class="media-object" ng-src="{{apiBase}}image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
-                                    <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
-                                    <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
-                                </div>
-                                <div class="name">
-                                    <div>{{resource.name}}</div>
-                                    <div class="longdescription">
-                                        <p>{{resource.description}}</p>
-                                    </div>
-                                </div>
-                                <div class="sp_actions">
-                                    <div class="btn-group btn-group-sm pull-right">
-                                        <button class="btn btn-default" ng-click="toggleSound(resource)" ng-switch-when="sound"><span class="glyphicon glyphicon-{{playMsg}}"></span></button>
-                                        <button class="btn btn-default" ng-click="editResource(resource)"><span class="glyphicon glyphicon-cog"></span></button>
-                                        <button class="btn btn-default" ng-click="addToPalette(resource)"><span class="glyphicon glyphicon-arrow-right"></span></button>
-                                    </div>
-                                </div>
-                            </dnd-nodrag>
-                        </div>
-                    </li>
-                </ul>
+  <div ng-include="'notifications.tpl.html'" class="container" ng-show="notifications.getCurrent().length">
+  </div>
 
-            </div>
-            <div class="sp_paging">
-  <pagination
-      total-items="resources.length"
-      page="currentPage"
-      max-size="maxSize"
-      class="pagination-sm"
-      boundary-links="true"
-      items-per-page="itemsPerPage"
-      on-select-page="pageChanged()"
-      previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-  </pagination>
-            <!-- // sp_scrollport -->
+  <div class="sp_fixedcontainer">
+    <!-- sp_resources -->
+    <div class="sp_resources" ng-controller="ResourceListCtrl">
+      <div class="sp_toolbar">
+        <div class="field_wrapper">
+          <h4>Resurser</h4>
+          <button class="btn btn-primary pull-right" ng-click="newResource()">
+            <span class="glyphicon glyphicon-plus glyphicon-white"></span>&nbsp;Ny resurs&hellip;
+          </button>
         </div>
-
-        <!-- // sp_resources -->
-        <div class="sp_palette" ng-controller="PaletteCtrl">
-            <div class="sp_toolbar">
-                <input id="paletteTitle" ng-model="palette.name" class="sp_titlebox form-control" type="text" placeholder="Skriv in palettens namn här"
-                />
-                <button class="btn btn-default btn-success pull-right" ng-click="savePalette()">Spara palett</button>
-                <div class="sp_descriptionbox">
-                    <textarea id="paletteDescription" ng-model="palette.description" class="long-input form-control" type="text" placeholder="Skriv in palettens beskrivning här">
-                    </textarea>
-                </div>
-            </div>
-            <div class="dndLists sp_scrollport">
-                <ul dnd-list="palette.assets">
-                    <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item" ng-switch
-                    on="asset.type" dnd-draggable="asset" dnd-moved="palette.assets.splice($index, 1)" dnd-effect-allowed="move"
-                    dnd-selected="models.selected = asset">
-                        <div class="media {{asset.type}} palette_item">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}" ng-switch-when="image">
-                                <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
-                                <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
-                            </a>
-                            <button class="close" ng-click="remove()">&times;</button>
-
-                            <div class="media-body" ng-switch-when="image">
-                                <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
-                                <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                                    <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                                </div>
-                                <span class="help-block opacity_down">
-                        <span class="glyphicon glyphicon-picture"></span> {{asset.name}}</span>
-                            </div>
-
-                            <div class="media-body" ng-switch-when="light">
-                                <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
-                                <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                                    <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                                </div>
-                                <span class="help-block opacity_down"><span class="glyphicon glyphicon-certificate"></span>                                {{asset.name}}</span>
-                            </div>
-
-                            <div class="media-body" ng-switch-when="sound">
-                                <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
-                                <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                                    <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                                </div>
-                                <span class="help-block opacity_down"><span class="glyphicon glyphicon-music"></span> {{asset.name}}</span>
-                                <div class="checkbox pull-right loop">
-                                    <label>
-                                        <input type="checkbox" ng-model="asset.loop"> Loop </label>
-                                </div>
-                                <span class="help-block"><span class="glyphicon glyphicon-volume-up"></span> Max-volume:
-                                {{asset.maxVolume}}</span>
-                                <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
-                            </div>
-                        </div>
-                        <!-- // media -->
-                    </li>
-                </ul>
-            </div>
-            <!-- // media -->
-            </div-->
-            <!-- // sp_scrollport -->
+        <div class="input-group pull-right search_box">
+            <input class="form-control" id="inputIcon" type="text" ng-model="query" placeholder="Sök" />
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
         </div>
-        <!-- // sp_palette -->
-
+        <tabset>
+          <tab heading="Alla" select="filterResources()"></tab>
+          <tab heading="Ljud" select="filterResources('sound')"></tab>
+          <tab heading="Bilder" select="filterResources('image')"></tab>
+          <tab heading="Ljus" select="filterResources('light')"></tab>
+        </tabset>
+      </div>
+      <div class="dndLists sp_scrollport">
+        <!-- The dnd-list directive allows to drop elements into it. The dropped data will be added to the referenced list -->
+        <ul dnd-list="filteredResources" dnd-drop="filteredResources.splice($index, 1);">
+          <!-- The dnd-draggable directive makes an element draggable and will
+     transfer the object that was assigned to it. If an element was
+     dragged away, you have to remove it from the original list
+     yourself using the dnd-moved attribute -->
+          <li ng-controller="ResourceCtrl" ng-repeat="resource in filteredResources"
+              ng-switch on="resource.type" dnd-draggable="resource" dnd-selected="models.selected = resource" ng-class="{'selected': models.selected === resource}">
+            <div class="resource">
+              <div class="handle">::::</div>
+              <dnd-nodrag>
+                <div class="thumb">
+                  <img class="media-object" ng-src="{{apiBase}}image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
+                  <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
+                  <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
+                </div>
+                <div class="name">
+                  <div>{{resource.name}}</div>
+                  <div class="longdescription">
+                    <p>{{resource.description}}</p>
+                  </div>
+                </div>
+                <div class="sp_actions">
+                  <div class="btn-group btn-group-sm pull-right">
+                    <button class="btn btn-default" ng-click="toggleSound(resource)" ng-switch-when="sound"><span class="glyphicon glyphicon-{{playMsg}}"></span></button>
+                    <button class="btn btn-default" ng-click="editResource(resource)"><span class="glyphicon glyphicon-cog"></span></button>
+                    <button class="btn btn-default" ng-click="addToPalette(resource)"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                  </div>
+                </div>
+              </dnd-nodrag>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-    <!-- // sp_fixedcontainer -->
+    <!-- // sp_resources -->
+
+    <!-- sp_paging -->
+    <div class="sp_paging">
+      <pagination
+        total-items="resources.length"
+        page="currentPage"
+        max-size="maxSize"
+        class="pagination-sm"
+        boundary-links="true"
+        items-per-page="itemsPerPage"
+        on-select-page="pageChanged()"
+        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+      </pagination>
+    </div>
+    <!-- //sp_paging -->
+
+    <!-- sp_palette -->
+    <div class="sp_palette" ng-controller="PaletteCtrl">
+      <div class="sp_toolbar">
+        <input id="paletteTitle" ng-model="palette.name" class="sp_titlebox form-control" type="text" placeholder="Skriv in palettens namn här">
+        <button class="btn btn-default btn-success pull-right" ng-click="savePalette()">Spara palett</button>
+        <div class="sp_descriptionbox">
+          <textarea id="paletteDescription" ng-model="palette.description" class="long-input form-control" type="text" placeholder="Skriv in palettens beskrivning här">
+          </textarea>
+        </div>
+      </div>
+      <div class="dndLists sp_scrollport">
+        <ul dnd-list="palette.assets">
+          <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item" ng-switch
+           on="asset.type" dnd-draggable="asset" dnd-moved="palette.assets.splice($index, 1)" dnd-effect-allowed="move"
+           dnd-selected="models.selected = asset">
+            <div class="media {{asset.type}} palette_item">
+              <a class="pull-left" href="#">
+                <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}" ng-switch-when="image">
+                <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
+                <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
+              </a>
+              <button class="close" ng-click="remove()">&times;</button>
+
+              <div class="media-body" ng-switch-when="image">
+                <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
+                <div class="btn-group btn-group-sm">
+                  <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                  <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                </div>
+                <span class="help-block opacity_down">
+                <span class="glyphicon glyphicon-picture"></span> {{asset.name}}</span>
+              </div>
+
+              <div class="media-body" ng-switch-when="light">
+                <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
+                <div class="btn-group btn-group-sm">
+                  <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                  <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                </div>
+                <span class="help-block opacity_down"><span class="glyphicon glyphicon-certificate"></span>{{asset.name}}</span>
+              </div>
+
+              <div class="media-body" ng-switch-when="sound">
+                <input type="text" class="form-control short-input" placeholder="Kort namn" ng-model="asset.label">
+                <div class="btn-group btn-group-sm">
+                  <button class="btn btn-default" ng-click="moveUp()"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                  <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                </div>
+                <span class="help-block opacity_down"><span class="glyphicon glyphicon-music"></span> {{asset.name}}</span>
+                <div class="checkbox pull-right loop">
+                  <label><input type="checkbox" ng-model="asset.loop"> Loop </label>
+                </div>
+                <span class="help-block"><span class="glyphicon glyphicon-volume-up"></span> Max-volume:{{asset.maxVolume}}</span>
+                <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--//sp_palette-->
+  </div>
+  <!--//fixed_container-->
 </div>
-<!-- // sp_fixbody -->
+<!--//fixed_body-->
