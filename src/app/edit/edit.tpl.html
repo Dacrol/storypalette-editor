@@ -81,8 +81,10 @@
     <!-- sp_palette -->
     <div class="sp_palette" ng-controller="PaletteCtrl">
       <div class="sp_toolbar">
-        <input id="paletteTitle" ng-model="palette.name" class="sp_titlebox form-control" type="text" placeholder="Skriv in palettens namn här">
-        <button class="btn btn-default btn-success pull-right" ng-click="savePalette()">Spara palett</button>
+        <div class="field_wrapper">
+          <input id="paletteTitle" ng-model="palette.name" class="sp_titlebox form-control" type="text" placeholder="Skriv in palettens namn här">
+          <button class="btn btn-default btn-success pull-right" ng-click="savePalette()">Spara palett</button>
+        </div>
         <div class="sp_descriptionbox">
           <textarea id="paletteDescription" ng-model="palette.description" class="long-input form-control" type="text" placeholder="Skriv in palettens beskrivning här">
           </textarea>
