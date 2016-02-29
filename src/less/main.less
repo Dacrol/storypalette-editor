@@ -128,13 +128,9 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 4px;
 }
 
-div.media-body {
+/*div.media-body {
   padding: 4px;
-}
-
-.palette_item button.close{
-  font-size: 24.5px;
-}
+}*/
 
 .palette_item div.media-body label.checkbox{
   margin-bottom: 10px;
@@ -149,12 +145,12 @@ div.loop {
 }
 
 table.sp_table {
-  /*border-collapse:collapse;
-  width: 460px;*/
+  border-collapse:collapse;
+  width: 460px;
 }
 
 table.sp_table td.sp_title {
-  width: 260px;
+  width: 400px;
 }
 
 table.sp_table tr td {
@@ -173,12 +169,12 @@ input[type=file] {
   font-family: SourceSansPro, Arial, Helvetica, sans-serif;
 }
 
-div.sp_frontbody {
+div.sp_frontbody { //remove?
   color:white;
   background:#003366 url(../img/frontpage_illustration.png) 50% 60px no-repeat;
 }
 
-.fullscreenImage {
+.fullscreenImage { //remove?
   z-index: 100;
   position: fixed;
   top:0px;
@@ -188,12 +184,12 @@ div.sp_frontbody {
   width: 100%;
 }
 
-.sp_fullwidth {
+.sp_fullwidth { //remove?
   box-sizing:border-box;
   width:100%;
 }
 
-body.play {
+body.play { //remove?
   color:black;
   background:black;
 }
@@ -216,14 +212,10 @@ div.container div.alert button.close{ /*notifications*/
   margin-top: 4px;
 }
 
-div.modal-header button.close {
+/*div.modal-header button.close {
   line-height: 30px;
   font-size: 24.5px;
-}
-
-.btn span {
-  top: 2px;
-}
+}*/
 
 /* Add resource modal */
 .sp_output {
@@ -232,6 +224,24 @@ div.modal-header button.close {
 }
 
 /* Misc shared classes*/
+button.close {
+  font-size: 26px;
+  border: 0;
+}
+button.close:focus {
+  outline: 0;
+  box-shadow: none;
+  color: @close-focus-color;
+}
+
+.btn span {
+  top: 2px;
+}
+
 .opacity_down {
   opacity: 0.7;
+}
+
+.form-control:focus {
+  box-shadow: none;
 }

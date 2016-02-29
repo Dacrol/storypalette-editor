@@ -25,8 +25,8 @@
       <div class="sp_scrollport">
         <table class="table table-hover sp_table sp_resource-list">
           <tr ng-repeat="palette in palettes | orderBy: 'name' | filter:{creatorId: userFilter,organisationId: organisationFilter} | filter:query">
-            <td class="sp_title"><a ng-href="palettes/{{palette._id}}">
-              <h4>{{palette.name}}</h4></a>
+            <td class="sp_title">
+              <a ng-href="palettes/{{palette._id}}"><h4>{{palette.name}}</h4></a>
               <div class="longdescription">
                 <p>{{palette.description}}</p>
               </div>
@@ -34,7 +34,7 @@
             <td class="sp_actions">
               <div class="btn-group pull-right dropdown" dropdown>
                 <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                  <span class="glyphicon glyphicon-cog"></span></span>
+                  <span class="glyphicon glyphicon-cog"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                   <li><a ng-click="duplicatePalette(palette)">Duplicera</a></li>
