@@ -36,7 +36,7 @@
               ng-switch on="resource.type" dnd-draggable="resource" dnd-selected="models.selected = resource" ng-class="{'selected': models.selected === resource}">
             <div class="resource">
               <div class="handle">::::</div>
-              <dnd-nodrag>
+              <!-- <dnd-nodrag> -->
                 <div class="thumb">
                   <img ng-src="{{apiBase}}image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
                   <img src="/assets/img/icon_sound.png" ng-switch-when="sound">
@@ -55,7 +55,7 @@
                     <button class="btn btn-default" ng-click="addToPalette(resource)"><span class="glyphicon glyphicon-arrow-right"></span></button>
                   </div>
                 </div>
-              </dnd-nodrag>
+              <!-- </dnd-nodrag> -->
             </div>
           </li>
         </ul>
@@ -99,7 +99,7 @@
                 <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}" ng-switch-when="image">
                 <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
                 <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
-              </div>  
+              </div>
               <button class="close" ng-click="remove()">&times;</button>
 
               <div class="media-body" ng-switch-when="image">
