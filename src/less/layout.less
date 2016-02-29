@@ -154,7 +154,12 @@ div.sp_paging {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  img {
+    pointer-events: none;
+  }
 }
+
 .dndLists ul[dnd-list] li:hover {
   background-color: @li-hover-color;
 
@@ -204,6 +209,12 @@ div.sp_paging {
 
 .dndLists .thumb img {
   height: 40px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .dndLists .name {
