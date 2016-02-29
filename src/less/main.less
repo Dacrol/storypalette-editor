@@ -42,7 +42,7 @@ a {
   z-index: 999;
 }
 
-/* Field wrapper for top panels */
+/* Resources */
 .field_wrapper {
   height: 34px; //button height
   margin-bottom: 10px;
@@ -60,11 +60,16 @@ div.search_box {
   width: 180px;
 }
 
-/*ul.type_filter li a{
-    padding-bottom: 14px;
-}*/
-
 /* Palette */
+input.sp_titlebox {
+  line-height: 18px;
+  font-size: 18px;
+  height:34px;
+  font-weight:bold;
+  width:76%;
+  display: inline-block;
+}
+
 input.short-input {
   width: 220px;
   display: inline-block;
@@ -149,7 +154,6 @@ input[type=file] {
 
 .sp_navbar a:not(.sp_storypalette_home) {
   color: rgba(0,0,0,0.7);
-  text-shadow: 0 0px 1px rgba(0, 0, 0, 0.25);
   line-height: 40px;
 }
 
@@ -171,34 +175,14 @@ a.logout, a.login {
   margin-left:20px;
 }
 
-.sp_output {
-  padding-top:5px;
-  text-transform:capitalize;
-}
-
 .sp_login {
   float:right;
   line-height:40px;
 }
 
-.sp_login .sp_user {
-  opacity: 0.6;
-  text-shadow: 0 0px 1px rgba(0, 0, 0, 0.1);
-}
-
 div.sp_frontbody {
   color:white;
   background:#003366 url(../img/frontpage_illustration.png) 50% 60px no-repeat;
-}
-
-input.sp_titlebox {
-  line-height: 20px;
-  font-size: 24.5px;
-  height:40px;
-  font-weight:bold;
-  width:76%;
-  box-sizing:border-box;
-  display: inline-block;
 }
 
 .fullscreenImage {
@@ -230,14 +214,6 @@ body.play {
   margin: 50px 0;
 }
 
-div.sp_toolbar button.save_palette {
-  height:40px;
-}
-
-div.sp_toolbar button.save_palette {
-  height:40px;
-}
-
 div.container { /*notifications*/
   position: relative;
   top: 20px;
@@ -254,6 +230,12 @@ div.modal-header button.close {
 
 .btn span {
   top: 2px;
+}
+
+/* Add resource modal */
+.sp_output {
+  padding-top:5px;
+  text-transform:capitalize;
 }
 
 /* Misc shared classes*/

@@ -1,6 +1,5 @@
 <div class="sp_login">
-  <span class="sp_user" ng-show="isAuthenticated()"><span class="glyphicon glyphicon-user"></span> {{user.username}}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home"></span> {{user.organisation.name}}</span>
+  <span class="opacity_down" ng-show="isAuthenticated()"><span class="glyphicon glyphicon-user"></span> {{user.username}}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home"></span> {{user.organisation.name}}</span>
   <a ng-show="isAuthenticated()" ng-click="logout()" class="logout">Logga ut</a>
   <a ng-hide="isAuthenticated()" ng-click="login()" class="login">Logga in</a>
 </div>
-
