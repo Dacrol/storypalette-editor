@@ -24,14 +24,8 @@
                     <tab heading="Ljus" select="filterResources('light')"></tab>
                 </tabset>
             </div>
-            <div class="dndLists sp_scrollport">
-                <!-- The dnd-list directive allows to drop elements into it.
-     The dropped data will be added to the referenced list -->
-                <ul dnd-list="filteredResources" dnd-drop="filteredResources.splice($index, 1);">
-                    <!-- The dnd-draggable directive makes an element draggable and will
-         transfer the object that was assigned to it. If an element was
-         dragged away, you have to remove it from the original list
-         yourself using the dnd-moved attribute -->
+            <div class="dndLists sp_scrollport"><!-- dnd-drop="filteredResources.splice($index, 1);"-->
+                <ul dnd-list="filteredResources" dnd-drop="return false" dnd-disable-if="true" dnd-dragover="return false">
                     <li ng-controller="ResourceCtrl" ng-repeat="resource in filteredResources"
                     ng-switch on="resource.type" dnd-draggable="resource" dnd-selected="models.selected = resource" ng-class="{'selected': models.selected === resource}">
                         <div class="resource">
@@ -58,6 +52,7 @@
                             </dnd-nodrag>
                         </div>
                     </li>
+                    <li class
                 </ul>
 
             </div>
