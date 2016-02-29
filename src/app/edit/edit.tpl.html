@@ -95,11 +95,11 @@
            on="asset.type" dnd-draggable="asset" dnd-moved="palette.assets.splice($index, 1)" dnd-effect-allowed="move"
            dnd-selected="models.selected = asset">
             <div class="media {{asset.type}} palette_item">
-              <a class="pull-left" href="#">
+              <div class="pull-left">
                 <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}" ng-switch-when="image">
                 <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
                 <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
-              </a>
+              </div>  
               <button class="close" ng-click="remove()">&times;</button>
 
               <div class="media-body" ng-switch-when="image">
