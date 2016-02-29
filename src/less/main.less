@@ -35,15 +35,23 @@ a {
   text-decoration: none !important;
 }
 
-// Header
+/* Header */
 .sp_fixedheader {
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(0,0,0,0.3);
   background: white;
   z-index: 999;
 }
 
-.opacity_down {
-  opacity: 0.7;
+/* Field wrapper for top panels */
+.field_wrapper {
+  height: 34px; //button height
+  margin-bottom: 10px;
+}
+
+.field_wrapper h4 {
+  display: inline-block;
+  line-height: 34px;
+  margin: 0;
 }
 
 div.search_box {
@@ -52,15 +60,17 @@ div.search_box {
   width: 180px;
 }
 
-ul.type_filter li a{
+/*ul.type_filter li a{
     padding-bottom: 14px;
-}
+}*/
 
+/* Palette */
 input.short-input {
   width: 220px;
   display: inline-block;
 }
 
+// volume slider
 input[type=range] {
   -webkit-appearance: none;
   background: rgba(0, 0, 0, 0.4);
@@ -85,10 +95,6 @@ div.media-body {
   padding: 4px;
 }
 
-.palette_item {
-  margin-right: 10px;
-}
-
 .palette_item button.close{
   font-size: 24.5px;
 }
@@ -105,30 +111,6 @@ div.loop {
   display: inline;
 }
 
-.field_wrapper {
-  height: 40px;
-  margin-bottom: 15px;
-}
-
-.field_wrapper h4 {
-  margin: 10px 0;
-  display: inline-block;
-  font-size: 18.5px;
-}
-
-.field_wrapper button {
-  margin: 5px 0;
-}
-
-.field_wrapper h4{
-  margin: 10px 0;
-  display: inline-block;
-  font-size: 18.5px;
-}
-
-.field_wrapper button{
-  margin: 5px 0;
-}
 
 table.sp_table {
   /*border-collapse:collapse;
@@ -157,7 +139,7 @@ input[type=file] {
 
 .sp_nav {
   float: left;
-  line-height: 44px;
+  line-height: 40px;
 }
 
 .sp_navbar a{
@@ -168,7 +150,7 @@ input[type=file] {
 .sp_navbar a:not(.sp_storypalette_home) {
   color: rgba(0,0,0,0.7);
   text-shadow: 0 0px 1px rgba(0, 0, 0, 0.25);
-  line-height: 44px;
+  line-height: 40px;
 }
 
 a.sp_storypalette_home {
@@ -196,7 +178,7 @@ a.logout, a.login {
 
 .sp_login {
   float:right;
-  line-height:44px;
+  line-height:40px;
 }
 
 .sp_login .sp_user {
@@ -239,10 +221,6 @@ body.play {
   background:black;
 }
 
-/*.sp_btn_lefty {
-  text-align:left;
-}*/
-
 .loading {
   padding: 50px;
   color: white;
@@ -276,4 +254,9 @@ div.modal-header button.close {
 
 .btn span {
   top: 2px;
+}
+
+/* Misc shared classes*/
+.opacity_down {
+  opacity: 0.7;
 }

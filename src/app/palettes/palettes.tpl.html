@@ -7,19 +7,19 @@
         <div class="field_wrapper">
           <h4 ng-if="!userFilter">Alla paletter</h4>
           <h4 ng-if="userFilter">{{user.firstname}}s paletter</h4>
-
           <button class="btn btn-primary pull-right" ng-click="newPalette()"><span class="glyphicon glyphicon-plus icon-white"></span> Skapa ny palett&hellip;</button>
         </div>
-          <div class="input-group pull-right search_box">
-            <input ng-model="query" class="form-control" id="inputIcon" type="text" placeholder="Sök"/>
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-          </div>
 
-          <tabset>
-            <tab heading="Alla" select="filterPalettes()"></tab>
-            <tab heading="Mina" select="filterPalettes('user')"></tab>
-            <tab heading="Alla organisationens" select="filterPalettes('organisation')"></tab>
-          </tabset>
+        <div class="input-group pull-right search_box">
+          <input ng-model="query" class="form-control" id="inputIcon" type="text" placeholder="Sök"/>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+        </div>
+
+        <tabset>
+          <tab heading="Alla" select="filterPalettes()"></tab>
+          <tab heading="Mina" select="filterPalettes('user')"></tab>
+          <tab heading="Alla organisationens" select="filterPalettes('organisation')"></tab>
+        </tabset>
       </div>
 
       <div class="sp_scrollport">
@@ -28,7 +28,7 @@
             <td class="sp_title"><a ng-href="palettes/{{palette._id}}">
               <h4>{{palette.name}}</h4></a>
               <div class="longdescription">
-                  <p>{{palette.description}}</p>
+                <p>{{palette.description}}</p>
               </div>
             </td>
             <td class="sp_actions">

@@ -1,106 +1,115 @@
 /* CSS Document */
-body, html {height:100%;}
+body, html {
+  height:100%;
+  box-sizing:border-box;
+}
 
+/* Genaral layout */
 div.sp_fixbody {
-    position:absolute;
-    top:44px;
-    left:0;
-    right:0;
-    bottom:0;
-    overflow:scroll;
+  position:absolute;
+  top:50px;
+  left:0;
+  right:0;
+  bottom:0;
+  overflow:scroll;
 }
 
 div.sp_fixedcontainer {
-    margin:0 auto;
-    width:940px;
-    height:100%;
-    position:relative;
+  margin:0 auto;
+  width:940px;
+  height:100%;
+  position: relative;
+}
+
+div.sp_scrollport {
+  position:absolute;
+  top:100px;
+  left:0;
+  right:0;
+  bottom:70px;
+  padding-bottom:0;
+  margin-bottom:0;
+  overflow-x:hidden;
+  overflow-y:scroll;
+}
+
+/* Header */
+header.sp_fixedheader {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:40px;
+  z-index: 999;
+}
+
+div.sp_navbar {
+  margin:0 auto;
+  width:940px;
+}
+
+/* Editor layout */
+div.sp_resources {
+  position:absolute;
+  top: 0;
+  left: 0;
+  width:460px;
+  bottom: 0;
+}
+
+div.sp_palettes {
+  position:absolute;
+  top: 0;
+  left: 0;
+  width:460px;
+  bottom: 0;
+}
+
+div.sp_palette {
+  position:absolute;
+  top: 0;
+  left:480px;
+  width:460px;
+  bottom: 0;
+}
+
+div.sp_toolbar {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
 }
 
 div.sp_fixedcontainer_performer {
-    margin:0 auto;
-    width:960px;
-    height:100%;
-    position:relative;
+  margin:0 auto;
+  width:960px;
+  height:100%;
+  position:relative;
 }
 
-div.sp_title {
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:40px;
+/*div.sp_title {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:40px;
 }
 
 div.sp_title h1 {
     line-height:40px;
     font-size:30px;
     margin:0;
-}
+}*/
 
-div.sp_palette {
-  position:absolute;
-  top:20px;
-  left:480px;
-  width:460px;
-  bottom: 0;
-}
 
-div.sp_resources {
-    position:absolute;
-    top:20px;
-    left:0px;
-    width:460px;
-    bottom: 0;
-}
 
-div.sp_palettes {
-    position:absolute;
-    top:20px;
-    left:0px;
-    width:460px;
-    bottom: 0;
-}
 
-div.sp_toolbar {
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:110px;
-}
-
-div.sp_scrollport {
-    position:absolute;
-    top:150px;
-    top:100px;
-    left:0;
-    right:0;
-    bottom:70px;
-    padding-bottom:0;
-    margin-bottom:0;
-    overflow-x:hidden;
-    overflow-y:scroll;
-}
 div.sp_paging {
     position:absolute;
     bottom: 0px;
 }
 
-header.sp_fixedheader {
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:44px;
-    box-sizing:border-box;
-    z-index: 999;
-}
 
-div.sp_navbar {
-    margin:0 auto;
-    width:940px;
-}
 
 /**
  * For the correct positioning of the placeholder element, the dnd-list and
@@ -150,11 +159,10 @@ div.sp_navbar {
  */
 .dndLists ul[dnd-list] li {
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
     display: block;
-    padding: 10px 15px;
+    padding: 10px;
     margin-bottom: -1px;
 
     /* Disable text selection if item is not draggable */
@@ -201,13 +209,13 @@ div.sp_navbar {
     clear: left;
 }
 
-.dndLists .thumb {
+/*.dndLists .thumb {
     float: left;
 }
 
 .dndLists .thumb img {
     height: 40px;
-}
+}*/
 
 .dndLists .name {
     top:0;
