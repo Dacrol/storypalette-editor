@@ -91,10 +91,10 @@
       </div>
       <div class="dndLists sp_scrollport">
         <ul dnd-list="palette.assets">
-          <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item" ng-switch
+          <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="{{asset.type}} palette_item" ng-switch
            on="asset.type" dnd-draggable="asset" dnd-moved="palette.assets.splice($index, 1)" dnd-effect-allowed="move"
            dnd-selected="models.selected = asset">
-            <div class="media {{asset.type}} palette_item">
+            <div class="media {{asset.type}}">
               <div class="pull-left">
                 <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}" ng-switch-when="image">
                 <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
