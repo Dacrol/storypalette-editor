@@ -107,15 +107,15 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     // TODO: We need to notify ResourcesCtrl about the new resource!
     $modalInstance.close();
   };
-
+  
   $scope.toggleSound = function(resource) {
-    var url = $scope.apiBase + 'sound/' + resource.source.id + '/' + resource.source.extension;
+    var url = config.apiBase + 'sound/' + resource.source.id + '/' + resource.source.extension;
     $scope.playMsg = ($scope.playMsg === 'play') ? 'stop':'play';
-    audioPlayer.newSound(url);
+    audioPlayer.newSound(url, {format: 'ogg'});
     if ($scope.playMsg === 'stop'){
-        audioPlayer.play(url);
+      audioPlayer.play(url);
     } else {
-        audioPlayer.stop(url);
+      audioPlayer.stop(url);            
     }
   };
 
