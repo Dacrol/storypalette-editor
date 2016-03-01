@@ -26,7 +26,7 @@
         <table class="table table-hover sp_table sp_resource-list">
           <tr ng-repeat="palette in palettes | orderBy: 'name' | filter:{creatorId: userFilter,organisationId: organisationFilter} | filter:query">
             <td class="sp_title">
-              <a ng-href="palettes/{{palette._id}}"><h4>{{palette.name}}</h4></a>
+              <a ng-href="palettes/{{palette._id}}"><h4>{{palette.name}}<span class="label label-info private">Privat</span></h4></a>
               <div class="longdescription">
                 <p>{{palette.description}}</p>
               </div>

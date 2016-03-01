@@ -69,6 +69,24 @@ a.logout, a.login {
   line-height:40px;
 }
 
+/* List of palettes */
+table.sp_table {
+  border-collapse:collapse;
+  width: 460px;
+}
+
+table.sp_table td.sp_title {
+  width: 400px;
+}
+
+table.sp_table tr td {
+  vertical-align: middle;
+}
+
+table.sp_table tr:first-child td{
+  border-top-color: transparent;
+}
+
 /* Resources */
 .field_wrapper {
   height: 34px; //button height
@@ -142,27 +160,6 @@ input[type=range]::-webkit-slider-thumb {
 
 div.loop {
   margin: 0;
-}
-
-.inline {
-  display: inline;
-}
-
-table.sp_table {
-  border-collapse:collapse;
-  width: 460px;
-}
-
-table.sp_table td.sp_title {
-  width: 400px;
-}
-
-table.sp_table tr td {
-  vertical-align: middle;
-}
-
-table.sp_table tr:first-child td{
-  border-top-color: transparent;
 }
 
 input[type=file] {
@@ -248,4 +245,14 @@ button.close:focus {
 
 .form-control:focus {
   box-shadow: none;
+}
+
+.inline {
+  display: inline;
+}
+
+.label.private {
+  margin-left: 10px;
+  padding: 3px 5px 3px 5px;
+  font-weight: normal;
 }
