@@ -131,8 +131,11 @@
                 <div class="checkbox pull-right loop">
                   <label><input type="checkbox" ng-model="asset.loop"> Loop </label>
                 </div>
+
                 <span class="help-block"><span class="glyphicon glyphicon-volume-up"></span> Max-volume:{{asset.maxVolume}}</span>
-                <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
+                <div dnd-nodrag>
+                    <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
+                </div>
               </div>
             </div>
           </li>
