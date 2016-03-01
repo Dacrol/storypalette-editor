@@ -22,12 +22,14 @@ angular.module('sp.editor.edit.resourceListCtrl', [
         $scope.typeFilter = type;
         $scope.resources = search($scope.restrictedResources, $scope.typeFilter, $scope.query);
         $scope.currentPage = 1;
+        $scope.totalItems = $scope.resources.length;
         $scope.filteredResources = makePage($scope.resources); 
     };
 
     $scope.$watch('query', function (term) {
         $scope.resources = search($scope.restrictedResources, $scope.typeFilter, term);
         $scope.currentPage = 1;
+        $scope.totalItems = $scope.resources.length;
         $scope.filteredResources = makePage($scope.resources); 
     });
         
