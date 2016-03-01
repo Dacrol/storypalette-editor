@@ -29,6 +29,8 @@
 body {
   margin: 0;
   font-family: SourceSansPro, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;*/
 }
 
 a {
@@ -213,15 +215,18 @@ div.container div.alert button.close{ /*notifications*/
   margin-top: 4px;
 }
 
-/*div.modal-header button.close {
-  line-height: 30px;
-  font-size: 24.5px;
-}*/
-
 /* Add resource modal */
-.sp_output {
-  padding-top:5px;
-  text-transform:capitalize;
+.add_resource {
+  .modal-header,.modal-body,.modal-footer {padding: 15px;}
+
+  h4 {margin: 0;}
+
+  .modal-footer {margin: 0;}
+
+  .sp_output {
+    padding-top:5px;
+    text-transform:capitalize;
+  }
 }
 
 /* Misc shared classes*/
