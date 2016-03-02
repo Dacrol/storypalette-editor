@@ -43,7 +43,7 @@
                   <img src="/assets/img/icon_light.png" ng-switch-when="light">
                 </div>
                 <div class="name">
-                  <div>{{resource.name}}</div>
+                  <div>{{resource.name}} <span class="label label-info private" ng-show="resource.restrict">Privat</span></div>
                   <div class="longdescription">
                     <p>{{resource.description}}</p>
                   </div>
@@ -108,7 +108,7 @@
                   <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
                 </div>
                 <span class="help-block opacity_down">
-                <span class="glyphicon glyphicon-picture"></span> {{asset.name}}</span>
+                <span class="glyphicon glyphicon-picture"></span> {{asset.name}} <span class="label label-info private" ng-show="asset.restrict">Privat</span></span>
               </div>
 
               <div class="media-body" ng-switch-when="light">
