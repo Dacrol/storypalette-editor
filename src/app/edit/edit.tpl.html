@@ -35,7 +35,7 @@
           <li ng-controller="ResourceCtrl" ng-repeat="resource in filteredResources"
               ng-switch on="resource.type" dnd-draggable="resource" dnd-selected="models.selected = resource" ng-class="{'selected': models.selected === resource}">
             <div class="resource">
-              <div class="handle">::::</div>
+              <img class="handle" src="/assets/img/icon_handle.svg">
               <!-- <dnd-nodrag> -->
                 <div class="thumb">
                   <img ng-src="{{apiBase}}image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
@@ -93,7 +93,8 @@
           <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="{{asset.type}} palette_item" ng-switch
            on="asset.type" dnd-draggable="asset" dnd-moved="palette.assets.splice($index, 1)" dnd-effect-allowed="move"
            dnd-selected="models.selected = asset">
-            <div class="media {{asset.type}}">
+            <div class="media palette_wrapper {{asset.type}}">
+              <img class="handle" src="/assets/img/icon_handle.svg">
               <div class="pull-left">
                 <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}" ng-switch-when="image">
                 <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
