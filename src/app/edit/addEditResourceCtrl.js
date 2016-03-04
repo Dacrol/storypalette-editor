@@ -126,13 +126,15 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
 
     var name = file.name;
     var ext2type = {
-      wav:'sound',
-      mp3:'sound',
-      ogg:'sound',
-      jpg:'image',
-      gif:'image',
-      jpeg:'image',
-      png:'image'
+      wav: 'sound',
+      aif: 'sound',
+      aiff: 'sound',
+      mp3: 'sound',
+      ogg: 'sound',
+      jpg: 'image',
+      gif: 'image',
+      jpeg: 'image',
+      png: 'image'
     };
     var source = {
       name: name.substring(0,name.lastIndexOf('.')),
