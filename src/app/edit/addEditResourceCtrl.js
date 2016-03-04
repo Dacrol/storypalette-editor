@@ -126,6 +126,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
 
     var name = file.name;
     var ext2type = {
+      wav:'sound',
       mp3:'sound',
       ogg:'sound',
       jpg:'image',
