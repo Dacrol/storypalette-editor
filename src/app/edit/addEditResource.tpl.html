@@ -42,6 +42,10 @@
           <label for="tags">Taggar</label>
           <input ng-model="resource.tags" type="text" class="form-control" id="tags" placeholder="Till exempel: barn, lågmält, fnissigt)">
         </div>
+        <div class="form-group">
+          <label for="restrict">Dela med</label>
+          <select ng-model="formChoice.restrict" ng-options="option for option in restrictOptions"></select>
+        </div>
       </fieldset>
       <!--
       <fieldset ng-switch on="resource.type">

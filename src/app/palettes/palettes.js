@@ -1,4 +1,6 @@
 angular.module('sp.editor.palettes', [
+  'sp.editor.common.access',
+
   'uiAuth',
   'uiDialog',
   'uiNotifications',
@@ -8,7 +10,7 @@ angular.module('sp.editor.palettes', [
 .config(function($stateProvider, $locationProvider, authProvider, config) {
   // Select palette or create new
   $stateProvider.state('user.palettes', {
-    url: '/palettes', 
+    url: '/palettes',
     templateUrl: 'palettes/palettes.tpl.html',
     controller: 'PaletteListCtrl',
     resolve: {
@@ -19,8 +21,8 @@ angular.module('sp.editor.palettes', [
   });
 })
 
-.controller('PaletteListCtrl', function($scope, allPalettes, palettes, $location, user, dialog,  auth, notifications) {
-  $scope.palettes = allPalettes;
+.controller('PaletteListCtrl', function($scope, allPalettes, palettes, access, $location, user, dialog, notifications) {
+  $scope.palettes = access.filterRestrictedData(allPalettes);
   $scope.user = user;
   $scope.userFilter = '';
 

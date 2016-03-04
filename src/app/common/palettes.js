@@ -1,5 +1,5 @@
 angular.module('sp.editor.common.palettes', [
-  'sp.editor.common.config', 
+  'sp.editor.common.config',
   'spUtils',
   'uiAuth'
 ])
@@ -93,6 +93,19 @@ angular.module('sp.editor.common.palettes', [
     },
 
     saveCurrent: function() {
+      // Update palette access
+      currentPalette.restrict = null;
+      for (var i = 0; i < currentPalette.assets.length; i++) {
+        var asset = currentPalette.assets[i];
+
+        if (asset.restrict) {
+          // TODO user-private should have priority over organisation-private
+          // for user-private to make sense
+          currentPalette.restrict = asset.restrict;
+          break;
+        }
+      }
+
       if (currentPalette._id) {
         return update(currentPalette);
       } else {

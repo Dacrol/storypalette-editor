@@ -15,16 +15,13 @@ div.sp_fixedcontainer {
     width:940px;
     height:100%;
     position:relative;
-    /*margin-bottom: 10px;*/
-    /*background:url(../img/dev/10-60-10_grid.png) -10px 0 repeat;*/
 }
+
 div.sp_fixedcontainer_performer {
     margin:0 auto;
     width:960px;
     height:100%;
     position:relative;
-    /*margin-bottom: 10px;*/
-    /*background:url(../img/dev/10-60-10_grid.png) -10px 0 repeat;*/
 }
 
 div.sp_title {
@@ -40,19 +37,21 @@ div.sp_title h1 {
     font-size:30px;
     margin:0;
 }
+
 div.sp_palette {
-    position:absolute;
-    top:20px;
-    left:480px;
-    width:460px;
-    bottom:10px;
+  position:absolute;
+  top:20px;
+  left:480px;
+  width:460px;
+  bottom: 0;
 }
+
 div.sp_resources {
     position:absolute;
     top:20px;
     left:0px;
     width:460px;
-    bottom:10px;
+    bottom: 0;
 }
 
 div.sp_palettes {
@@ -60,8 +59,9 @@ div.sp_palettes {
     top:20px;
     left:0px;
     width:460px;
-    bottom:10px;
+    bottom: 0;
 }
+
 div.sp_toolbar {
     position:absolute;
     top:0;
@@ -69,17 +69,22 @@ div.sp_toolbar {
     right:0;
     height:110px;
 }
+
 div.sp_scrollport {
     position:absolute;
     top:150px;
     top:100px;
     left:0;
     right:0;
-    bottom:0;
+    bottom:70px;
     padding-bottom:0;
     margin-bottom:0;
     overflow-x:hidden;
     overflow-y:scroll;
+}
+div.sp_paging {
+    position:absolute;
+    bottom: 0px;
 }
 
 header.sp_fixedheader {
@@ -95,4 +100,126 @@ header.sp_fixedheader {
 div.sp_navbar {
     margin:0 auto;
     width:940px;
+}
+
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+.dndLists ul[dnd-list],
+.dndLists ul[dnd-list] > li {
+	position: relative;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.dndLists ul[dnd-list] {
+    min-height: 42px;
+    padding-left: 0px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+.dndLists ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+.dndLists ul[dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: #ddd;
+    min-height: 42px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+.dndLists ul[dnd-list] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+
+    /* Disable text selection if item is not draggable */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/**
+ * Gender-specifc background
+ */
+.dndLists ul[dnd-list] li.background-man {
+	background-color: #CAE0FC;
+}
+
+.dndLists ul[dnd-list] li.background-woman {
+	background-color: #FFE2F5;
+}
+
+.dndLists ul[dnd-list] input.background-man {
+	background-color: #D8E9FF;
+	color: #2F4D99;
+}
+
+.dndLists ul[dnd-list] input.background-woman {
+	background-color: #FFF0FA;
+	color: #D84FA7;
+}
+
+/**
+ * Handle positioning
+ */
+
+
+.dndLists .handle {
+    cursor: move;
+    position: relative;
+    top: 14px;
+    margin-right: 8px;
+    float: left;
+    clear: left;
+}
+
+.dndLists .thumb {
+    float: left;
+}
+
+.dndLists .thumb img {
+    height: 40px;
+}
+
+.dndLists .name {
+    top:0;
+    left:0;
+    right:0;
+    margin-left: 20px;
+    float: left;
+    width: 220px;
+    overflow: auto;
+}
+
+.dndLists .resource {
+    min-height: 40px;
+    overflow: auto;
 }

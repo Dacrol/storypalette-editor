@@ -20,10 +20,10 @@ angular.module('sp.editor.edit.resourceCtrl', [])
       audioPlayer.stop(url);            
     }
   };
-  
+      
   $scope.getClass = function() {
     return $scope.isPlaying ? 'icon-stop' : 'icon-play';
   };
-
+  
 })
 ;

@@ -8,6 +8,9 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   console.log('AddEditResourceCtrl', resource);
   console.log('AddEditResourceCtrl config', config);
 
+  // TODO is current user available somewhere?
+  var currentUser = auth.getCurrentUser();
+
   $scope.isEditing = typeof(resource) === 'object';
   $scope.resource = $scope.isEditing ? resource : {};
   $scope.action = $scope.isEditing ? 'Redigera' : 'Lägg till';
@@ -18,15 +21,35 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   $scope.types = ['sound', 'image', 'light'];
   $scope.apiBase = config.apiBase;
 
+  $scope.restrictOptions = [
+    'Alla',
+    currentUser.organisation.name
+  ];
+
+  $scope.formChoice = {
+    restrict: $scope.restrictOptions[0]
+  };
+
+  if ($scope.resource.restrict) {
+    switch ($scope.resource.restrict.type) {
+      case 'organisation':
+        $scope.formChoice.restrict = $scope.restrictOptions[1];
+
+        break;
+      case 'user':
+        // not used now
+    }
+  }
+
+  // Creator
+  $scope.resource.creatorId = currentUser._id;
+
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
   };
 
-  // Creator
-  $scope.resource.creatorId = auth.getCurrentUser()._id;
-
   $scope.deleteResource = function() {
-    resources.remove($scope.resource);   
+    resources.remove($scope.resource);
     $modalInstance.close();
   };
 
@@ -43,8 +66,37 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     $scope.resource.created = new Date().getTime();
     $scope.resource.edited = new Date().getTime();
 
-    resources.save($scope.resource).then(function (resource) {
-      notifications.pushToast({message: 'Resursen sparad', type: 'success'});
+    $scope.resource.restrict = null;
+
+    switch ($scope.formChoice.restrict) {
+      case currentUser.organisation.name:
+        $scope.resource.restrict = {
+          type: 'organisation',
+          id:   currentUser.organisation._id
+        };
+
+        break;
+      case currentUser.username:
+        // not used now
+        // $scope.resource.restrict = {
+        //   type: 'user',
+        //   id:   currentUser._id
+        // };
+    }
+
+    var promise;
+    var msg;
+
+    if ($scope.isEditing) {
+      promise = resources.update($scope.resource);
+      msg     = "Resursen uppdaterad";
+    } else {
+      promise = resources.save($scope.resource);
+      msg     = "Resursen sparad";
+    }
+
+    promise.then(function(response) {
+      notifications.pushToast({message: msg, type: 'success'});
 
       // Update view and reload resources
       // TODO: Do we really need to do a full GET?
@@ -108,7 +160,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
       }
     }, false);
     upload.addEventListener("load", function (ev) {
-       
+
       if (type != 'image') {
         $scope.progress = 'Uppladdning klar';
         $scope.resource.source = source;
@@ -118,7 +170,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
       else {
         // wait till image is loaded
         var pollImage = new Image();
-        
+
         $scope.progress = 'Uppladdning klar. Det kan ibland dröja något innan bilden är visningsklar.';
         $scope.resource.found = true;
         $scope.$apply();
@@ -126,20 +178,20 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
         pollImage.onload = function () {
           window.clearInterval(timer);
           $scope.progress = 'Uppladdning klar';
-          $scope.resource.source = source;  
+          $scope.resource.source = source;
           $scope.resource.type = type;
           $scope.imagefound = true;
           console.log($scope);
           $scope.$apply();
         };
-              
+
         var timer = window.setInterval(function () {
           console.log('sending the request again');
           pollImage.src = $scope.apiBase + "image/" + source.id + "." + source.extension;
         }, 2000);
 
       }
-          
+
     }, false);
     upload.addEventListener("error", function (ev) {console.log(ev);}, false);
     xhr.open("POST", url);
