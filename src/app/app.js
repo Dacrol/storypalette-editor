@@ -60,7 +60,7 @@ angular.module('sp.editor', [
 })
 
 .run(function($rootScope, config) {
-  console.log('*** Storypalette version ' + config.version.number + ' - ' + config.version.name + ' ***\n');
+  console.log('*** Storypalette Editor version ' + config.version.number + ' - ' + config.version.name + ' ***\n');
 
   $rootScope.$on('$stateChangeError',
 function(event, toState, toParams, fromState, fromParams, error){

@@ -5,61 +5,59 @@ angular.module('sp.editor.edit.resourceListCtrl', [
 .controller('ResourceListCtrl', function($scope, $state, orderByFilter, filterFilter, access, audioPlayer, palettes, resources, dialog, $modal) {
   $scope.isCollapsed = true;
   
-  function load()
-  {
-  resources.all().then(function(data) {
-    // TODO Move filtering serverside
-    $scope.resources = $scope.restrictedResources = orderByFilter(access.filterRestrictedData(data), 'name');
-    $scope.itemsPerPage = 10;
-    $scope.currentPage = 1;
-    $scope.maxSize = 5;
-    
-    $scope.filteredResources = $scope.resources.slice(0, $scope.itemsPerPage);  
+  function load() {
+    resources.all().then(function(data) {
+      // TODO Move filtering serverside
+      $scope.resources = $scope.restrictedResources = orderByFilter(access.filterRestrictedData(data), 'name');
+      $scope.itemsPerPage = 40;
+      $scope.currentPage = 1;
+      $scope.maxSize = 5;
+      
+      $scope.filteredResources = $scope.resources.slice(0, $scope.itemsPerPage);  
 
-    $scope.totalItems = $scope.resources.length;
+      $scope.totalItems = $scope.resources.length;
 
-    $scope.filterResources = function(type) {
+      $scope.filterResources = function(type) {
         $scope.typeFilter = type;
         $scope.resources = search($scope.restrictedResources, $scope.typeFilter, $scope.query);
         $scope.currentPage = 1;
         $scope.totalItems = $scope.resources.length;
         $scope.filteredResources = makePage($scope.resources); 
-    };
+      };
 
-    $scope.$watch('query', function (term) {
-        $scope.resources = search($scope.restrictedResources, $scope.typeFilter, term);
-        $scope.currentPage = 1;
-        $scope.totalItems = $scope.resources.length;
-        $scope.filteredResources = makePage($scope.resources); 
+      $scope.$watch('query', function (term) {
+          $scope.resources = search($scope.restrictedResources, $scope.typeFilter, term);
+          $scope.currentPage = 1;
+          $scope.totalItems = $scope.resources.length;
+          $scope.filteredResources = makePage($scope.resources); 
+      });
+          
+      $scope.$watch('currentPage', function() { 
+          $scope.filteredResources = makePage($scope.resources);
+      });    
     });
-        
-    $scope.$watch('currentPage', function() { 
-        $scope.filteredResources = makePage($scope.resources);
-    });    
-  });
   }
   
   load(); 
   
   function makePage(list) {
-      var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-      var end = begin + $scope.itemsPerPage;
-      return list.slice(begin, end);
+    var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+    var end = begin + $scope.itemsPerPage;
+    return list.slice(begin, end);
   }
 
   function search(list, typeFilter, query) {
-      var filteredList = list;
+    var filteredList = list;
 
-      if (typeFilter) {
-          var obj = { type: typeFilter };
+    if (typeFilter) {
+      var obj = {type: typeFilter};
+      filteredList = filterFilter(list, obj);
+    }
 
-          filteredList = filterFilter(list, obj);
-      }
-
-      if (query) {
-          filteredList = filterFilter(filteredList, query);
-      }
-      return filteredList;
+    if (query) {
+      filteredList = filterFilter(filteredList, query);
+    }
+    return filteredList;
   }
 
   $scope.iconClasses = {

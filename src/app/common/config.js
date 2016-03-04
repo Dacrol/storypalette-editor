@@ -2,8 +2,8 @@ angular.module('sp.editor.common.config', [])
 
 .constant('config', {
   version: {
-    number: '0.6.0',
-    name: 'Red Eyes'
+    number: '0.7.0',
+    name: 'Strange Gateways Beckon'
   },
   notifications: {
     toastLengthShort: 1000,                 
