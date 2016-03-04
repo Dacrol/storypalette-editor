@@ -27,7 +27,7 @@
       </div>
       <div class="dndLists sp_scrollport">
         <!-- The dnd-list directive allows to drop elements into it. The dropped data will be added to the referenced list -->
-        <ul dnd-list="filteredResources" dnd-drop="filteredResources.splice($index, 1);">
+        <ul dnd-list="filteredResources" dnd-disable-if="true">
           <!-- The dnd-draggable directive makes an element draggable and will
      transfer the object that was assigned to it. If an element was
      dragged away, you have to remove it from the original list
@@ -35,15 +35,15 @@
           <li ng-controller="ResourceCtrl" ng-repeat="resource in filteredResources"
               ng-switch on="resource.type" dnd-draggable="resource" dnd-selected="models.selected = resource" ng-class="{'selected': models.selected === resource}">
             <div class="resource">
-              <div class="handle">::::</div>
-              <dnd-nodrag>
+              <img class="handle" src="/assets/img/icon_handle.svg">
+              <!-- <dnd-nodrag> -->
                 <div class="thumb">
-                  <img class="media-object" ng-src="{{apiBase}}image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
-                  <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
-                  <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
+                  <img ng-src="{{apiBase}}image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
+                  <img src="/assets/img/icon_sound.png" ng-switch-when="sound">
+                  <img src="/assets/img/icon_light.png" ng-switch-when="light">
                 </div>
                 <div class="name">
-                  <div>{{resource.name}}</div>
+                  <div>{{resource.name}} <span class="label label-info private" ng-show="resource.restrict">Privat</span></div>
                   <div class="longdescription">
                     <p>{{resource.description}}</p>
                   </div>
@@ -55,18 +55,17 @@
                     <button class="btn btn-default" ng-click="addToPalette(resource)"><span class="glyphicon glyphicon-arrow-right"></span></button>
                   </div>
                 </div>
-              </dnd-nodrag>
+              <!--</dnd-nodrag> -->
             </div>
           </li>
         </ul>
       </div>
-    </div>
     <!-- // sp_resources -->
 
     <!-- sp_paging -->
     <div class="sp_paging">
       <pagination
-        total-items="resources.length"
+        total-items="totalItems"
         page="currentPage"
         max-size="maxSize"
         class="pagination-sm"
@@ -81,24 +80,26 @@
     <!-- sp_palette -->
     <div class="sp_palette" ng-controller="PaletteCtrl">
       <div class="sp_toolbar">
-        <input id="paletteTitle" ng-model="palette.name" class="sp_titlebox form-control" type="text" placeholder="Skriv in palettens namn här">
-        <button class="btn btn-default btn-success pull-right" ng-click="savePalette()">Spara palett</button>
-        <div class="sp_descriptionbox">
-          <textarea id="paletteDescription" ng-model="palette.description" class="long-input form-control" type="text" placeholder="Skriv in palettens beskrivning här">
-          </textarea>
+        <div class="field_wrapper">
+          <input id="paletteTitle" ng-model="palette.name" class="sp_titlebox form-control" type="text" placeholder="Skriv in palettens namn här">
+          <button class="btn btn-default btn-success pull-right" ng-click="savePalette()">Spara palett</button>
         </div>
+        <textarea id="paletteDescription" ng-model="palette.description" class="sp_descriptionbox long-input form-control" type="text" placeholder="Skriv in palettens beskrivning här">
+        </textarea>
+
       </div>
       <div class="dndLists sp_scrollport">
         <ul dnd-list="palette.assets">
-          <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="media well {{asset.type}} palette_item" ng-switch
+          <li ng-repeat="asset in palette.assets" ng-controller="AssetCtrl" class="{{asset.type}} palette_item" ng-switch
            on="asset.type" dnd-draggable="asset" dnd-moved="palette.assets.splice($index, 1)" dnd-effect-allowed="move"
            dnd-selected="models.selected = asset">
-            <div class="media {{asset.type}} palette_item">
-              <a class="pull-left" href="#">
+            <div class="media palette_wrapper {{asset.type}}">
+              <img class="handle" src="/assets/img/icon_handle.svg">
+              <div class="pull-left">
                 <img class="media-object" ng-src="{{apiBase}}image/64x64/{{asset.source.id}}.{{asset.source.extension}}" ng-switch-when="image">
                 <img class="media-object" src="/assets/img/icon_sound.png" ng-switch-when="sound">
                 <img class="media-object" src="/assets/img/icon_light.png" ng-switch-when="light">
-              </a>
+              </div>
               <button class="close" ng-click="remove()">&times;</button>
 
               <div class="media-body" ng-switch-when="image">
@@ -108,7 +109,7 @@
                   <button class="btn btn-default" ng-click="moveDown()"><span class="glyphicon glyphicon-arrow-down"></span></button>
                 </div>
                 <span class="help-block opacity_down">
-                <span class="glyphicon glyphicon-picture"></span> {{asset.name}}</span>
+                <span class="glyphicon glyphicon-picture"></span> {{asset.name}} <span class="label label-info private" ng-show="asset.restrict">Privat</span></span>
               </div>
 
               <div class="media-body" ng-switch-when="light">
@@ -130,8 +131,11 @@
                 <div class="checkbox pull-right loop">
                   <label><input type="checkbox" ng-model="asset.loop"> Loop </label>
                 </div>
+
                 <span class="help-block"><span class="glyphicon glyphicon-volume-up"></span> Max-volume:{{asset.maxVolume}}</span>
-                <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
+                <div dnd-nodrag>
+                    <input type="range" name="max_volume" min="0" max="1" step="0.01" ng-model="asset.maxVolume">
+                </div>
               </div>
             </div>
           </li>

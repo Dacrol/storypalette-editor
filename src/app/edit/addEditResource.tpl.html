@@ -1,8 +1,8 @@
 <!-- Form for adding/editing resources -->
-<div>
+<div class="add_resource">
   <div class="modal-header">
-    <button type="button" class="close" ng-click="cancel()">&times;</button>
-    <h3>{{action}} resurs</h3>
+    <button type="button" class="close" ng-click="cancel()"><span>&times;</span></button>
+    <h4>{{action}} resurs</h4>
   </div>
   <div class="modal-body">
     <form role="form">
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
           <label for="tags">Taggar</label>
-          <input ng-model="resource.tags" type="text" class="form-control" id="tags" placeholder="Till exempel: barn, lågmält, fnissigt)">
+          <input ng-model="resource.tags" type="text" class="form-control" id="tags" placeholder="Till exempel: barn, lågmält, fnissigt">
         </div>
         <div class="form-group">
           <label for="restrict">Dela med</label>
