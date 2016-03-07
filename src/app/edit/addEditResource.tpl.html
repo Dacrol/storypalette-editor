@@ -13,17 +13,12 @@
           <div>{{progress}}</div>
           <div ng-switch on="resource.type">
             <div ng-switch-when="image">
-              <div ng-switch on="imagefound">
-                <div ng-switch-when="true">
                   <img ng-src="{{apiBase}}image/220x220/{{resource.source.id}}.{{resource.source.extension}}"/>
-                </div>
-              </div>
             </div>
-            <div ng-switch-when="sound">
-              <!-- temporarily disabled -->
-              <!--button class="btn btn-default btn-sm" ng-click="toggleSound(resource)">
+            <div ng-switch-when="sound">    
+              <button class="btn btn-default btn-sm" ng-click="toggleSound(resource)">
                 <span class="glyphicon glyphicon-{{playMsg}}"></span>
-              </button-->
+              </button>
             </div>
           </div>
         </div>
@@ -66,6 +61,6 @@
   </div> <!-- // modal-body -->
   <div class="modal-footer">
     <button ng-show="isEditing" class="btn btn-link pull-left" ng-click="deleteResource()"><span class="glyphicon glyphicon-trash"></span> Ta bort</button>
-    <button class="btn btn-default btn-success" ng-click="createResource()">Spara</button>
+    <button class="btn btn-default btn-success" ng-click="createResource()" ng-disabled="resource.type==null">Spara</button>
   </div>
 </div>

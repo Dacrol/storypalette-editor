@@ -153,54 +153,29 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     }
     var xhr = new XMLHttpRequest();
     var upload = xhr.upload;
-    $scope.progress = 'Laddar upp';
+    $scope.progress = 'Laddar upp...';
     $scope.$apply();
     upload.addEventListener("progress", function (ev) {
       if (ev.lengthComputable) {
         console.log((ev.loaded / ev.total) * 100 + "%");
-        $scope.progress = 'Laddar upp, '+((ev.loaded / ev.total) * 100) + "% klar";
-        $scope.$apply();
       }
     }, false);
-    upload.addEventListener("load", function (ev) {
 
-      if (type != 'image') {
-        $scope.progress = 'Uppladdning klar';
-        $scope.resource.source = source;
-        $scope.resource.type = type;
-        $scope.$apply();
-      }
-      else {
-        // wait till image is loaded
-        var pollImage = new Image();
-
-        $scope.progress = 'Uppladdning klar. Det kan ibland dröja något innan bilden är visningsklar.';
-        $scope.resource.found = true;
-        $scope.$apply();
-
-        pollImage.onload = function () {
-          window.clearInterval(timer);
-          $scope.progress = 'Uppladdning klar';
-          $scope.resource.source = source;
-          $scope.resource.type = type;
-          $scope.imagefound = true;
-          console.log($scope);
-          $scope.$apply();
-        };
-
-        var timer = window.setInterval(function () {
-          console.log('sending the request again');
-          pollImage.src = $scope.apiBase + "image/" + source.id + "." + source.extension;
-        }, 2000);
-
-      }
-
-    }, false);
     upload.addEventListener("error", function (ev) {console.log(ev);}, false);
     xhr.open("POST", url);
     xhr.setRequestHeader("Cache-Control", "no-cache");
     xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
     xhr.setRequestHeader("X-File-Name", source.id + '.' + source.extension);
     xhr.send(file);
+    
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log('status code 200, upload has finnished processing');
+            $scope.resource.source = source;
+            $scope.resource.type = type;
+            $scope.progress = "Uppladdning klar.";
+            $scope.$apply();
+        }
+    };
   };
 });
