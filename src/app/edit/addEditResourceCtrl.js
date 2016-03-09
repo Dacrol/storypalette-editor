@@ -170,7 +170,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log('status code 200, upload has finnished processing');
+            console.log('status code 200, upload has finished processing');
             $scope.resource.source = source;
             $scope.resource.type = type;
             $scope.progress = "Uppladdning klar.";

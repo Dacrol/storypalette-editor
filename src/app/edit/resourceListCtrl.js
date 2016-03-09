@@ -74,11 +74,12 @@ angular.module('sp.editor.edit.resourceListCtrl', [
     resolve: {resource: function() {return undefined;} }
   };
 
-  var loginDialog;
+  var modalInstance;
 
   $scope.newResource = function(resource) {
     dialogOptions.resolve =  {resource: function() {return undefined;}};
-    loginDialog = $modal.open(dialogOptions);
+
+    openDialog();
   };
   
   $scope.editResource = function(resource) {
@@ -86,17 +87,15 @@ angular.module('sp.editor.edit.resourceListCtrl', [
     palettes.saveCurrent();
 
     dialogOptions.resolve = {resource: function() {return resource;}};
+
     openDialog();
   };
   
   var openDialog = function () {
-    console.log(dialog);
-    dialog.dialog(dialogOptions, function() {
-      console.log('reloading page');
-
-      $scope.filteredResources = [];
-      load();
-      $state.go($state.current, {}, {reload: true});
+    modalInstance = $modal.open(dialogOptions); 
+    modalInstance.result.then(function () {
+         $state.go($state.current, {}, {reload: true});
+    }, function () {
     });
   };
 })
