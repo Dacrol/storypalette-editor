@@ -59,9 +59,13 @@ angular.module('sp.editor', [
   //$routeProvider.otherwise({template: 'Bad route. Go <a href="/">home.</a>'});
 })
 
-.run(function($rootScope, config) {
+.run(function($rootScope, $state, $window, config) {
   console.log('*** Storypalette Editor version ' + config.version.number + ' - ' + config.version.name + ' ***\n');
-
+  
+  $rootScope.$on('auth:userLoggedOut', function(user){
+    $window.location.reload();
+  });
+  
   $rootScope.$on('$stateChangeError',
 function(event, toState, toParams, fromState, fromParams, error){
     console.warn('$stateChangeError', error);
