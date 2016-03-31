@@ -12,11 +12,11 @@ angular.module('sp.editor.edit.resourceListCtrl', [
       $scope.itemsPerPage = 40;
       $scope.currentPage = 1;
       $scope.maxSize = 5;
-      
-      $scope.filteredResources = $scope.resources.slice(0, $scope.itemsPerPage);  
+            
+      $scope.filteredResources = makePage($scope.resources);  
 
       $scope.totalItems = $scope.resources.length;
-
+            
       $scope.filterResources = function(type) {
         $scope.typeFilter = type;
         $scope.resources = search($scope.restrictedResources, $scope.typeFilter, $scope.query);
@@ -43,7 +43,21 @@ angular.module('sp.editor.edit.resourceListCtrl', [
   function makePage(list) {
     var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
     var end = begin + $scope.itemsPerPage;
-    return list.slice(begin, end);
+    var page = list.slice(begin, end);
+    
+    // make the date string
+    page.forEach(function(resource) {          
+        var d = new Date(resource.created);
+          
+        try {
+            var dateString = d.toISOString();
+            dateString = dateString.substr(0, dateString.indexOf("T"));
+            resource.createdDate = dateString;
+        }
+        catch (exception) {}
+    }, this);
+      
+    return page;
   }
 
   function search(list, typeFilter, query) {
