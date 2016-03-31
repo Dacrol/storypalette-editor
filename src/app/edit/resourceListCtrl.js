@@ -108,7 +108,8 @@ angular.module('sp.editor.edit.resourceListCtrl', [
   var openDialog = function () {
     modalInstance = $modal.open(dialogOptions); 
     modalInstance.result.then(function () {
-         $state.go($state.current, {}, {reload: true});
+         //$state.go($state.current, {}, {reload: true});
+         document.location.reload();
     }, function () {
     });
   };
