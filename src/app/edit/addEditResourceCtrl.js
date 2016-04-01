@@ -43,7 +43,6 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
 
   // Creator
   $scope.resource.creatorId = currentUser._id;
-  $scope.resource.creator = currentUser;
 
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
