@@ -1,5 +1,7 @@
+import uiBootstrap from 'angular-ui-bootstrap';
+
 angular.module('uiAuth.loginFormCtrl', [
-  'ui.bootstrap'
+  'ui.bootstrap.modal'
 ])
 
 // The LoginFormController provides the behaviour behind a reusable form to allow users to authenticate.

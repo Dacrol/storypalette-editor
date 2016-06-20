@@ -1,3 +1,5 @@
+import config from './config.js';
+
 angular.module('sp.editor.common.resources', [
   'sp.editor.common.config' 
 ])

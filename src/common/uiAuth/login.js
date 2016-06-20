@@ -1,4 +1,9 @@
-angular.module('uiAuth.login', [])
+import template from './loginForm.tpl.html';
+import uiBootstrap from 'angular-ui-bootstrap';
+
+angular.module('uiAuth.login', [
+  'ui.bootstrap.modal'
+])
 
 // For the moment, this handles a modal login dialog.
 .factory('login', function(queue, $modal, $location) {
@@ -14,7 +19,7 @@ angular.module('uiAuth.login', [])
     //if (loginDialog) {throw 'Dialog already open';}
 
     loginDialog = $modal.open({
-      templateUrl: 'uiAuth/loginForm.tpl.html',
+      templateUrl: template,
       controller: 'LoginFormCtrl'
     });
 

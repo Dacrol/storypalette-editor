@@ -1,3 +1,5 @@
+import uiAuth from '../../common/uiAuth/index.js';
+
 angular.module('sp.editor.common.access', [
   'uiAuth'
 ])

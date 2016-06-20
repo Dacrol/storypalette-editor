@@ -1,3 +1,7 @@
+import access from './common/access.js';
+import dndLists from '../../../vendor/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js';
+import uiBootstrap from 'angular-ui-bootstrap';
+
 angular.module('sp.editor.edit.resourceListCtrl', [
   'sp.editor.common.access', 'dndLists', 'ui.bootstrap'
 ])

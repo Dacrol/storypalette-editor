@@ -1,3 +1,6 @@
+import template from './confirm.tpl.html';
+import uiBootstrap from 'angular-ui-bootstrap';
+
 angular.module('uiDialog', [
   'ui.bootstrap.modal'
 ])
@@ -41,7 +44,7 @@ angular.module('uiDialog', [
     confirm: function(opts) {
       var modalInstance = $modal.open({
         size: 'sm', 
-        templateUrl: 'uiDialog/confirm.tpl.html',
+        templateUrl: template,
         scope: angular.extend($rootScope.$new(false), {data: opts})
       });
 

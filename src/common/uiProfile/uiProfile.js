@@ -1,3 +1,6 @@
+import template from './uiProfile.tpl.html';
+import uiAuth from '../uiAuth/index.js';
+
 angular.module('uiProfile', [
   'uiAuth'
 ])
@@ -6,7 +9,7 @@ angular.module('uiProfile', [
 // Depends on uiAuth.
 .directive('uiProfile',function(auth) {
   return {
-    templateUrl: 'uiProfile/uiProfile.tpl.html',
+    templateUrl: template,
     restrict: 'AE',
     scope: true,
     link: function(scope, el) {

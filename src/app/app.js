@@ -1,3 +1,19 @@
+import angular from 'angular';
+import uirouter from 'angular-ui-router';
+
+import config from './common/config.js';
+import palettes from './common/palettes.js';
+import resources from './common/resources.js';
+import access from './common/access.js';
+import users from './common/users.js';
+
+import httpRequestTracker from '../common/services/httpRequestTracker.js';
+import uiDialog from '../common/uiDialog/uiDialog.js';
+import uiNotifications from '../common/uiNotifications/notifications.js';
+import uiAuth from '../common/uiAuth/index.js';
+import uiProfile from '../common/uiProfile/uiProfile.js'
+import uiBootstrap from 'angular-ui-bootstrap';
+
 angular.module('sp.editor', [
   'ui.router',
   'templates-app',
