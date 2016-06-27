@@ -1,9 +1,10 @@
+import template from './palettes.tpl.html';
 import access from '../common/access.js';
 import uiAuth from '../../common/uiAuth/index.js';
 import uiDialog from '../../common/uiDialog/uiDialog.js';
 import uiNotifications from '../../common/uiNotifications/notifications.js';
-
 import uiBootstrap from 'angular-ui-bootstrap'; 
+import '../header/header.tpl.html';
 
 angular.module('sp.editor.palettes', [
   'sp.editor.common.access',
@@ -18,7 +19,7 @@ angular.module('sp.editor.palettes', [
   // Select palette or create new
   $stateProvider.state('user.palettes', {
     url: '/palettes',
-    templateUrl: 'palettes/palettes.tpl.html',
+    templateUrl: template,
     controller: 'PaletteListCtrl',
     resolve: {
       allPalettes: function(palettes) {
