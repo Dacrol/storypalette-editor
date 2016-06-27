@@ -1,3 +1,4 @@
+import template from './addEditResource.tpl.html';
 import access from '../common/access.js';
 import dndLists from '../../../vendor/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js';
 import uiBootstrap from 'angular-ui-bootstrap';
@@ -87,7 +88,7 @@ angular.module('sp.editor.edit.resourceListCtrl', [
   $scope.typeFilter = '';
   
   var dialogOptions = {
-    templateUrl: 'edit/addEditResource.tpl.html',
+    templateUrl: template,
     controller: 'AddEditResourceCtrl',
     resolve: {resource: function() {return undefined;} }
   };
