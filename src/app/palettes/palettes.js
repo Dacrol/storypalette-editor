@@ -1,3 +1,10 @@
+import access from '../common/access.js';
+import uiAuth from '../../common/uiAuth/index.js';
+import uiDialog from '../../common/uiDialog/uiDialog.js';
+import uiNotifications from '../../common/uiNotifications/notifications.js';
+
+import uiBootstrap from 'angular-ui-bootstrap'; 
+
 angular.module('sp.editor.palettes', [
   'sp.editor.common.access',
 

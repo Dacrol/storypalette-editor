@@ -1,3 +1,10 @@
+import template from './users.tpl.html';
+import '../../header/header.tpl.html';
+
+import usersCtrl from './usersCtrl.js';
+import commonUsers from '../../common/users.js';
+import commonOrganisations from '../../common/organisations.js';
+
 angular.module('sp.editor.admin.users', [
   'sp.editor.admin.usersCtrl',
   'sp.editor.common.users',

@@ -7,17 +7,21 @@ import resources from './common/resources.js';
 import access from './common/access.js';
 import users from './common/users.js';
 
+import editorHeader from './header/headerCtrl.js';
+import editorPalettes from './palettes/palettes.js';
+import editorEdit from './edit/index.js';
+import admin from './admin/index.js';
+
 import httpRequestTracker from '../common/services/httpRequestTracker.js';
 import uiDialog from '../common/uiDialog/uiDialog.js';
 import uiNotifications from '../common/uiNotifications/notifications.js';
 import uiAuth from '../common/uiAuth/index.js';
 import uiProfile from '../common/uiProfile/uiProfile.js'
 import uiBootstrap from 'angular-ui-bootstrap';
+import '../less/main.less';
 
 angular.module('sp.editor', [
   'ui.router',
-  'templates-app',
-  'templates-common',
 
   'sp.editor.common.config',
   'sp.editor.common.palettes',
@@ -47,7 +51,10 @@ angular.module('sp.editor', [
   authConfigProvider.setApiBase(config.apiBase);
 
   // Route configuration
-  $locationProvider.html5Mode(true);  // no hash-urls
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
 
   // Abstract state for different access levels
   $stateProvider

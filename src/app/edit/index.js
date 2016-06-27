@@ -13,7 +13,7 @@ import config from '../common/config.js';
 import uiAuth from '../../common/uiAuth/index.js';
 import uiAudioPlayer from '../../common/uiAudioPlayer/audioPlayer.js';
 import uiDialog from '../../common/uiDialog/uiDialog.js';
-import utils from  '../../spUtils/utils.js';
+import utils from  '../../common/spUtils/utils.js';
 import uiNotifications from '../../common/uiNotifications/notifications.js';
 
 

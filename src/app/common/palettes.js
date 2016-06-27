@@ -1,5 +1,5 @@
 import config from './config.js';
-import utils from  '../../spUtils/utils.js';
+import utils from  '../../common/spUtils/utils.js';
 import uiAuth from '../../common/uiAuth/index.js';
 
 angular.module('sp.editor.common.palettes', [

@@ -1,3 +1,8 @@
+import template from './admin.tpl.html';
+import '../header/header.tpl.html';
+import adminUsers from './users/index.js';
+import uiAuth from '../../common/uiAuth/index.js';
+
 angular.module('sp.editor.admin', [
   'sp.editor.admin.users',
   'uiAuth'
@@ -8,7 +13,7 @@ angular.module('sp.editor.admin', [
 .config(function($stateProvider, authProvider) {
   $stateProvider.state('admin.admin', {
     url: '/admin', 
-    templateUrl: 'admin/admin.tpl.html',
+    templateUrl: template,
     controller: 'AdminCtrl'
   });
 })
