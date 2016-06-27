@@ -18,6 +18,8 @@ import uiNotifications from '../common/uiNotifications/notifications.js';
 import uiAuth from '../common/uiAuth/index.js';
 import uiProfile from '../common/uiProfile/uiProfile.js'
 import uiBootstrap from 'angular-ui-bootstrap';
+
+import 'bootstrap/less/bootstrap.less';
 import '../less/main.less';
 
 angular.module('sp.editor', [

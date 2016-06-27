@@ -13,7 +13,7 @@ var env       = require('./env')(config);
 
 // Configuration.
 app.use(express.static(config.editor.folder));
-app.use(favicon(path.join(config.editor.folder, './static/favicon.ico')));
+app.use(favicon(path.join(config.editor.folder, './assets/favicon.ico')));
 
 app.get('/env.js', env);
 
