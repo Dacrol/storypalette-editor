@@ -1,31 +1,30 @@
-'use strict';
+var config = require('./config');
+var path  = require('path');
+var express = require('express');
+var favicon = require('serve-favicon');
+var morgan = require('morgan');
 
-var config    = require('config');
-var path      = require('path');
-var express   = require('express');
-var favicon   = require('serve-favicon');
-var logger    = require('morgan');
-var app       = express();
-var server    = require('http').Server(app);
-var env       = require('./env')(config);
+var app = express();
+var env  = require('./env')(config);
 
-//global.io = require('socket.io')(server);
+// Logging
+app.use(morgan('dev'));
 
-// Configuration.
-app.use(express.static(config.editor.folder));
-app.use(favicon(path.join(config.editor.folder, './assets/favicon.ico')));
-
-app.get('/env.js', env);
+// Serve static files
+const publicFolder = path.resolve(__dirname, '../public');
+app.use(express.static(publicFolder));
+//app.use(favicon(path.join(config.performer.folder, './static/favicon.ico')));
 
 // Routing.
+app.get('/env.js', env);
 app.all('/*', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-module.exports = app;
-
 // Start server.
-var port = process.env.PORT || config.server.port;
-server.listen(port, function() {
-  console.log("Server listening on: http://localhost:%s", port);
+const port = process.env.PORT || config.port;
+const mode = process.env.NODE_ENV;
+
+app.listen(port, function() {
+  console.log(`storypalette-editor in ${mode} mode at port ${port}`);
 });

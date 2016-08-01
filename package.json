@@ -1,8 +1,17 @@
 {
-  "author": "Unsworn Industries",
+  "author": "Unsworn",
   "name": "storypalette-editor",
   "version": "0.6.0",
   "homepage": "http://www.storypalette.net",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "start": "npm run build && NODE_ENV=production node server",
+    "dev": "npm run build && NODE_ENV=development node server",
+    "deploy": "git push heroku master"
+  },
+  "engines": {
+    "node": "5.8.0"
+  },
   "dependencies": {
     "angular": "^1.5.5",
     "angular-socket-io": "^0.6.0",
@@ -17,7 +26,6 @@
     "express": "^4.13.4",
     "file-loader": "^0.8.5",
     "html-loader": "^0.4.3",
-    "http": "0.0.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "morgan": "^1.7.0",
