@@ -1,7 +1,7 @@
 var config = require('./config');
 var path  = require('path');
 var express = require('express');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var morgan = require('morgan');
 
 var app = express();
