@@ -10,7 +10,8 @@
     "deploy": "git push heroku master"
   },
   "engines": {
-    "node": "5.8.0"
+    "node": "6.2.2",
+    "npm": "3.9.5"
   },
   "dependencies": {
     "angular": "^1.5.5",
