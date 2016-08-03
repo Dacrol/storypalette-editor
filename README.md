@@ -4,7 +4,7 @@ Web app for creating and editing storypalettes
 
 ## Prerequisites
 
-- Install [node.js](http://nodejs.org) (minimum version 0.12).
+- Install [node.js](http://nodejs.org)
 - Clone this repo
 
 ```sh

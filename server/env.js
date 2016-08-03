@@ -2,12 +2,12 @@
 // by injecting a javascript object `window.env`
 module.exports = function(config) {
   var info = {
-    apiBase: config.apiBase,
+    apiBase: config.apiBase, 
+    socketBase: config.socketBase, 
     environment: config.environment
   };
 
   return function(req, res) {
-    var test = {testo: 'apa'};
     res.setHeader('Content-Type', 'application/javascript');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.setHeader('Pragma', 'no-cache');
@@ -15,4 +15,5 @@ module.exports = function(config) {
 
     res.send('window.env = ' + JSON.stringify(info) + ';');
   };
+
 };
