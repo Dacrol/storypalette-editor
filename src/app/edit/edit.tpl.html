@@ -25,7 +25,9 @@
           <tab heading="Ljus" select="filterResources('light')"></tab>
         </tabset>
       </div>
+      
       <div class="dndLists sp_scrollport">
+          <accordion close-others="oneAtATime">
         <!-- The dnd-list directive allows to drop elements into it. The dropped data will be added to the referenced list -->
         <ul dnd-list="filteredResources" dnd-disable-if="true">
           <!-- The dnd-draggable directive makes an element draggable and will
@@ -36,29 +38,36 @@
               ng-switch on="resource.type" dnd-draggable="resource" dnd-selected="models.selected = resource" ng-class="{'selected': models.selected === resource}">
             <div class="resource">
               <img class="handle" src="/assets/img/icon_handle.svg">
-              <!-- <dnd-nodrag> -->
-                <div class="thumb">
+
+                                        <div class="thumb">
                   <img ng-src="{{apiBase}}image/64x64/{{resource.source.id}}.{{resource.source.extension}}" ng-switch-when="image">
                   <img src="/assets/img/icon_sound.png" ng-switch-when="sound">
                   <img src="/assets/img/icon_light.png" ng-switch-when="light">
                 </div>
+                <accordion-group class="accordionitem">
                 <div class="name">
-                  <div>{{resource.name}} <span class="label label-info private" ng-show="resource.restrict">Privat</span></div>
-                  <div class="longdescription">
-                    <p>{{resource.description}}</p>
-                  </div>
+                  <div style="float:left"><accordion-heading class="accordionheading">  {{resource.name}} <span class="label label-info private" ng-show="resource.restrict">Privat</span> </accordion-heading></div>
                 </div>
+                
                 <div class="sp_actions">
                   <div class="btn-group btn-group-sm pull-right">
                     <button class="btn btn-default" ng-click="toggleSound(resource)" ng-switch-when="sound"><span class="glyphicon glyphicon-{{playMsg}}"></span></button>
                     <button class="btn btn-default" ng-click="editResource(resource)"><span class="glyphicon glyphicon-cog"></span></button>
                     <button class="btn btn-default" ng-click="addToPalette(resource)"><span class="glyphicon glyphicon-arrow-right"></span></button>
                   </div>
+                                  <div class="longdescription">
+                    <p>{{resource.description}}</p>
+                    <p ng-show="resource.tags.length > 0">Taggad som: {{resource.tags.toString()}}.</p>
+                    <p ng-show="resource.creator != null">Skapad av <a href="mailto:{{resource.creator.email}}">{{resource.creator.firstname}} {{resource.creator.lastname}}</a> {{resource.createdDate}}.</p>
+                  </div>                                                    
+
+
                 </div>
-              <!--</dnd-nodrag> -->
+</accordion-group>
             </div>
           </li>
         </ul>
+          </accordion>
       </div>
     <!-- // sp_resources -->
 

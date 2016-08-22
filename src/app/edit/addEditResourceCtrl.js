@@ -65,7 +65,6 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     $scope.resource.tags = tags;
     $scope.resource.created = new Date().getTime();
     $scope.resource.edited = new Date().getTime();
-
     $scope.resource.restrict = null;
 
     switch ($scope.formChoice.restrict) {
