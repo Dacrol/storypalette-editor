@@ -3,6 +3,7 @@
   "name": "storypalette-editor-fix",
   "version": "0.6.0",
   "homepage": "http://www.storypalette.net",
+  "repository": "https://github.com/storypalette/storypalette-editor",
   "license": "ISC",
   "scripts": {
     "build": "webpack --config webpack.config.js",
