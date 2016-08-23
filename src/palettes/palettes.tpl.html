@@ -1,51 +1,61 @@
+
 <header class="sp_fixedheader" ng-include="'/header/header.tpl.html'"></header>
 <div class="sp_fixbody">
-  <div ng-include="'notifications.tpl.html'" class="container" ng-show="notifications.getCurrent().length"></div>
-  <div class="sp_fixedcontainer">
-    <div class="sp_palettes">
-      <div class="sp_toolbar">
-        <div class="field_wrapper">
-          <h4 ng-if="!userFilter">Alla paletter</h4>
-          <h4 ng-if="userFilter">{{user.firstname}}s paletter</h4>
-          <button class="btn btn-primary pull-right" ng-click="newPalette()"><span class="glyphicon glyphicon-plus icon-white"></span> Skapa ny palett&hellip;</button>
-        </div>
+    <div ng-include="'notifications.tpl.html'" class="container" ng-show="notifications.getCurrent().length"></div>
+    <div class="sp_fixedcontainer">
+        <div class="sp_palettes">
+            <div class="sp_toolbar">
+                <div class="field_wrapper">
+                    <h4 ng-if="!userFilter">Alla paletter</h4>
+                    <h4 ng-if="userFilter">{{user.firstname}}s paletter</h4>
+                    <button class="btn btn-primary pull-right" ng-click="newPalette()"><span class="glyphicon glyphicon-plus icon-white"></span> Skapa ny palett&hellip;</button>
+                </div>
 
-        <div class="input-group pull-right search_box">
-          <input ng-model="query" class="form-control" id="inputIcon" type="text" placeholder="Sök"/>
-          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-        </div>
+                <div class="input-group pull-right search_box">
+                    <input ng-model="query" class="form-control" id="inputIcon" type="text" placeholder="Sök" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                </div>
 
-        <tabset>
-          <tab heading="Alla" select="filterPalettes()"></tab>
-          <tab heading="Mina" select="filterPalettes('user')"></tab>
-          <tab heading="Alla organisationens" select="filterPalettes('organisation')"></tab>
-        </tabset>
-      </div>
+                <tabset>
+                    <tab heading="Alla" select="filterPalettes()"></tab>
+                    <tab heading="Mina" select="filterPalettes('user')"></tab>
+                    <tab heading="Alla organisationens" select="filterPalettes('organisation')"></tab>
+                </tabset>
+            </div>
 
-      <div class="sp_scrollport">
-        <table class="table table-hover sp_table sp_resource-list">
-          <tr ng-repeat="palette in palettes | orderBy: 'name' | filter:{creatorId: userFilter,organisationId: organisationFilter} | filter:query">
-            <td class="sp_title">
-              <a ng-href="palettes/{{palette._id}}"><h4>{{palette.name}}
-                  <span class="label label-info private" ng-show="palette.restrict">Privat</span></h4></a>
-              <div class="longdescription">
-                <p>{{palette.description}}</p>
-              </div>
-            </td>
-            <td class="sp_actions">
-              <div class="btn-group pull-right dropdown" dropdown>
-                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                  <span class="glyphicon glyphicon-cog"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a ng-click="duplicatePalette(palette)">Duplicera</a></li>
-                  <li><a ng-click="deletePalette(palette)">Ta bort</a></li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div> <!-- // sp_scrollport -->
-    </div><!-- // sp_resources -->
-  </div> <!-- // sp_fixedcontainer -->
+            <div class="sp_scrollport">
+                <table class="table table-hover sp_table sp_resource-list">
+                    <tr ng-repeat="palette in palettes | orderBy: 'name' | filter:{creatorId: userFilter,organisationId: organisationFilter} | filter:query">
+                        <td class="sp_title">
+                            <a ng-href="palettes/{{palette._id}}">
+                                <h4>
+                                    {{palette.name}}
+                                    <span class="label label-info private" ng-show="palette.restrict">Privat</span>
+                                </h4>
+                            </a>
+                            <div class="longdescription">
+                                <p>{{palette.description}}</p>
+                            </div>
+                        </td>
+                        <td class="sp_actions">
+                            <div class="btn-group pull-right dropdown" dropdown is-open="status.isopen">
+                                <button id="dropdown-options" type="button" class="btn btn-default btn-sm dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdown-options">
+                                    <li role="menuitem">
+                                        <a href="#" ng-click="duplicatePalette(palette)">Duplicera</a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a href="#" ng-click="deletePalette(palette)">Ta bort</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div> <!-- // sp_scrollport -->
+        </div><!-- // sp_resources -->
+    </div> <!-- // sp_fixedcontainer -->
 </div> <!-- // sp_fixbody -->
