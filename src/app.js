@@ -21,6 +21,9 @@ import uiBootstrap from 'angular-ui-bootstrap';
 
 import 'bootstrap/less/bootstrap.less';
 import './less/main.less';
+import './assets/img/icon_light.png';
+import './assets/img/icon_sound.png';
+import './assets/img/spinner.gif';
 
 angular.module('sp.editor', [
   'ui.router',
