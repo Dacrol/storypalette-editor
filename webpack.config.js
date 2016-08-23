@@ -28,7 +28,7 @@ module.exports = {
       loader: "style!css!less"
     },
     {
-      test   : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+      test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
       loader: 'file?name=/assets/fonts/[name].[ext]'
     },
     {
@@ -36,8 +36,8 @@ module.exports = {
       loader: "file?name=/assets/img/[name].[ext]"
     },
     {
-        test: /\.(ico)$/,
-        loader: "file?name=/[name].[ext]"
+      test: /\.(ico)$/,
+      loader: "file?name=/[name].[ext]"
     }]
   }
 };
