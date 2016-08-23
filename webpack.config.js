@@ -34,6 +34,10 @@ module.exports = {
     {
       test: /\.(png|jpg|gif)$/,
       loader: "file?name=/assets/img/[name].[ext]"
+    },
+    {
+        test: /\.(ico)$/,
+        loader: "file?name=/[name].[ext]"
     }]
   }
 };

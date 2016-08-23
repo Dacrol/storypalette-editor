@@ -24,6 +24,7 @@ import './less/main.less';
 import './assets/img/icon_light.png';
 import './assets/img/icon_sound.png';
 import './assets/img/spinner.gif';
+import './assets/favicon.ico';
 
 angular.module('sp.editor', [
   'ui.router',
