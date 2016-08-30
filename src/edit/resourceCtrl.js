@@ -10,8 +10,8 @@ angular.module('sp.editor.edit.resourceCtrl', [])
     console.log('Asset created: ', a);
   };
 
-  $scope.toggleSound = function(resource) {
-    var url = config.apiBase + 'sound/' + resource.source.id + '/' + 'ogg';
+  $scope.toggleSound = function (resource) {
+    var url = config.apiBase + 'sound/' + resource.source.id + '/' + resource.source.extension;
     $scope.playMsg = ($scope.playMsg === 'play') ? 'stop':'play';
     audioPlayer.newSound(url, {format: 'ogg'});
     if ($scope.playMsg === 'stop'){

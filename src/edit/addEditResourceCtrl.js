@@ -108,7 +108,7 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
   $scope.toggleSound = function(resource) {
     var url = config.apiBase + 'sound/' + resource.source.id + '/' + resource.source.extension;
     $scope.playMsg = ($scope.playMsg === 'play') ? 'stop':'play';
-    audioPlayer.newSound(url, {format: 'ogg'});
+    audioPlayer.newSound(url);
     if ($scope.playMsg === 'stop'){
       audioPlayer.play(url);
     } else {
@@ -124,8 +124,6 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     var name = file.name;
     var ext2type = {
       wav: 'sound',
-      aif: 'sound',
-      aiff: 'sound',
       mp3: 'sound',
       ogg: 'sound',
       jpg: 'image',
