@@ -105,15 +105,16 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     $modalInstance.close();
   };
   
-  $scope.toggleSound = function(resource) {
-    var url = config.apiBase + 'sound/' + resource.source.id + '/' + resource.source.extension;
-    $scope.playMsg = ($scope.playMsg === 'play') ? 'stop':'play';
-    audioPlayer.newSound(url);
-    if ($scope.playMsg === 'stop'){
-      audioPlayer.play(url);
-    } else {
-      audioPlayer.stop(url);            
-    }
+  $scope.toggleSound = function (resource) {
+      var url = config.apiBase + 'sound/' + resource.source.id + '/' + resource.source.extension;
+      $scope.playMsg = ($scope.playMsg === 'play') ? 'stop' : 'play';
+
+      audioPlayer.newSound(url, { format: resource.source.extension });
+      if ($scope.playMsg === 'stop') {
+          audioPlayer.play(url);
+      } else {
+          audioPlayer.stop(url);
+      }
   };
 
   $scope.fileUploadChange = function(element) {
@@ -152,7 +153,9 @@ angular.module('sp.editor.edit.addEditResourceCtrl', [])
     $scope.$apply();
     upload.addEventListener("progress", function (ev) {
       if (ev.lengthComputable) {
-        console.log((ev.loaded / ev.total) * 100 + "%");
+          console.log((ev.loaded / ev.total) * 100 + "%");
+          $scope.progress = 'Laddar upp, ' + (((ev.loaded / ev.total).toFixed(2) * 100) - 1) + "% klar";
+          $scope.$apply();
       }
     }, false);
 
