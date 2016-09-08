@@ -1,3 +1,6 @@
+// Exposes Howl global
+import 'howler';
+
 angular.module('uiAudioPlayer', [])
 
 // Audio play service based on howler.js

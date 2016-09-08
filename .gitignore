@@ -1,6 +1,6 @@
-.DS_Store
-/resources
 .swp
-/build/
-/dist/
+.DS_Store
+/node_modules/
 npm-debug.log
+/public/bundle.js
+/public
