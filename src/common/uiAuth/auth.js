@@ -8,7 +8,6 @@ angular.module('uiAuth.auth', [])
   };
 
   this.requireUser = function(auth) {
-    console.log('requireUser');
     return auth.requireUser(); 
   };
 
