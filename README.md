@@ -1,12 +1,12 @@
 # Storypalette Editor
 
-Web app for creating and editing storypalettes
+Web app for creating and editing storypalettes: http://editor.storypalette.net
 
 ## Run
 
 ```sh
 $ npm start
-``
+```
 
 ## Develop
 
@@ -21,6 +21,7 @@ $ npm install
 ```
 
 ### Run
+
 ```sh
 $ npm run dev  # Connects to local storypalette-server
 $ open http://localhost:8883
