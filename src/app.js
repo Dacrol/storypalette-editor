@@ -89,8 +89,6 @@ angular.module('sp.editor', [
 })
 
 .run(function($rootScope, $state, $window, config) {
-  console.log('*** Storypalette Editor version ' + config.version.number + ' - ' + config.version.name + ' ***\n');
-  
   $rootScope.$on('auth:userLoggedOut', function(user){
     $window.location.reload();
   });
