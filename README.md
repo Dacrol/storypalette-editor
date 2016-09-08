@@ -2,23 +2,31 @@
 
 Web app for creating and editing storypalettes
 
-## Prerequisites
-
-- Install [node.js](http://nodejs.org)
-- Clone this repo
+## Run
 
 ```sh
-$ npm install
-```
+$ npm start
+``
 
 ## Develop
 
+### Install
+
+Install [node.js](http://nodejs.org)
+
 ```sh
-$ npm run dev
+$ git clone https://github.com/storypalette/storypalette-editor.git
+$ cd storypalette-editor
+$ npm install
+```
+
+### Run
+```sh
+$ npm run dev  # Connects to local storypalette-server
 $ open http://localhost:8883
 ```
 
-## Deploy to Heroku
+## Deploy
 
 ```sh
 $ npm run deploy
